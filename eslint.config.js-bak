@@ -1,0 +1,82 @@
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import reactCompiler from 'eslint-plugin-react-compiler';
+import reactHooks from 'eslint-plugin-react-hooks';
+
+import pluginJest from 'eslint-plugin-jest';
+
+import eslintConfigPrettier from 'eslint-config-prettier';
+import pluginQuery from '@tanstack/eslint-plugin-query';
+import pluginRouter from '@tanstack/eslint-plugin-router';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  {
+    ignores: [
+      'coverage/',
+      'dist/',
+      '.vinxi',
+      '.wrangler',
+      '.vercel',
+      '.netlify',
+      '.output',
+      'build/',
+    ],
+  },
+
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
+
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  ...pluginQuery.configs['flat/recommended'],
+  ...pluginRouter.configs['flat/recommended'],
+  eslintConfigPrettier,
+
+  reactCompiler.configs.recommended,
+
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+
+  {
+    // update this to match your test files
+    files: ['**/*.spec.js', '**/*.test.js'],
+    plugins: { jest: pluginJest },
+    ...pluginJest.configs['flat/recommended'],
+    languageOptions: {
+      globals: pluginJest.environments.globals.globals,
+    },
+    rules: {
+      'jest/no-disabled-tests': 'warn',
+      'jest/no-focused-tests': 'error',
+      'jest/no-identical-title': 'error',
+      'jest/prefer-to-have-length': 'warn',
+      'jest/valid-expect': 'error',
+    },
+  },
+
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+];

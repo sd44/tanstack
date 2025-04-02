@@ -1,0 +1,43 @@
+#+TITLE: Project TODOs
+#+CATEGORY: tanstack
+
+* General
+
+** TODO applyTheme
+
+[[file:app/components/ThemeToggle.tsx]]  应在 layout 或 root 建立 applyTheme()，否则无法保存主题设定，每次刷新网页都要手动设定。
+
+注意：读取主题需要在客户端 localStorage，所以可能导致服务水合出错，需要设定不提示水合失败。
+** TODO 为 user 增加 distinct 和 unit 等成员，或者建另建一个数据库表
+
+[[file:app/lib/server/auth.ts]]
+
+
+** TODO addCompany 提交时加入服务专员、派出单位等信息，注意 zod schema 也应加入校验
+
+[[file:app/lib/server/schema/company.schema.ts]]
+
+[[file:app/utils/company-server.tsx]]
+等文件
+
+* 泛型
+
+** TODO 完善 drizzle 通用泛型函数，类型定义有问题
+
+[[file:app/lib/drizzle/utils.ts]]
+
+** TODO 完善 table 通用泛型函数，类型定义有问题
+
+[[file:app/lib/table/table.tsx::28]]
+
+* Features
+
+** TODO 结合 better-auth admin plugin role，建立多级权限角色。
+
+* Bugs
+
+* Refactoring
+
+* Documentation
+
+* Completed
