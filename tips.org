@@ -1,0 +1,43 @@
+*  网上比较好的 drizzle 简明笔记，涉及到 ~drizzle-zod~ 实践。
+
+[[https://heibaimeng.com/post/265][黑白梦 drizzle-orm使用笔记]]
+
+个人不喜欢 ~drizzle-zod~ ，因需要扩展 ~refine~ 等或重新自定义 ~schema~ ，以实现用户友好的 message 等，见 [[https://orm.drizzle.team/docs/zod#refinements]]
+
+* tanstack form zod validator 简明使用
+
+tanstack form 可以很方便的在 server 和 client 复用 zod 等 validator， ，并且可以直接在 form field 显示 zod 错误信息，不需额外配置：
+
+1. tanstack form 推荐的实践 AppFrom
+   + [[https://tanstack.com/form/latest/docs/framework/react/guides/form-composition#pre-bound-form-components][tanstack form 预绑定、可复用]]
+   + [[file:app/hooks/form.tsx][我的实践]]
+   + 特别注意实践各 ~foo-field.tsx~ 代码中的以下内容，在 field ~touched~ 或错误时自动显示错误信息
+
+     #+begin_src typescript
+       {meta.isTouched && meta.errors.length ? (
+         <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+       ) : null}
+     #+end_src
+
+2. 我的 zod schema 以及一些 zod 辅助函数
+
+   [[file:app/utils/company-isomophic.ts::1429][my zod schema]]
+
+3. server 和 client 只需要指定 validator，各 field 的错误显示，zod 的类型转换等可自动搞定，无须再做其他工作。
+
+   #+begin_src typescript
+     validators: {
+           onChange: companySchema,
+         },
+   #+end_src
+   [[file:app/components/myui/company-form.tsx][client]]
+
+   [[file:app/utils/company-server.ts][server]]
+
+4. tanstack form ~onServerValidator~ 只接受 formdata type，搭配 form action 使用。我没搞清楚，另外似乎有 bug，略。
+
+* TODO
+
+   [[file:TODOs.org][My TODOs]]
+
+希望小伙伴们可以和我一起学习交流
