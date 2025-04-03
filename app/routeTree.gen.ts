@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestclientImport } from './routes/testclient'
+import { Route as Test3Import } from './routes/test3'
 import { Route as Test2Import } from './routes/test2'
 import { Route as TestImport } from './routes/test'
 import { Route as Table2Import } from './routes/table2'
@@ -30,6 +31,12 @@ import { Route as AuthLoginImport } from './routes/auth/login'
 const TestclientRoute = TestclientImport.update({
   id: '/testclient',
   path: '/testclient',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Test3Route = Test3Import.update({
+  id: '/test3',
+  path: '/test3',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -158,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Test2Import
       parentRoute: typeof rootRoute
     }
+    '/test3': {
+      id: '/test3'
+      path: '/test3'
+      fullPath: '/test3'
+      preLoaderRoute: typeof Test3Import
+      parentRoute: typeof rootRoute
+    }
     '/testclient': {
       id: '/testclient'
       path: '/testclient'
@@ -243,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/table2': typeof Table2Route
   '/test': typeof TestRoute
   '/test2': typeof Test2Route
+  '/test3': typeof Test3Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -258,6 +273,7 @@ export interface FileRoutesByTo {
   '/table2': typeof Table2Route
   '/test': typeof TestRoute
   '/test2': typeof Test2Route
+  '/test3': typeof Test3Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -275,6 +291,7 @@ export interface FileRoutesById {
   '/table2': typeof Table2Route
   '/test': typeof TestRoute
   '/test2': typeof Test2Route
+  '/test3': typeof Test3Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -293,6 +310,7 @@ export interface FileRouteTypes {
     | '/table2'
     | '/test'
     | '/test2'
+    | '/test3'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -307,6 +325,7 @@ export interface FileRouteTypes {
     | '/table2'
     | '/test'
     | '/test2'
+    | '/test3'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -322,6 +341,7 @@ export interface FileRouteTypes {
     | '/table2'
     | '/test'
     | '/test2'
+    | '/test3'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -339,6 +359,7 @@ export interface RootRouteChildren {
   Table2Route: typeof Table2Route
   TestRoute: typeof TestRoute
   Test2Route: typeof Test2Route
+  Test3Route: typeof Test3Route
   TestclientRoute: typeof TestclientRoute
 }
 
@@ -350,6 +371,7 @@ const rootRouteChildren: RootRouteChildren = {
   Table2Route: Table2Route,
   TestRoute: TestRoute,
   Test2Route: Test2Route,
+  Test3Route: Test3Route,
   TestclientRoute: TestclientRoute,
 }
 
@@ -370,6 +392,7 @@ export const routeTree = rootRoute
         "/table2",
         "/test",
         "/test2",
+        "/test3",
         "/testclient"
       ]
     },
@@ -402,6 +425,9 @@ export const routeTree = rootRoute
     },
     "/test2": {
       "filePath": "test2.tsx"
+    },
+    "/test3": {
+      "filePath": "test3.tsx"
     },
     "/testclient": {
       "filePath": "testclient.tsx"

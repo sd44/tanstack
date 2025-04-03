@@ -4,9 +4,9 @@ import { user } from '~/lib/server/schema/auth.schema';
 
 import { eq } from 'drizzle-orm';
 
-for (let i = 0; i < 100; i++) {
+for (let i = 1; i <= 100; i++) {
   const name = `user${i}`;
-  const image = faker.image.personPortrait();
+  const image = faker.image.personPortrait({ size: 256 });
   console.log('image图像是：', image);
   const result = await db
     .update(user)

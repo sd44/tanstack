@@ -22,7 +22,7 @@ async function signUpUsers() {
           name: `user${id}`,
           email: `user${id}@1.1`,
           password: '12345678',
-          image: faker.image.personPortrait(),
+          image: faker.image.personPortrait({ size: 64 }),
         },
       });
     } catch (error) {

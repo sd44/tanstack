@@ -9,7 +9,7 @@
 - 尚未配置完成的 Jest
 - 大量尚未完成，持续开发的代码
 
-## 参考并感谢
+# 参考并感谢
 
 - [dotnize/react-tanstarter(Tanstarter with Better Auth)](https://github.com/dotnize/react-tanstarter)
 
@@ -29,7 +29,7 @@ A minimal starter template for 🏝️ TanStack Start.
 - [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL
 - [Better Auth](https://www.better-auth.com/)
 
-## Getting Started
+# Getting Started
 
 本库改用bun作为默认包管理工具，可自行修改 `package.json`使用其他包管理。
 
@@ -69,19 +69,19 @@ A minimal starter template for 🏝️ TanStack Start.
    ```
 
 
-## Issue watchlist
+# Issue watchlist
 
 - [React Compiler docs](https://react.dev/learn/react-compiler), [Working Group](https://github.com/reactwg/react-compiler/discussions) - React Compiler is still in beta. You can disable it in [app.config.ts](./app.config.ts#L15) if you prefer.
 - https://github.com/TanStack/router/discussions/2863 - TanStack Start is currently in beta and may still undergo major changes.
 
-## Auth
+# Auth
 
 Better Auth is currently configured for OAuth with GitHub, Google, and Discord, but can be easily modified to use other providers.
 
 
-## Goodies
+# Goodies
 
-#### Scripts
+## Scripts
 
 These scripts in [package.json](./package.json#L5) use **pnpm** by default, but you can modify them to use your preferred package manager.
 
@@ -89,10 +89,10 @@ These scripts in [package.json](./package.json#L5) use **pnpm** by default, but 
 - **`db`** - Run drizzle-kit commands. (e.g. `pnpm db push` to generate a migration)
 - **`ui`** - The shadcn/ui CLI. (e.g. `pnpm ui add button` to add shadcn@canary button component) 注意：本库使用Origin UI 覆盖了 Shadcn UI，此方法安装可能会有冲突。
 - **`format`** and **`lint`** - Run Prettier and ESLint.
-- **`数据库通用工具`** - [utils.ts](app/lib/drizzle/utils.ts)
-- **`zod验证库辅助函数及示例`** - [tips.org](tips.org)
+- **`drizzle 数据库辅助`** - [utils.ts](app/lib/drizzle/utils.ts)
+- **`zod 验证库辅助函数及示例`** - [tips.org](tips.org)
 
-#### Utilities
+## Utilities
 
 - [`auth-guard.ts`](./src/lib/middleware/auth-guard.ts) - Sample middleware for forcing authentication on server functions. ([see #5](https://github.com/dotnize/tanstarter/issues/5))
 - [`ThemeToggle.tsx`](./src/lib/components/ThemeToggle.tsx) - A simple component to toggle between light and dark mode. ([#7](https://github.com/dotnize/tanstarter/issues/7))
