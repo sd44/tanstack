@@ -30,21 +30,21 @@ const tiers = [
       '移动优先的响应式设计',
       '手机、电脑等设备自适应',
       'Tailwind CSS',
-      'Origin & Ant Design UI',
+      'Shadcn & Origin UI',
     ],
   },
 ];
 
 export function About() {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-12">
+    <div className="mx-auto mt-12 max-w-7xl px-6 lg:px-8">
       <div className="mx-auto max-w-7xl sm:text-center">
-        <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-indigo-600 dark:text-violet-200 sm:text-4xl sm:text-balance">
+        <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-indigo-600 sm:text-4xl sm:text-balance dark:text-violet-200">
           墨韩的梦园 —— 企业专员服务系统
         </p>
       </div>
 
-      <div className="m-8 flex justify-center place-content-center">
+      <div className="m-8 flex place-content-center justify-center">
         <Button className="w-64">
           <Link to="/dashboard">管理面板</Link>
         </Button>
@@ -54,7 +54,7 @@ export function About() {
       <div className="mt-2 flow-root">
         <div className="isolate mx-auto mt-2 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {tiers.map((tier) => (
-            <div key={tier.id} className="ring-gray-200 rounded-3xl p-4 ring-1 xl:p-6  border-4">
+            <div key={tier.id} className="rounded-3xl border-4 p-4 ring-1 ring-gray-200 xl:p-6">
               <h3 id={tier.id} className="text-xl/loose font-semibold">
                 {tier.name}
               </h3>
