@@ -17,7 +17,6 @@
     "ui": "bun x shadcn@canary"
   },
   "dependencies": {
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-aspect-ratio": "^1.1.2",
@@ -54,7 +53,6 @@
     "@tanstack/react-store": "^0.7.0",
     "@tanstack/react-table": "^8.21.2",
     "@tanstack/zod-adapter": "^1.114.34",
-    "antd": "^5.24.6",
     "better-auth": "^1.2.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

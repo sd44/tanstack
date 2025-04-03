@@ -3,7 +3,6 @@ import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanst
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { createServerFn } from '@tanstack/react-start';
 
-import '@ant-design/v5-patch-for-react-19';
 import { type QueryClient } from '@tanstack/react-query';
 import { getWebRequest } from '@tanstack/react-start/server';
 import { Toaster } from 'sonner';

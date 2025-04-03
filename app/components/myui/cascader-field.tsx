@@ -1,60 +1,48 @@
 import { useStore } from '@tanstack/react-form';
-import type { CascaderProps } from 'antd';
-import { Cascader } from 'antd';
+import { useState } from 'react';
 import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context.tsx';
+import { useFieldContext } from '~/hooks/form-context';
+import type { OptionsType } from './nested-dropdown';
+import { NestedDropMenu } from './nested-dropdown';
 
 interface CascaderFieldProps {
-  options: object; //传递给ant design cascader的JSON对象
+  options: OptionsType; //传递给ant design cascader的JSON对象
   label: string;
   labelCls?: string; //labelCls 变为可选
-  cascaderStyle: object; //labelCls 变为可选
+  cascaderStyle?: object; //labelCls 变为可选
+  placeholder?: string;
 }
 
 export default function CascaderField({
   options,
   label,
   labelCls = 'w-24',
-  cascaderStyle = { width: '300px' },
+  placeholder = '请选择',
 }: CascaderFieldProps) {
   const field = useFieldContext<string>();
   const meta = useStore(field.store, (state) => state.meta);
+  const [selectedLabel, setSelectedLabel] = useState<string>(placeholder);
 
-  const displayRender = (labels: string[]) => {
-    if (labels.length == 0) {
-      return undefined;
-    }
-    return labels[labels.length - 1];
-  };
-
-  const filter = (inputValue: string, path: DefaultOptionType[]) =>
-    path.some(
-      (option) => (option.label as string).toLowerCase().indexOf(inputValue.toLowerCase()) > -1,
-    );
-
-  const onChange: CascaderProps<Option>['onChange'] = (value) => {
-    // ant design cascader在清除数据后，有可能返回一个undefine changeEvent
-    if (value === undefined) {
-      return undefined;
-    }
-    console.log(value);
-    if (value.length > 0) {
-      field.handleChange(value[value.length - 1]);
+  const onValueChange = (value: string | null, label: string | null) => {
+    if (value) {
+      field.handleChange(value);
+      setSelectedLabel(label || placeholder);
+    } else {
+      // Handle clear action
+      field.handleChange(''); // Reset field value to empty string
+      setSelectedLabel(placeholder); // Reset to default placeholder
     }
   };
 
   return (
     <div>
-      <Label className="flex items-center gap-2 w-full">
+      <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
-        <Cascader
-          style={cascaderStyle}
+        <NestedDropMenu
+          labelName={selectedLabel}
           options={options}
-          displayRender={displayRender}
-          showSearch={{ filter }}
-          onSearch={(value) => console.log(value)}
-          value={field.state.value}
-          onChange={onChange}
+          initialValue={field.state.value}
+          onValueChange={onValueChange}
         />
       </Label>
       {meta.isTouched && meta.errors.length ? (

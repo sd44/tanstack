@@ -16,7 +16,7 @@ import { cn } from '~/lib/utils';
 import { Input } from '../ui/input';
 import { OptionNode } from './OptionNode';
 
-type OptionsType = OptionNode[]; // 顶层数据是 OptionNode 数组
+export type OptionsType = OptionNode[]; // 顶层数据是 OptionNode 数组
 
 interface RenderMenuItemProps {
   node: OptionNode; // 接收一个节点作为 prop
@@ -97,23 +97,22 @@ export function NestedDropMenu({
 
   // Handle final selection from menu items
   const handleFinalSelect = (value: string, label: string) => {
-    setSelectedValue(value);
-    setSelectedLabel(label);
     if (onValueChange) {
       onValueChange(value, label);
     }
+    setSelectedValue(value);
+    setSelectedLabel(label);
     // Dropdown closes automatically on select
   };
 
   // Handle clearing the selection
   const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('我在handleClear里');
-    event.stopPropagation(); // 阻止事件冒泡
-    event.preventDefault(); // 阻止与指针按下相关的默认行为
+    event.stopPropagation();
+    event.preventDefault();
     setSelectedValue(null);
     setSelectedLabel(null);
     if (onValueChange) {
-      onValueChange(null, null);
+      onValueChange(null, null); // This will trigger the parent's onValueChange
     }
   };
 
