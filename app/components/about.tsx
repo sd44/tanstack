@@ -18,8 +18,8 @@ const tiers = [
     features: [
       'Tanstack React 全栈框架',
       '优先服务端渲染 SSR',
-      'Better Auth 用户验证库',
-      'PostgreSQL 数据库',
+      'Better Auth 用户认证库',
+      'Drizzle + PostgreSQL 数据库',
     ],
   },
   {

@@ -97,3 +97,6 @@ These scripts in [package.json](./package.json#L5) use **pnpm** by default, but 
 - [`auth-guard.ts`](./src/lib/middleware/auth-guard.ts) - Sample middleware for forcing authentication on server functions. ([see #5](https://github.com/dotnize/tanstarter/issues/5))
 - [`ThemeToggle.tsx`](./src/lib/components/ThemeToggle.tsx) - A simple component to toggle between light and dark mode. ([#7](https://github.com/dotnize/tanstarter/issues/7))
 
+# TODOS
+
+以下 ['TODOs.org'](TODOs) 还未完成，欢迎小伙伴们一起参与！

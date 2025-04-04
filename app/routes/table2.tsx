@@ -8,11 +8,11 @@ import { useFilters } from '~/lib/table/useFilters';
 import { COMP_COLUMNS, CompFilters, fetchComps } from '~/components/myui/listcomp';
 
 export const Route = createFileRoute('/table2')({
-  component: CompsPage,
+  component: ListComps,
   validateSearch: () => ({}) as CompFilters,
 });
 
-function CompsPage() {
+function ListComps() {
   const { filters, resetFilters, setFilters } = useFilters(Route.fullPath);
 
   const { data } = useQuery({
@@ -32,7 +32,7 @@ function CompsPage() {
 
   return (
     <div className="flex flex-col gap-2 p-2">
-      <h1 className="mb-1 text-2xl font-semibold">TanStack Table + Query + Router</h1>
+      <h3 className="m-8">企业信息列表</h3>
       <Table
         data={data?.result ?? []}
         columns={columns}

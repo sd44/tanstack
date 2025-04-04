@@ -1,24 +1,9 @@
 import { createServerFn } from '@tanstack/react-start';
 import { ColumnDef } from '@tanstack/react-table';
 import { db } from '~/lib/server/db';
-import { enterprises } from '~/lib/server/schema';
+import { SelectEnterprises as Comps, enterprises } from '~/lib/server/schema';
 import { fetchDatas } from '~/lib/table/fetchdatas';
 import { Filters, PaginatedData } from '~/lib/table/types';
-
-export interface Comps {
-  id: number;
-  companyName: string;
-  address: string;
-  legalPersonName: string;
-  legalPersonPhone: string;
-  contactPerson: string | null;
-  contactPersonPhone: string | null;
-  companySize: '特大型' | '大型' | '中型' | '小型' | '微型';
-  registeredCapital: string;
-  employeeCount: number;
-  businessStatus: '正常' | '异常';
-  industryCategory: string;
-}
 
 const fetchCompDatas = createServerFn({ method: 'GET' }).handler(async () => {
   const result = await db.select().from(enterprises);

@@ -2,6 +2,7 @@ import { formOptions } from '@tanstack/react-form';
 import { z } from 'zod';
 
 import { fakerZH_CN as faker } from '@faker-js/faker';
+import { InsertEnterprises } from '~/lib/server/schema';
 
 import {
   mobileSchema,
@@ -9,21 +10,6 @@ import {
   optionalStrFieldSchema,
   strFieldSchema,
 } from './zod_helper_func';
-
-export interface CompSeed {
-  companyName: string;
-  address: string;
-  legalPersonName: string;
-  legalPersonPhone: string;
-  contactPerson: string;
-  contactPersonPhone: string;
-  companySize: string;
-  registeredCapital: number;
-  employeeCount: number;
-  businessStatus: string;
-  industryCategory: string;
-  industryCode: string;
-}
 
 export const companyOpts = formOptions({
   defaultValues: {
@@ -1441,7 +1427,7 @@ export const companySchema = z.object({
   industryCode: z.enum(industryCodeList, { message: '请选择行业分类' }),
 });
 
-export function generateRandomComp(): CompSeed {
+export function generateRandomComp(): InsertEnterprises {
   return {
     companyName: faker.company.name(),
     address: faker.location.city() + faker.location.streetAddress(),
@@ -1450,10 +1436,12 @@ export function generateRandomComp(): CompSeed {
     contactPerson: faker.person.fullName(),
     contactPersonPhone: faker.helpers.fromRegExp('1[0-9]{10}'),
     companySize: faker.helpers.arrayElement(['特大型', '大型', '中型', '小型', '微型']),
-    registeredCapital: faker.number.int({ min: 0, max: 3000 }),
+    registeredCapital: faker.number.float({ min: 0, max: 3000 }).toString(),
     employeeCount: faker.number.int({ min: 1, max: 1000 }),
     businessStatus: faker.helpers.arrayElement(['正常', '异常']),
     industryCategory: faker.helpers.arrayElement(['第一产业', '第二产业', '第三产业']),
     industryCode: faker.helpers.arrayElement(industryCodeList),
+    // 生成user1到25@1.com， 硬解码
+    serviceCommissioner: `user{ceil(Math.random()* 25)}@1.com`,
   };
 }

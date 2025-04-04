@@ -15,14 +15,14 @@ async function signUpUsers() {
   // 包裹在一个 async 函数中，避免顶层 await
   let id = 1;
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 1; i <= 25; i++) {
     try {
       await auth.api.signUpEmail({
         body: {
           name: `user${id}`,
-          email: `user${id}@1.1`,
+          email: `user${id}@1.com`,
           password: '12345678',
-          image: faker.image.personPortrait({ size: 64 }),
+          image: faker.image.personPortrait({ size: 256 }),
         },
       });
     } catch (error) {
@@ -35,9 +35,9 @@ async function signUpUsers() {
   }
 }
 
-console.log('开始创建 100 名用户');
-signUpUsers(); // 调用 async 函数
-console.log('成功创建 100 名用户');
+console.log('开始创建 25 名用户');
+await signUpUsers(); // 调用 async 函数
+console.log('成功创建 25 名用户');
 
 export async function seedTasks<T extends object>(
   randomObjGenerator: () => T,
