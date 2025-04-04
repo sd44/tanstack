@@ -5,7 +5,7 @@ import { InputHTMLAttributes, useEffect, useState } from 'react';
 export function DebouncedInput({
   value: initialValue,
   onChange,
-  debounce = 800,
+  debounce = 1000,
   ...props
 }: {
   value: string | number;

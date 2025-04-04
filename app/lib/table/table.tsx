@@ -26,7 +26,7 @@ type Props<T extends Record<string, string | number>> = {
 };
 
 // TODO: Record类型有限，只包括了string, number，应当泛型！
-export default function Table<T extends Record<string, string | number>>({
+export default function Table<T extends Record<string, any>>({
   data,
   columns,
   pagination,
@@ -79,7 +79,7 @@ export default function Table<T extends Record<string, string | number>>({
                         </div>
                         {header.column.getCanFilter() && fieldMeta?.filterKey !== undefined ? (
                           <DebouncedInput
-                            className="w-16 rounded border shadow"
+                            className="w-18 rounded border shadow"
                             onChange={(value) => {
                               onFilterChange({
                                 [fieldMeta.filterKey as keyof T]: value,

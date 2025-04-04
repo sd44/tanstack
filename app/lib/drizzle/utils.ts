@@ -41,18 +41,20 @@ export function isEmpty<TColumn extends AnyColumn>(column: TColumn) {
 export function isNotEmpty<TColumn extends AnyColumn>(column: TColumn) {
   return not(isEmpty(column));
 }
-
+const baseMeta = {
+  id: integer('id').generatedAlwaysAsIdentity().primaryKey(),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+};
 // 定义一个泛型表生成函数
 export function createTable<T extends { id: number }>(
   tableName: string,
   columns: (name: string) => { [K in keyof Omit<T, 'id'>]: T },
 ) {
   const table = pgTable(tableName, {
-    id: integer('id').generatedAlwaysAsIdentity().primaryKey(),
-    createdAt: timestamp('created_at').defaultNow(),
-    updatedAt: timestamp('updated_at')
-      .defaultNow()
-      .$onUpdate(() => new Date()),
+    ...baseMeta,
     ...columns(tableName),
   });
 

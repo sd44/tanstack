@@ -11,14 +11,13 @@ export interface Comps {
   address: string;
   legalPersonName: string;
   legalPersonPhone: string;
-  contactPerson: string;
-  contactPersonPhone: string;
-  companySize: string;
-  registeredCapital: number;
+  contactPerson: string | null;
+  contactPersonPhone: string | null;
+  companySize: '特大型' | '大型' | '中型' | '小型' | '微型';
+  registeredCapital: string;
   employeeCount: number;
-  businessStatus: string;
+  businessStatus: '正常' | '异常';
   industryCategory: string;
-  industryCode: string;
 }
 
 const fetchCompDatas = createServerFn({ method: 'GET' }).handler(async () => {
@@ -50,29 +49,30 @@ export async function fetchComps(filtersAndPagination: CompFilters): Promise<Pag
 }
 
 interface columnDefMeta {
-  key: string;
+  key: keyof Comps;
   head: string;
-  filterVariant: string;
+  filterVariant?: 'text' | 'number';
 }
 
 const compColumns: columnDefMeta[] = [
   { key: 'id', head: '序号', filterVariant: 'number' },
-  { key: 'companyName', head: '企业名称', filterVariant: 'string' },
-  { key: 'legalPersonName', head: '法代姓名', filterVariant: 'string' },
-  { key: 'legalPersonPhone', head: '法代手机', filterVariant: 'string' },
-  { key: 'contactPerson', head: '联系人姓名', filterVariant: 'string' },
-  { key: 'contactPersonPhone', head: '联系人手机', filterVariant: 'string' },
-  { key: 'companySize', head: '企业规模', filterVariant: 'string' },
+  { key: 'companyName', head: '企业名称', filterVariant: 'text' },
+  { key: 'legalPersonName', head: '法代姓名', filterVariant: 'text' },
+  { key: 'legalPersonPhone', head: '法代手机', filterVariant: 'text' },
+  { key: 'contactPerson', head: '联系人姓名', filterVariant: 'text' },
+  { key: 'contactPersonPhone', head: '联系人手机', filterVariant: 'text' },
+  { key: 'companySize', head: '企业规模', filterVariant: 'text' },
   { key: 'registeredCapital', head: '注册资本 万元', filterVariant: 'number' },
   { key: 'employeeCount', head: '员工人数', filterVariant: 'number' },
-  { key: 'businessStatus', head: '经营状态', filterVariant: 'string' },
-  { key: 'industryCategory', head: '行业分类', filterVariant: 'string' },
+  { key: 'businessStatus', head: '经营状态', filterVariant: 'text' },
+  { key: 'industryCategory', head: '行业分类', filterVariant: 'text' },
 ];
 
-export const COMP_COLUMNS: ColumnDef<Comps>[] = compColumns.map((item) => {
-  return {
-    accessorKey: item.key,
-    header: () => <span>{item.head}</span>,
-    meta: { filterKey: item.key, filterVariant: item.filterVariant },
-  };
-});
+export const COMP_COLUMNS: ColumnDef<Comps>[] = compColumns.map((item) => ({
+  accessorKey: item.key,
+  header: () => <span>{item.head}</span>,
+  meta: {
+    filterKey: item.key,
+    filterVariant: item.filterVariant,
+  },
+}));

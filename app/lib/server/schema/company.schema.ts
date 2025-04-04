@@ -33,3 +33,6 @@ export const enterprises = pgTable('enterprises', {
   // TODO: 录入单位在表单提交时处理
   recordingUnitName: text('recording_unit_name'), // 录入单位名称
 });
+
+export type InsertEnterprises = typeof enterprises.$inferInsert;
+export type SelectEnterprises = typeof enterprises.$inferSelect;
