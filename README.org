@@ -1,0 +1,153 @@
+* Tanstack Family + tailwindcss v4 + Origin UI + better-auth
+:PROPERTIES:
+:CUSTOM_ID: tanstack-family-tailwindcss-v4-origin-ui-better-auth
+:END:
+
+#+begin_quote
+[!WARNING] fork 自
+[[https://github.com/dotnize/tanstarter][dotnize/tanstarter]]
+开发阶段，尚未完成，仅供参考！特别是本库体积臃肿，主要是为开发方便：
+
+#+end_quote
+
+- 全部 shadcn UI 组件
+- 大量 eslint, prettier plugin
+- 尚未配置完成的 Jest
+- 大量尚未完成，持续开发的代码
+
+* 参考并感谢
+:PROPERTIES:
+:CUSTOM_ID: 参考并感谢
+:END:
+- [[https://github.com/dotnize/react-tanstarter][dotnize/react-tanstarter(Tanstarter
+  with Better Auth)]]
+
+  以下文档修改自 dotnize/react-tanstarter
+
+- [[https://better-auth.vercel.app/docs/examples/next-js][Better Auth
+  with Next Example]]
+
+* TanStarter
+:PROPERTIES:
+:CUSTOM_ID: tanstarter
+:END:
+A minimal starter template for 🏝️ TanStack Start.
+
+- [[https://react.dev][React 19]] +
+  [[https://react.dev/learn/react-compiler][React Compiler]]
+
+- TanStack Full Stack
+  - [[https://tanstack.com/start/latest][Start]]
+  - [[https://tanstack.com/router/latest][Router]]
+  - [[https://tanstack.com/query/latest][Query]]
+  - [[https://tanstack.com/form/latest][Form]]
+  - [[https://tanstack.com/table/latest][Table]]
+  - [[https://tanstack.com/store/latest][store]]
+
+- [[https://tailwindcss.com/][Tailwind CSS v4]] + [[https://originui.com/][Oringin UI]]
+
+- [[https://orm.drizzle.team/][Drizzle ORM]] + PostgreSQL
+
+- [[https://www.better-auth.com/][Better Auth]]
+
+* Getting Started
+:PROPERTIES:
+:CUSTOM_ID: getting-started
+:END:
+本库改用 bun 作为默认包管理工具，可自行修改 =package.json=使用其他包管理。
+
+1. Install dependencies:
+
+   #+begin_src sh
+   bun install
+   #+end_src
+
+2. Create a =.env= file based on [[./.env.example][=.env.example=]].
+
+3. Push the schema to your database with drizzle-kit:
+
+   #+begin_src sh
+   bun db push
+   #+end_src
+
+   https://orm.drizzle.team/docs/migrations
+
+4. 生成 seed 数据
+
+   #+begin_src sh
+   bun seed
+   #+end_src
+
+5. Run the development server:
+
+   #+begin_src sh
+   bun dev
+   #+end_src
+
+   The development server should be now running at
+   [[http://localhost:3000]].
+
+6. Build && Start:
+
+   #+begin_src sh
+   bun run build
+   bun start
+   #+end_src
+
+* Issue watchlist
+:PROPERTIES:
+:CUSTOM_ID: issue-watchlist
+:END:
+- [[https://react.dev/learn/react-compiler][React Compiler docs]],
+  [[https://github.com/reactwg/react-compiler/discussions][Working
+  Group]] - React Compiler is still in beta. You can disable it in
+  [[./app.config.ts#L15][app.config.ts]] if you prefer.
+- https://github.com/TanStack/router/discussions/2863 - TanStack Start
+  is currently in beta and may still undergo major changes.
+
+* Auth
+:PROPERTIES:
+:CUSTOM_ID: auth
+:END:
+Better Auth is currently configured for OAuth with GitHub, Google, and
+Discord, but can be easily modified to use other providers.
+
+* Goodies
+:PROPERTIES:
+:CUSTOM_ID: goodies
+:END:
+** Scripts
+:PROPERTIES:
+:CUSTOM_ID: scripts
+:END:
+These scripts in [[./package.json#L5][package.json]] use *pnpm* by
+default, but you can modify them to use your preferred package manager.
+
+- *=auth:generate=* - Regenerate the
+  [[./src/lib/server/schema/auth.schema.ts][auth db schema]] if you've
+  made changes to your Better Auth [[./src/lib/server/auth.ts][config]].
+- *=db=* - Run drizzle-kit commands. (e.g. =pnpm db push= to generate a
+  migration)
+- *=ui=* - The shadcn/ui CLI. (e.g. =pnpm ui add button= to add
+  shadcn@canary button component) 注意：本库使用 Origin UI 覆盖了 Shadcn
+  UI，此方法安装可能会有冲突。
+- *=format=* and *=lint=* - Run Prettier and ESLint.
+- *=drizzle 数据库辅助=* - [[file:app/lib/drizzle/utils.ts][utils.ts]]
+- *=开发过程中的一些 tips=* - [[file:tips.org]]
+
+** Utilities
+:PROPERTIES:
+:CUSTOM_ID: utilities
+:END:
+- [[./src/lib/middleware/auth-guard.ts][=auth-guard.ts=]] - Sample
+  middleware for forcing authentication on server functions.
+  ([[https://github.com/dotnize/tanstarter/issues/5][see #5]])
+- [[./src/lib/components/ThemeToggle.tsx][=ThemeToggle.tsx=]] - A simple
+  component to toggle between light and dark mode.
+  ([[https://github.com/dotnize/tanstarter/issues/7][#7]])
+
+* TODOS
+:PROPERTIES:
+:CUSTOM_ID: todos
+:END:
+以下 [[file:TODOs]['TODOs.org']] 还未完成，欢迎小伙伴们一起参与！

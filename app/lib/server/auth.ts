@@ -18,6 +18,7 @@ const from = process.env.BETTER_AUTH_EMAIL || '';
 const to = process.env.TEST_EMAIL || '';
 
 export const auth = betterAuth({
+  appName: '墨韩的梦园',
   baseURL: process.env.VITE_BASE_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
