@@ -1,4 +1,5 @@
 import { createServerFn } from '@tanstack/react-start';
+import { ColumnDef } from '@tanstack/react-table';
 import { db } from '~/lib/server/db';
 import { enterprises } from '~/lib/server/schema';
 import { fetchDatas } from '~/lib/table/fetchdatas';
