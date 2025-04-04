@@ -123,17 +123,17 @@ Discord, but can be easily modified to use other providers.
 These scripts in [[./package.json#L5][package.json]] use *pnpm* by
 default, but you can modify them to use your preferred package manager.
 
-- *=auth:generate=* - Regenerate the
+- *auth:generate* - Regenerate the
   [[./src/lib/server/schema/auth.schema.ts][auth db schema]] if you've
   made changes to your Better Auth [[./src/lib/server/auth.ts][config]].
-- *=db=* - Run drizzle-kit commands. (e.g. =pnpm db push= to generate a
+- *db* - Run drizzle-kit commands. (e.g. =pnpm db push= to generate a
   migration)
-- *=ui=* - The shadcn/ui CLI. (e.g. =pnpm ui add button= to add
+- *ui* - The shadcn/ui CLI. (e.g. =pnpm ui add button= to add
   shadcn@canary button component) 注意：本库使用 Origin UI 覆盖了 Shadcn
   UI，此方法安装可能会有冲突。
-- *=format=* and *=lint=* - Run Prettier and ESLint.
-- *=drizzle 数据库辅助=* - [[file:app/lib/drizzle/utils.ts][utils.ts]]
-- *=开发过程中的一些 tips=* - [[file:tips.org]]
+- *format* and *=lint=* - Run Prettier and ESLint.
+- *drizzle 数据库辅助* - [[file:app/lib/drizzle/utils.ts][utils.ts]]
+- *开发过程中的一些 tips* - [[file:tips.org]]
 
 ** Utilities
 :PROPERTIES:
