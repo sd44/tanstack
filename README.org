@@ -131,7 +131,7 @@ default, but you can modify them to use your preferred package manager.
 - *ui* - The shadcn/ui CLI. (e.g. =pnpm ui add button= to add
   shadcn@canary button component) 注意：本库使用 Origin UI 覆盖了 Shadcn
   UI，此方法安装可能会有冲突。
-- *format* and *=lint=* - Run Prettier and ESLint.
+- *format* and *lint* - Run Prettier and ESLint.
 - *drizzle 数据库辅助* - [[file:app/lib/drizzle/utils.ts][utils.ts]]
 - *开发过程中的一些 tips* - [[file:tips.org]]
 
@@ -150,4 +150,5 @@ default, but you can modify them to use your preferred package manager.
 :PROPERTIES:
 :CUSTOM_ID: todos
 :END:
-以下 [[file:TODOs]['TODOs.org']] 还未完成，欢迎小伙伴们一起参与！
+
+[[file:TODOs]['TODOs.org']] 包含代完成任务，欢迎小伙伴们一起参与！
