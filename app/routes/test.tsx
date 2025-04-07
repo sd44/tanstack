@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { BarChart02 } from '~/components/modif_shadcn/bar-chart';
+import { MinMaxInput } from '~/components/myui/origin-minmax';
 function MyComponent() {
   // 使用 useRouteContext hook，并指定正确的上下文类型
 
@@ -13,7 +13,7 @@ function MyComponent() {
 }
 
 export const Route = createFileRoute('/test')({
-  component: BarChart02,
+  component: MinMaxInput,
 
   loader: ({ context }) => {
     return { user: context.user };

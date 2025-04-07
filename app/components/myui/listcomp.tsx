@@ -36,7 +36,7 @@ export async function fetchComps(filtersAndPagination: CompFilters): Promise<Pag
 interface columnDefMeta {
   key: keyof Comps;
   head: string;
-  filterVariant?: 'text' | 'number';
+  filterVariant?: 'text' | 'number' | 'range' | undefined;
 }
 
 const compColumns: columnDefMeta[] = [
@@ -47,7 +47,7 @@ const compColumns: columnDefMeta[] = [
   { key: 'contactPerson', head: '联系人姓名', filterVariant: 'text' },
   { key: 'contactPersonPhone', head: '联系人手机', filterVariant: 'text' },
   { key: 'companySize', head: '企业规模', filterVariant: 'text' },
-  { key: 'registeredCapital', head: '注册资本 万元', filterVariant: 'number' },
+  { key: 'registeredCapital', head: '注册资本 万元', filterVariant: 'range' },
   { key: 'employeeCount', head: '员工人数', filterVariant: 'number' },
   { key: 'businessStatus', head: '经营状态', filterVariant: 'text' },
   { key: 'industryCategory', head: '行业分类', filterVariant: 'text' },
@@ -60,4 +60,6 @@ export const COMP_COLUMNS: ColumnDef<Comps>[] = compColumns.map((item) => ({
     filterKey: item.key,
     filterVariant: item.filterVariant,
   },
+  // Enable filtering for columns that have a filterVariant defined
+  enableColumnFilter: !!item.filterVariant,
 }));

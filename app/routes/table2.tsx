@@ -1,11 +1,10 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useMemo } from 'react';
+import { COMP_COLUMNS, CompFilters, fetchComps } from '~/components/myui/listcomp';
 import Table, { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from '~/lib/table/table';
 import { sortByToState, stateToSortBy } from '~/lib/table/tableSortMapper';
 import { useFilters } from '~/lib/table/useFilters';
-/* import { fetchUsers, UserFilters } from '~/lib/table/user'; */
-import { COMP_COLUMNS, CompFilters, fetchComps } from '~/components/myui/listcomp';
 
 export const Route = createFileRoute('/table2')({
   component: ListComps,
@@ -55,7 +54,7 @@ function ListComps() {
         }}
       />
       <div className="flex items-center gap-2">
-        {data?.rowCount} 获得企业数据
+        {data?.rowCount} 获得数据
         <button
           className="rounded border p-1 disabled:cursor-not-allowed disabled:text-gray-500"
           onClick={resetFilters}
