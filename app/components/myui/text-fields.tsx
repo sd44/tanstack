@@ -21,18 +21,20 @@ export default function TextField({
   const meta = useStore(field.store, (state) => state.meta);
 
   return (
-    <div className="flex">
-      <Label className="flex items-center gap-2 w-full">
+    <div className="flex flex-wrap">
+      <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
         <Input
           value={field.state.value}
           onChange={(e) => field.handleChange(e.target.value)}
-          className={cn('flex-grow border rounded px-2 py-1', inputCls)}
+          className={cn('flex-grow rounded border px-2 py-1', inputCls)}
           {...props}
         />
       </Label>
       {meta.isTouched && meta.errors.length ? (
-        <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+        <p className="w-full text-sm text-red-600">
+          {meta.errors.map((err) => err.message).join(',')}
+        </p>
       ) : null}
     </div>
   );

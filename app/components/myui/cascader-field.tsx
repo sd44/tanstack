@@ -35,7 +35,7 @@ export default function CascaderField({
   };
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
         <NestedDropMenu
@@ -46,7 +46,9 @@ export default function CascaderField({
         />
       </Label>
       {meta.isTouched && meta.errors.length ? (
-        <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+        <p className="w-full text-sm text-red-600">
+          {meta.errors.map((err) => err.message).join(',')}
+        </p>
       ) : null}
     </div>
   );

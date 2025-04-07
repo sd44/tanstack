@@ -1,7 +1,7 @@
 import { useStore } from '@tanstack/react-form';
-import { PasswordInput } from '~/components/myui/password-input';
+import { PasswordInput } from '~/components/myui/origin-password';
 import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context.tsx';
+import { useFieldContext } from '~/hooks/form-context';
 
 import { cn } from '~/lib/utils';
 
@@ -16,7 +16,7 @@ export default function PasswordField({ label, labelCls = 'w-24' }: PasswordFiel
   const meta = useStore(field.store, (state) => state.meta);
 
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
         <PasswordInput
@@ -26,7 +26,9 @@ export default function PasswordField({ label, labelCls = 'w-24' }: PasswordFiel
         />
       </Label>
       {meta.isTouched && meta.errors.length ? (
-        <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+        <p className="w-full text-sm text-red-600">
+          {meta.errors.map((err) => err.message).join(',')}
+        </p>
       ) : null}
     </div>
   );
