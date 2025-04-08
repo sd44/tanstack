@@ -1,11 +1,12 @@
 'use client';
-
+import lDebounce from 'lodash/debounce';
 import { InputHTMLAttributes, useEffect, useState } from 'react';
+import { Input } from '~/components/ui/input';
 
 export function DebouncedInput({
   value: initialValue,
   onChange,
-  debounce = 1000,
+  debounce = 800,
   ...props
 }: {
   value: string | number;
@@ -19,15 +20,19 @@ export function DebouncedInput({
   }, [initialValue]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const debounced = lDebounce(() => {
       onChange(value);
     }, debounce);
 
-    return () => clearTimeout(timeout);
-  }, [value]);
+    debounced();
+
+    return () => {
+      debounced.cancel();
+    };
+  }, [value, debounce, onChange]);
 
   return (
-    <input
+    <Input
       {...props}
       value={value ?? ''}
       onChange={(e) => {
