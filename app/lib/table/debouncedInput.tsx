@@ -1,12 +1,9 @@
-'use client';
-import lDebounce from 'lodash/debounce';
 import { InputHTMLAttributes, useEffect, useState } from 'react';
-import { Input } from '~/components/ui/input';
 
 export function DebouncedInput({
   value: initialValue,
   onChange,
-  debounce = 800,
+  debounce = 600,
   ...props
 }: {
   value: string | number;
@@ -20,19 +17,16 @@ export function DebouncedInput({
   }, [initialValue]);
 
   useEffect(() => {
-    const debounced = lDebounce(() => {
+    const timeout = setTimeout(() => {
       onChange(value);
     }, debounce);
 
-    debounced();
-
-    return () => {
-      debounced.cancel();
-    };
-  }, [value, debounce, onChange]);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
-    <Input
+    <input
       {...props}
       value={value ?? ''}
       onChange={(e) => {

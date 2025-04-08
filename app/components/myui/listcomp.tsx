@@ -47,7 +47,7 @@ const compColumns: columnDefMeta[] = [
   { key: 'contactPerson', head: '联系人姓名', filterVariant: 'text' },
   { key: 'contactPersonPhone', head: '联系人手机', filterVariant: 'text' },
   { key: 'companySize', head: '企业规模', filterVariant: 'text' },
-  { key: 'registeredCapital', head: '注册资本 万元', filterVariant: 'number' },
+  { key: 'registeredCapital', head: '注册资本 \n 万元', filterVariant: 'number' },
   { key: 'employeeCount', head: '员工人数', filterVariant: 'number' },
   { key: 'businessStatus', head: '经营状态', filterVariant: 'text' },
   { key: 'industryCategory', head: '行业分类', filterVariant: 'text' },

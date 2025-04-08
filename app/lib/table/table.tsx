@@ -8,6 +8,14 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { Button } from '~/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select'; // Adjust the import path based on your project structure
 import { DebouncedInput } from '~/lib/table/debouncedInput';
 import { Filters } from '~/lib/table/types';
 
@@ -79,7 +87,7 @@ export default function Table<T extends Record<string, any>>({
                         </div>
                         {header.column.getCanFilter() && fieldMeta?.filterKey !== undefined ? (
                           <DebouncedInput
-                            className="w-18 rounded border shadow"
+                            className="w-24 rounded border shadow"
                             onChange={(value) => {
                               onFilterChange({
                                 [fieldMeta.filterKey as keyof T]: value,
@@ -115,42 +123,42 @@ export default function Table<T extends Record<string, any>>({
         </tbody>
       </table>
       <div className="my-2 flex items-center gap-2">
-        <button
-          className="rounded border p-1 disabled:cursor-not-allowed disabled:text-gray-500"
+        <Button
+          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}>
           {'<<'}
-        </button>
-        <button
-          className="rounded border p-1 disabled:cursor-not-allowed disabled:text-gray-500"
+        </Button>
+        <Button
+          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}>
           {'<'}
-        </button>
-        <button
-          className="rounded border p-1 disabled:cursor-not-allowed disabled:text-gray-500"
+        </Button>
+        <Button
+          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}>
           {'>'}
-        </button>
-        <button
-          className="rounded border p-1 disabled:cursor-not-allowed disabled:text-gray-500"
+        </Button>
+        <Button
+          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}>
           {'>>'}
-        </button>
+        </Button>
         <span className="w-16"></span>
         <strong>共{table.getPageCount()}页</strong>
-        <span className="flex items-center gap-1">
+        <span className="flex w-auto items-center">
           ，跳转至第:
-          <input
+          <DebouncedInput
             type="number"
             min={1}
             max={table.getPageCount()}
             className="data-[closed]:data-[leave]:opacit z-10 mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-base font-bold shadow-lg ring-1 ring-black/5 focus:outline-none"
             value={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              let page = e.target.value ? Number(e.target.value) - 1 : 0;
+            onChange={(value) => {
+              let page = value ? Number(value) - 1 : 0;
               if (page >= table.getPageCount()) {
                 page = table.getPageCount() - 1;
               }
@@ -166,18 +174,36 @@ export default function Table<T extends Record<string, any>>({
         </span>
         <span className="w-16" />
         每页显示
-        <select
-          className="data-[closed]:data-[leave]:opacit z-10 mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-base font-bold shadow-lg ring-1 ring-black/5 focus:outline-none"
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
+        <Select
+          // The 'value' prop expects a string. Convert the current pageSize number to string.
+          value={table.getState().pagination.pageSize.toString()}
+          // The 'onValueChange' callback receives the selected value as a string.
+          onValueChange={(value) => {
+            // Convert the selected string value back to a number before setting page size.
+            table.setPageSize(Number(value));
           }}>
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              {pageSize}
-            </option>
-          ))}
-        </select>
+          {/* SelectTrigger is the button that opens the dropdown */}
+          <SelectTrigger
+            className="h-8 w-[70px]" // Example: Apply specific width/height if needed, Shadcn handles focus/base styles
+          >
+            {/* SelectValue displays the currently selected value */}
+            <SelectValue placeholder="行数" /> {/* Optional: Add a placeholder */}
+          </SelectTrigger>
+
+          {/* SelectContent is the dropdown panel */}
+          <SelectContent>
+            {/* Map your page size options to SelectItem components */}
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <SelectItem
+                key={pageSize}
+                // The 'value' prop for SelectItem must also be a string.
+                value={pageSize.toString()}>
+                {/* The content displayed for the option */}
+                {pageSize}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         条
       </div>
     </div>
