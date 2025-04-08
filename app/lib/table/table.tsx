@@ -8,6 +8,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { TooltipWrapper } from '~/components/myui/tooltip-wrapper';
 import { Button } from '~/components/ui/button';
 import {
   Select,
@@ -16,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'; // Adjust the import path based on your project structure
+import { TooltipProvider } from '~/components/ui/tooltip';
 import { DebouncedInput } from '~/lib/table/debouncedInput';
 import { Filters } from '~/lib/table/types';
 
@@ -87,7 +89,7 @@ export default function Table<T extends Record<string, any>>({
                         </div>
                         {header.column.getCanFilter() && fieldMeta?.filterKey !== undefined ? (
                           <DebouncedInput
-                            className="w-24 rounded border shadow"
+                            className="w-20 rounded border shadow"
                             onChange={(value) => {
                               onFilterChange({
                                 [fieldMeta.filterKey as keyof T]: value,
@@ -123,34 +125,47 @@ export default function Table<T extends Record<string, any>>({
         </tbody>
       </table>
       <div className="my-2 flex items-center gap-2">
-        <Button
-          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}>
-          {'<<'}
-        </Button>
-        <Button
-          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}>
-          {'<'}
-        </Button>
-        <Button
-          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}>
-          {'>'}
-        </Button>
-        <Button
-          className="rounded border disabled:cursor-not-allowed disabled:text-gray-500"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}>
-          {'>>'}
-        </Button>
+        <TooltipProvider>
+          <TooltipWrapper tooltipMsg="首页">
+            <Button
+              className="rounded border"
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}>
+              {'<<'}
+            </Button>
+          </TooltipWrapper>
+
+          <TooltipWrapper tooltipMsg="上一页">
+            <Button
+              className="rounded border"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}>
+              {'<'}
+            </Button>
+          </TooltipWrapper>
+
+          <TooltipWrapper tooltipMsg="下一页">
+            <Button
+              className="rounded border"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}>
+              {'>'}
+            </Button>
+          </TooltipWrapper>
+
+          <TooltipWrapper tooltipMsg="末页">
+            <Button
+              className="rounded border"
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}>
+              {'>>'}
+            </Button>
+          </TooltipWrapper>
+        </TooltipProvider>
         <span className="w-16"></span>
         <strong>共{table.getPageCount()}页</strong>
         <span className="flex w-auto items-center">
-          ，跳转至第:
+          ，跳转至第
           <DebouncedInput
             type="number"
             min={1}

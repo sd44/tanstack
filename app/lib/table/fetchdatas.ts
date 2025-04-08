@@ -44,7 +44,7 @@ export async function fetchDatas<T extends Record<string, any>>(
 
       const value = item[key as keyof T];
 
-      if (typeof value === 'number') return value.toString().includes(filter);
+      if (typeof value === 'number') return value === +filter;
 
       if (typeof value === 'string') return value.toLowerCase().includes(`${filter}`.toLowerCase());
     });
