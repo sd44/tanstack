@@ -1,20 +1,17 @@
+/**
+   |--------------------------------------------------
+   | TODO: 本实现是客户端向服务端API发起数据，服务端转换xlsx后返回。
+   | 实现曲折，正常做法应当是服务端直接获取数据，转换为xlsx，客户端直接下载即可
+   |--------------------------------------------------
+ */
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
-import axios from 'redaxios';
 import { Button } from '~/components/ui/button';
+import { downloadFileWithAxios, postData } from '~/lib/utils/axios-download';
 
 export const Route = createFileRoute('/test3')({
   component: RouteComponent,
 });
-
-// Function to post data
-const postData = async (data: object) => {
-  return axios({
-    method: 'post',
-    url: '/api/export-xlsx',
-    data: data,
-  });
-};
 
 function RouteComponent() {
   // State for the data fetched by the button click
@@ -47,8 +44,12 @@ const worksheetName = body.worksheetName ?? 'sheet1';
         columns: userColumns,
         worksheetName: '用户数据',
       };
-      const x = await postData(newData);
-      console.log(x);
+      const x = await postData('/api/export-xlsx', newData);
+      if (x) {
+        downloadFileWithAxios(x);
+      } else {
+        console.log('发生错误: ', x);
+      }
     } catch (error) {
       console.error('Failed to fetch users on click:', error);
       setFetchError(error instanceof Error ? error : new Error('An unknown error occurred')); // Set error state
