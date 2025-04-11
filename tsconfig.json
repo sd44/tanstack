@@ -2,7 +2,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/lib/server/schema/visitors.schema.ts.tmp"  ],
   "compilerOptions": {
     /* Linting */
     "skipLibCheck": true,

@@ -3,4 +3,4 @@ export * from './auth.schema';
 
 export * from './company.schema';
 export * from './industry.schema';
-export * from './visitors.schema';
+export * from './visitors.schema.ts.tmp';
