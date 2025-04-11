@@ -1,0 +1,294 @@
+
+以下是 drizzle schema表。我如何用zod对其进行动态验证呢？如: 如果 hasCompanyDemand === true，则companyDeamand 和 isCompleted必须not null；如果isCompleted === true，则 completionTime not null.
+
+```typescript
+import { boolean, pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { enterprises } from './company.schema';
+
+// 定义走访形式的枚举类型
+export const visitTypeEnum = pgEnum('visit_type', ['实地走访', '微信交流', '电话联系']);
+
+// 定义 visits 表
+export const visits = pgTable('visits', {
+  id: serial('id').primaryKey(),
+  companyName: text('company_name')
+    .notNull()
+    .unique()
+    .references(() => enterprises.companyName, { onDelete: 'cascade' }), // 企业名称[必填]
+  commissioner: text('commissioner'), // 专员
+  visitTime: timestamp('visit_time').notNull(), // 走访时间[必填]
+  visitType: visitTypeEnum('visit_type').notNull(), // 走访形式[必填]
+  // TODO: visitedPerson, position, dispatchingUnit 应另外建表，并引入外键
+  visitedPerson: text('visited_person').notNull(), // 被走访人[必填]
+  visitedPersonPosition: text('visited_person_position').notNull(), // 被走访人职务[必填]
+  visitedPersonPhone: text('visited_person_phone').notNull(), // 被走访人电话[必填]
+  visitSituation: text('visit_situation'), // 走访内容
+  hasCompanyDemand: boolean('has_company_demand').notNull(), // 是否有企业诉求[是/否][必填]
+  companyDemand: text('company_demand'), // 企业诉求[必填]
+  isCompleted: boolean('is_completed'), // 是否办结[是/否/无诉求填-][必填]
+  problemDescription: text('problem_description'), // 诉求描述
+  remarkInformation: text('remark_information'), // 备注信息
+  completionTime: timestamp('completion_time'), // 办结时间
+  completionPersonName: text('completion_person_name'), // 办结人姓名
+  completionRemark: text('completion_remark'), // 办结备注
+});
+
+```
+
+好的，您可以利用 Zod 的 `.refine` 或 `.superRefine` 方法来实现这种基于其他字段值的动态条件验证。`.superRefine` 通常更适合处理涉及多个字段的复杂或多个条件，因为它允许您访问整个输入对象并根据需要添加多个错误。
+
+以下是如何为您的 `visits` Drizzle schema 创建相应的 Zod 验证 schema：
+
+```typescript
+import { z } from 'zod';
+import { visitTypeEnum } from './path/to/your/schema'; // 确保导入路径正确
+
+// 从 Drizzle pgEnum 获取枚举值数组
+const visitTypeValues = visitTypeEnum.enumValues; // ['实地走访', '微信交流', '电话联系']
+
+// 创建基本的 Zod Schema，映射 Drizzle 字段类型
+const baseVisitSchema = z.object({
+  // id 通常由数据库生成，不在创建/更新的验证范围内
+  // id: z.number().int().positive().optional(), // 如果需要验证 ID (例如在更新时)
+
+  companyName: z.string({ required_error: "企业名称不能为空" })
+               .min(1, "企业名称不能为空"),
+  commissioner: z.string().nullish(), // Drizzle text() 默认 nullable
+  visitTime: z.coerce.date({ // 使用 coerce.date 接受日期对象或可转换为日期的字符串/数字
+     required_error: "走访时间不能为空",
+     invalid_type_error: "走访时间必须是有效日期",
+  }),
+  visitType: z.enum(visitTypeValues, { // 使用从 pgEnum 获取的值
+     required_error: "走访形式不能为空",
+     invalid_type_error: `走访形式必须是 ${visitTypeValues.join(', ')} 中的一个`,
+  }),
+  visitedPerson: z.string({ required_error: "被走访人不能为空" })
+                  .min(1, "被走访人不能为空"),
+  visitedPersonPosition: z.string({ required_error: "被走访人职务不能为空" })
+                         .min(1, "被走访人职务不能为空"),
+  visitedPersonPhone: z.string({ required_error: "被走访人电话不能为空" })
+                      .min(1, "被走访人电话不能为空"),
+  visitSituation: z.string().nullish(),
+  hasCompanyDemand: z.boolean({ // Drizzle boolean().notNull() 对应 z.boolean()
+    required_error: "必须指明是否有企业诉求",
+    invalid_type_error: "“是否有企业诉求”必须是布尔值 (true/false)",
+  }),
+  companyDemand: z.string().nullish(), // Drizzle text() 默认 nullable
+  isCompleted: z.boolean().nullish(), // Drizzle boolean() 默认 nullable
+  problemDescription: z.string().nullish(),
+  remarkInformation: z.string().nullish(),
+  completionTime: z.coerce.date().nullish(), // Drizzle timestamp() 默认 nullable
+  completionPersonName: z.string().nullish(),
+  completionRemark: z.string().nullish(),
+});
+
+// 使用 .superRefine 应用动态验证规则
+export const visitValidationSchema = baseVisitSchema.superRefine((data, ctx) => {
+  // 规则 1: 如果 hasCompanyDemand === true，则 companyDemand 和 isCompleted 必须 not null
+  if (data.hasCompanyDemand === true) {
+    // 检查 companyDemand 是否为 null, undefined 或空字符串
+    if (data.companyDemand === null || data.companyDemand === undefined || data.companyDemand.trim() === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom, // 使用自定义错误代码
+        message: "当“有企业诉求”时，企业诉求内容不能为空",
+        path: ["companyDemand"], // 指明错误关联的字段
+      });
+    }
+    // 检查 isCompleted 是否为 null 或 undefined
+    // Drizzle boolean() 如果没有 .notNull() 是可以为 null 的，所以这里要确保它不是 null/undefined
+    if (data.isCompleted === null || data.isCompleted === undefined) {
+       ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "当“有企业诉求”时，必须明确“是否办结”状态 (true 或 false)",
+        path: ["isCompleted"],
+      });
+    }
+  }
+
+  // 规则 2: 如果 isCompleted === true，则 completionTime 必须 not null
+  // 注意：这个检查只在 isCompleted 确实为 true 时才有意义
+  if (data.isCompleted === true) {
+    // 检查 completionTime 是否为 null 或 undefined
+    if (data.completionTime === null || data.completionTime === undefined) {
+       ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "当“已办结”时，办结时间不能为空",
+        path: ["completionTime"],
+      });
+    }
+    // 根据实际需求，您可能还想在这里添加对 completionPersonName 等字段的非空验证
+    // if (data.completionPersonName === null || data.completionPersonName === undefined || data.completionPersonName.trim() === "") {
+    //   ctx.addIssue({ ... });
+    // }
+  }
+});
+
+// 可选：如果你想创建一个用于更新操作的 Schema，可能需要允许某些字段是可选的
+// export const updateVisitSchema = visitValidationSchema.partial(); // 使所有字段变为可选
+// 或者更精细地控制哪些字段可以更新
+
+// --- 使用示例 ---
+
+// 模拟有效的输入数据 (有诉求，未办结)
+const validInput1 = {
+  companyName: "测试有限公司",
+  visitTime: new Date(), // 或者 "2023-10-27T10:00:00Z"
+  visitType: "实地走访",
+  visitedPerson: "张三",
+  visitedPersonPosition: "经理",
+  visitedPersonPhone: "13800138000",
+  hasCompanyDemand: true,
+  companyDemand: "需要融资支持", // 必填，因为 hasCompanyDemand = true
+  isCompleted: false,      // 必填，因为 hasCompanyDemand = true
+  // completionTime, completionPersonName 等在这种情况下可以为 null/undefined
+};
+
+// 模拟有效的输入数据 (有诉求，已办结)
+const validInput2 = {
+  companyName: "创新科技",
+  visitTime: "2023-10-26", // Zod coerce.date 会尝试转换
+  visitType: "电话联系",
+  visitedPerson: "李四",
+  visitedPersonPosition: "技术总监",
+  visitedPersonPhone: "13900139000",
+  hasCompanyDemand: true,
+  companyDemand: "咨询政策优惠",
+  isCompleted: true, // 必填，因为 hasCompanyDemand = true
+  completionTime: new Date(), // 必填，因为 isCompleted = true
+  completionPersonName: "王五",
+  // ... 其他可选字段
+};
+
+// 模拟有效的输入数据 (无诉求)
+const validInput3 = {
+    companyName: "稳健发展集团",
+    visitTime: new Date(),
+    visitType: "微信交流",
+    visitedPerson: "赵六",
+    visitedPersonPosition: "运营主管",
+    visitedPersonPhone: "13700137000",
+    hasCompanyDemand: false, // 无诉求
+    // companyDemand, isCompleted, completionTime 等在这种情况下可以为 null/undefined 或不提供
+};
+
+
+// 模拟无效的输入数据 (有诉求，但缺少 companyDemand)
+const invalidInput1 = {
+  companyName: "测试有限公司",
+  visitTime: new Date(),
+  visitType: "实地走访",
+  visitedPerson: "张三",
+  visitedPersonPosition: "经理",
+  visitedPersonPhone: "13800138000",
+  hasCompanyDemand: true,
+  // companyDemand: undefined, // <-- 缺失，将导致验证失败
+  isCompleted: false,
+};
+
+// 模拟无效的输入数据 (有诉求，但 isCompleted 为 null/undefined)
+const invalidInput2 = {
+  companyName: "测试有限公司",
+  visitTime: new Date(),
+  visitType: "实地走访",
+  visitedPerson: "张三",
+  visitedPersonPosition: "经理",
+  visitedPersonPhone: "13800138000",
+  hasCompanyDemand: true,
+  companyDemand: "需要场地",
+  // isCompleted: undefined, // <-- 缺失状态，将导致验证失败
+};
+
+
+// 模拟无效的输入数据 (已办结，但缺少 completionTime)
+const invalidInput3 = {
+  companyName: "创新科技",
+  visitTime: "2023-10-26",
+  visitType: "电话联系",
+  visitedPerson: "李四",
+  visitedPersonPosition: "技术总监",
+  visitedPersonPhone: "13900139000",
+  hasCompanyDemand: true,
+  companyDemand: "咨询政策优惠",
+  isCompleted: true,
+  // completionTime: undefined, // <-- 缺失，将导致验证失败
+  completionPersonName: "王五",
+};
+
+
+try {
+  const parsedData1 = visitValidationSchema.parse(validInput1);
+  console.log("Valid Input 1 Passed:", parsedData1);
+
+  const parsedData2 = visitValidationSchema.parse(validInput2);
+  console.log("Valid Input 2 Passed:", parsedData2);
+
+  const parsedData3 = visitValidationSchema.parse(validInput3);
+  console.log("Valid Input 3 Passed:", parsedData3);
+
+  // 这将抛出 ZodError
+  // const parsedInvalidData = visitValidationSchema.parse(invalidInput1);
+
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    console.error("Validation Failed:", error.errors);
+    // 可以进一步处理错误，例如格式化后返回给前端
+    // error.errors 是一个数组，包含所有验证问题的详细信息
+    // [
+    //   {
+    //     "code": "custom",
+    //     "message": "当“有企业诉求”时，企业诉求内容不能为空",
+    //     "path": [ "companyDemand" ]
+    //   }
+    // ]
+  } else {
+     console.error("An unexpected error occurred:", error);
+  }
+}
+
+// 测试无效输入 1
+const resultInvalid1 = visitValidationSchema.safeParse(invalidInput1);
+if (!resultInvalid1.success) {
+    console.log("\nInvalid Input 1 Failed (as expected):");
+    console.log(resultInvalid1.error.format()); // `format()` 提供更结构化的错误信息
+}
+
+// 测试无效输入 2
+const resultInvalid2 = visitValidationSchema.safeParse(invalidInput2);
+if (!resultInvalid2.success) {
+    console.log("\nInvalid Input 2 Failed (as expected):");
+    console.log(resultInvalid2.error.format());
+}
+
+
+// 测试无效输入 3
+const resultInvalid3 = visitValidationSchema.safeParse(invalidInput3);
+if (!resultInvalid3.success) {
+    console.log("\nInvalid Input 3 Failed (as expected):");
+    console.log(resultInvalid3.error.format());
+}
+
+```
+
+**关键点解释:**
+
+1.  **基础映射:** 首先创建一个 `baseVisitSchema`，它将 Drizzle schema 中的每个字段映射到相应的 Zod 类型。
+    *   `text().notNull()` -> `z.string().min(1)` (或仅 `z.string()` 如果允许空字符串，但通常非空文本意味着需要内容)
+    *   `text()` (可空) -> `z.string().nullish()` (表示可以是 `string`, `null`, 或 `undefined`)
+    *   `timestamp().notNull()` -> `z.coerce.date()` (强制转换为 Date 对象，且必须提供)
+    *   `timestamp()` (可空) -> `z.coerce.date().nullish()`
+    *   `boolean().notNull()` -> `z.boolean()`
+    *   `boolean()` (可空) -> `z.boolean().nullish()`
+    *   `pgEnum().notNull()` -> `z.enum()` 使用从 Drizzle 枚举导出的值。
+2.  **动态验证 `.superRefine()`:** 这是实现条件逻辑的核心。它接收一个函数，该函数有两个参数：`data`（当前正在验证的对象）和 `ctx`（上下文对象，用于添加错误）。
+3.  **条件检查:** 在 `.superRefine` 的函数内部，我们检查触发条件的字段（`data.hasCompanyDemand` 和 `data.isCompleted`）。
+4.  **添加错误 `ctx.addIssue()`:** 如果条件满足且依赖的字段不符合要求（例如，应为非空但却是 `null`、`undefined` 或空字符串），我们使用 `ctx.addIssue` 来记录一个验证错误。
+    *   `code: z.ZodIssueCode.custom`: 表示这是一个自定义验证规则。
+    *   `message`: 提供对用户友好的错误信息。
+    *   `path`: 一个数组，指定与此错误相关的字段名（例如 `["companyDemand"]`）。这对于在 UI 中高亮显示错误字段非常有用。
+5.  **空字符串检查:** 对于 `companyDemand`，除了检查 `null` 和 `undefined`，还使用了 `.trim() === ""` 来确保它不仅仅是一个由空格组成的字符串。
+6.  **`isCompleted` 检查:** 当 `hasCompanyDemand` 为 `true` 时，`isCompleted` 不能是 `null` 或 `undefined`。这意味着它必须被明确地设置为 `true` 或 `false`。
+7.  **导出 Schema:** 最终导出的 `visitValidationSchema` 是包含了基础类型验证和动态条件验证的完整 schema。
+8.  **`z.coerce.date`**: 使用 `coerce` 可以让 Zod 尝试将输入（如 ISO 字符串或时间戳数字）转换为 JavaScript `Date` 对象，增加了灵活性。
+9.  **`safeParse` vs `parse`**: `parse` 在验证失败时会抛出 `ZodError`，需要用 `try...catch` 捕获。`safeParse` 则返回一个包含 `success` 标志和 `data` 或 `error` 的结果对象，通常在需要更精细错误处理时更方便。
+
+现在，您可以在需要验证访问数据的地方（例如 API 路由处理程序或表单提交处理逻辑中）使用 `visitValidationSchema.parse(yourData)` 或 `visitValidationSchema.safeParse(yourData)`.
