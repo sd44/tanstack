@@ -162,10 +162,9 @@ export default function Table<T extends Record<string, any>>({
             </Button>
           </TooltipWrapper>
         </TooltipProvider>
-        <span className="w-16"></span>
-        <strong>共{table.getPageCount()}页</strong>
-        <span className="flex w-auto items-center">
-          ，跳转至第
+        <span className="w-8" />
+        <span>
+          共<strong>{table.getPageCount()}</strong>页 ，跳转至第
           <DebouncedInput
             type="number"
             min={1}
@@ -184,8 +183,7 @@ export default function Table<T extends Record<string, any>>({
         </span>
         <span className="w-16" />
         <span className="flex items-center gap-1">
-          <div>共</div>
-          <strong>{table.getRowCount()}</strong>条信息
+          共 <strong>{table.getRowCount()}</strong>条信息
         </span>
         <span className="w-16" />
         每页显示

@@ -1,21 +1,17 @@
-import { useMutation } from '@tanstack/react-query';
+/**
+   |--------------------------------------------------
+   | TODO: 本实现是客户端向服务端API发起数据，服务端转换xlsx后返回。
+   | 实现曲折，正常做法应当是服务端直接获取数据，转换为xlsx，客户端直接下载即可
+   |--------------------------------------------------
+ */
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
-import axios from 'redaxios';
+import * as XLSX from 'xlsx';
 import { Button } from '~/components/ui/button';
 
 export const Route = createFileRoute('/test4')({
   component: RouteComponent,
 });
-
-// Function to post data
-const postData = async (data: object) => {
-  return axios({
-    method: 'post',
-    url: '/api/export-xlsx',
-    data: data,
-  });
-};
 
 function RouteComponent() {
   // State for the data fetched by the button click
@@ -23,8 +19,6 @@ function RouteComponent() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   // State to store any error from the button action
   const [fetchError, setFetchError] = useState<Error | null>(null);
-
-  const mutation = useMutation({ postData });
 
   // --- Async Event Handler for the Button ---
   const handleFetchClick = async () => {
@@ -36,21 +30,26 @@ function RouteComponent() {
       console.log('正在获取用户数据...');
       const users = await fetchUsers();
       console.log(`获取到 ${users.length} 条用户数据。`);
-      /* 我已有三个参数, body, data, columns，访问
-export const APIRoute = createAPIFileRoute('/test4')({
-POST: async ({ request }) => {
-const body: JsonToExcelBufParams = await request.json();
-const data = body.data;
-const columns = body.columns;
-const worksheetName = body.worksheetName ?? 'sheet1';
-   */
 
-      const newData = {
-        data: users,
-        columns: userColumns,
-        worksheetName: '用户数据',
-      };
-      await postData(newData);
+      const rows = users.map((row) => ({
+        姓名: row.name,
+        生日: row.email,
+        注册日期: row.registeredAt,
+        是否活跃: row.isActive ? '是' : '否',
+      }));
+      /* generate worksheet and workbook */
+      const worksheet = XLSX.utils.json_to_sheet(rows);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'sheet1');
+      const length = [20, 20, 30, 15];
+      worksheet['!cols'] = length.map((x) => {
+        return {
+          wch: x,
+        };
+      });
+
+      /* create an XLSX file and try to save to Presidents.xlsx */
+      XLSX.writeFile(workbook, 'Presidents.xlsx', { compression: true });
     } catch (error) {
       console.error('Failed to fetch users on click:', error);
       setFetchError(error instanceof Error ? error : new Error('An unknown error occurred')); // Set error state
@@ -88,35 +87,14 @@ interface User {
   isActive: boolean;
 }
 
-// 定义针对 User 数据的 Excel 列配置 (!!!)
-// 这里的 key 必须是 User 接口中的属性名
-const userColumns = [
-  { header: '用户ID', key: 'id', width: 10 },
-  { header: '姓名', key: 'name', width: 25 },
-  { header: '电子邮件', key: 'email', width: 35 },
-  {
-    header: '注册时间',
-    key: 'registeredAt',
-    width: 20,
-    style: { numFmt: 'yyyy-mm-dd hh:mm:ss' }, // 日期格式
-  },
-  {
-    header: '是否活跃',
-    key: 'isActive',
-    width: 12,
-    // 可以对布尔值进行转换显示
-    // style: { }, // 暂无直接转换，通常在 addRows 前处理数据
-  },
-];
 // 模拟获取特定数据
 async function fetchUsers(): Promise<User[]> {
-  // ... (获取用户数据的逻辑)
   return [
     {
       id: 1,
       name: '张三',
       email: 'zhangsan@example.com',
-      registeredAt: new Date(Date.now() + 1000 * 60 * 60 * 8),
+      registeredAt: new Date(new Date().toLocaleString('zh-CN')),
       isActive: true,
     },
     {

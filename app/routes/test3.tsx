@@ -30,14 +30,6 @@ function RouteComponent() {
       console.log('正在获取用户数据...');
       const users = await fetchUsers();
       console.log(`获取到 ${users.length} 条用户数据。`);
-      /* 我已有三个参数, body, data, columns，访问
-export const APIRoute = createAPIFileRoute('/test3')({
-POST: async ({ request }) => {
-const body: JsonToExcelBufParams = await request.json();
-const data = body.data;
-const columns = body.columns;
-const worksheetName = body.worksheetName ?? 'sheet1';
-   */
 
       const newData = {
         data: users,
@@ -115,7 +107,7 @@ async function fetchUsers(): Promise<User[]> {
       id: 1,
       name: '张三',
       email: 'zhangsan@example.com',
-      registeredAt: new Date(Date.now() + 1000 * 60 * 60 * 8),
+      registeredAt: new Date(new Date().toLocaleDateString('zh-CN')),
       isActive: true,
     },
     {
