@@ -5,10 +5,10 @@ import { jsonToExcelBuf } from '../../utils/json-to-xlsx'; // 导入通用函数
 interface JsonToExcelBufParams {
   data: Record<string, any>[]; // 接受任意对象的数组
   columns: Partial<Column>[]; // 接受列定义数组 (使用 Partial<Column> 更灵活)
-  worksheetName: string; // 默认工作表名
+  worksheetName?: string; // 默认工作表名
 }
 
-export const APIRoute = createAPIFileRoute('/api/export-users')({
+export const APIRoute = createAPIFileRoute('/api/export-xlsx')({
   POST: async ({ request }) => {
     const body: JsonToExcelBufParams = await request.json();
     const data = body.data;

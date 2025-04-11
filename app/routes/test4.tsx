@@ -1,9 +1,10 @@
+import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import axios from 'redaxios';
 import { Button } from '~/components/ui/button';
 
-export const Route = createFileRoute('/test3')({
+export const Route = createFileRoute('/test4')({
   component: RouteComponent,
 });
 
@@ -23,6 +24,8 @@ function RouteComponent() {
   // State to store any error from the button action
   const [fetchError, setFetchError] = useState<Error | null>(null);
 
+  const mutation = useMutation({ postData });
+
   // --- Async Event Handler for the Button ---
   const handleFetchClick = async () => {
     console.log('Button clicked, starting fetch...');
@@ -34,7 +37,7 @@ function RouteComponent() {
       const users = await fetchUsers();
       console.log(`获取到 ${users.length} 条用户数据。`);
       /* 我已有三个参数, body, data, columns，访问
-export const APIRoute = createAPIFileRoute('/test3')({
+export const APIRoute = createAPIFileRoute('/test4')({
 POST: async ({ request }) => {
 const body: JsonToExcelBufParams = await request.json();
 const data = body.data;
@@ -47,8 +50,7 @@ const worksheetName = body.worksheetName ?? 'sheet1';
         columns: userColumns,
         worksheetName: '用户数据',
       };
-      const x = await postData(newData);
-      console.log(x);
+      await postData(newData);
     } catch (error) {
       console.error('Failed to fetch users on click:', error);
       setFetchError(error instanceof Error ? error : new Error('An unknown error occurred')); // Set error state
