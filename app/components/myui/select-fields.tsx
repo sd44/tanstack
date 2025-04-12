@@ -10,7 +10,7 @@ import {
 
 import { useStore } from '@tanstack/react-form';
 import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context.tsx';
+import { useFieldContext } from '~/hooks/form-context';
 
 interface SelectFieldProps extends React.ComponentProps<typeof SelectValue> {
   label: string;
@@ -32,7 +32,7 @@ export default function SelectField({
 
   return (
     <div className="flex">
-      <Label className="flex items-center gap-2 w-full">
+      <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
         <Select value={field.state.value} onValueChange={(value) => field.handleChange(value)}>
           <SelectTrigger className={selectCls}>

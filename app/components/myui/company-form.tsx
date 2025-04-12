@@ -83,9 +83,8 @@ export const CompanyForm = () => {
         children={(field) => (
           <field.SelectField
             label="企业规模"
-            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg"
+            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg required"
             items={['特大型', '大型', '中型', '小型', '微型']}
-            required
           />
         )}
       />
@@ -108,9 +107,8 @@ export const CompanyForm = () => {
         children={(field) => (
           <field.SelectField
             label="生产经营状况"
-            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg"
+            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg required"
             items={['正常', '异常']}
-            required
           />
         )}
       />
@@ -120,9 +118,8 @@ export const CompanyForm = () => {
         children={(field) => (
           <field.SelectField
             label="三大产业"
-            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg"
+            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg required"
             items={['第一产业', '第二产业', '第三产业']}
-            required
           />
         )}
       />
@@ -132,9 +129,8 @@ export const CompanyForm = () => {
         children={(field) => (
           <field.CascaderField
             label="行业分类"
-            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg"
+            labelCls="w-48 after:ml-0.5 after:text-red-500 after:content-['*'] after:text-lg required"
             options={hangye2017}
-            required
           />
         )}
       />
