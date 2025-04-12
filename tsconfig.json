@@ -1,8 +1,7 @@
 {
   "include": [
     "**/*.ts",
-    "**/*.tsx"
-, "app/lib/server/schema/visitors.schema.ts.tmp"  ],
+    "**/*.tsx",],
   "compilerOptions": {
     /* Linting */
     "skipLibCheck": true,

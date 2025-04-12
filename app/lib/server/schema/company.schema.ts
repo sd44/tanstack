@@ -23,8 +23,11 @@ export const enterprises = pgTable('enterprises', {
   contactPerson: text('contact_person'), // 联系人
   contactPersonPhone: text('contact_person_phone'), // 联系人电话
   employeeCount: integer('employee_count').notNull(), // 员工人数[必填]
-  registeredCapital: numeric('registered_capital', { mode: 'number' }).notNull(), // 注册资本[必填][单位为万元] 默认情况下，为免精度损失，drizzle会将pgsql numeric转为 js string
-  // TODO: 服务专员和录入人不在表单，需分别在提交时处理。
+  // 注册资本[必填][单位为万元] 默认情况下，为免精度损失，drizzle会将pgsql
+  // numeric转为 js string。因我们的数据较小，存储为number不会影响精度，所以强制
+  // 指定。
+  registeredCapital: numeric('registered_capital', { mode: 'number' }).notNull(),
+  // TODO: 服务专员、录入人、录入单位名称不在表单，需额外建表，在提交时处理。
   serviceCommissioner: text('service_commissioner'), // 服务专员
   recorder: text('recorder'), // 录入人
   industryCategory: industryEnum('industry_category').notNull(), // 三大产业[必填]

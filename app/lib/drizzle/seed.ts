@@ -30,7 +30,7 @@ async function signUpUsers() {
         console.log(error.message, error.status);
       }
     }
-    console.log(`user${id}@x.co`);
+    console.log(`user${id}@x.com`);
     id += 1;
   }
 }

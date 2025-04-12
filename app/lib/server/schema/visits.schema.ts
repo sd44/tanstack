@@ -11,7 +11,6 @@ export const visits = pgTable('visits', {
     .notNull()
     .unique()
     .references(() => enterprises.companyName, { onDelete: 'cascade' }), // 企业名称[必填]
-  commissioner: text('commissioner').references(ref), // 专员
   visitTime: timestamp('visit_time').notNull(), // 走访时间[必填]
   visitType: visitTypeEnum('visit_type').notNull(), // 走访形式[必填]
   // TODO: visitedPerson, position, dispatchingUnit 应另外建表，并引入外键

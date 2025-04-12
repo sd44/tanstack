@@ -1,5 +1,5 @@
 import {
-  BookOpen,
+  /* BookOpen, */
   Bot,
   Command,
   Frame,
@@ -7,14 +7,14 @@ import {
   Map,
   PieChart,
   Send,
-  Settings2,
+  /* Settings2, */
   SquareTerminal,
 } from 'lucide-react';
 import * as React from 'react';
 
 import { useRouteContext } from '@tanstack/react-router';
 import { NavMain } from '~/components/modif_shadcn/nav-main';
-import { NavProjects } from '~/components/modif_shadcn/nav-projects';
+/* import { NavProjects } from '~/components/modif_shadcn/nav-projects'; */
 import { NavSecondary } from '~/components/modif_shadcn/nav-secondary';
 import { NavUser } from '~/components/modif_shadcn/nav-user';
 import {
@@ -43,77 +43,21 @@ const data = {
           title: '企业信息列表',
           url: '/dashboard/listCop',
         },
-        {
-          title: 'Settings',
-          url: '#',
-        },
       ],
     },
     {
-      title: '走访信息',
+      title: '走访记录',
       url: '#',
       icon: Bot,
       isActive: true,
       items: [
         {
-          title: 'Genesis',
-          url: '#',
+          title: '新增走访记录',
+          url: '/dashboard/newVisit',
         },
         {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Documentation',
-      url: '#',
-      icon: BookOpen,
-      isActive: true,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-      isActive: true,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
+          title: '历史走访记录',
+          url: '/dashboard/historyVisit',
         },
       ],
     },
@@ -151,7 +95,11 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const user = useRouteContext({ from: '/dashboard' }).user;
-  const userdata = { name: user.name, email: user.email, avatar: user.image ?? '/ico/avatar.png' };
+  const userdata = {
+    name: user!.name,
+    email: user!.email,
+    avatar: user!.image ?? '/ico/avatar.png',
+  };
 
   return (
     <Sidebar className="top-(--header-height) h-[calc(100svh-var(--header-height))]!" {...props}>
@@ -164,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-bold text-lg">墨韩的梦园</span>
+                  <span className="truncate text-lg font-bold">墨韩的梦园</span>
                   <span className="truncate text-sm">蛋疼的蛋蛋</span>
                 </div>
               </a>
@@ -174,7 +122,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        {/* <NavProjects projects={data.projects} /> */}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

@@ -1436,12 +1436,14 @@ export function generateRandomComp(): InsertEnterprises {
     contactPerson: faker.person.fullName(),
     contactPersonPhone: faker.helpers.fromRegExp('1[0-9]{10}'),
     companySize: faker.helpers.arrayElement(['特大型', '大型', '中型', '小型', '微型']),
-    registeredCapital: faker.number.float({ min: 0, max: 3000 }).toString(),
+    registeredCapital: faker.number.float({ min: 0, max: 3000 }),
     employeeCount: faker.number.int({ min: 1, max: 1000 }),
     businessStatus: faker.helpers.arrayElement(['正常', '异常']),
     industryCategory: faker.helpers.arrayElement(['第一产业', '第二产业', '第三产业']),
     industryCode: faker.helpers.arrayElement(industryCodeList),
     // 生成user1到25@1.com， 硬解码
-    serviceCommissioner: `user{ceil(Math.random()* 25)}@1.com`,
+    serviceCommissioner: `user${Math.ceil(Math.random() * 25)}`,
+    recorder: 'user1',
+    recordingUnitName: '高新区',
   };
 }
