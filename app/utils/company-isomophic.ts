@@ -11,23 +11,6 @@ import {
   strFieldSchema,
 } from './zod_helper_func';
 
-export const companyOpts = formOptions({
-  defaultValues: {
-    companyName: '',
-    address: '',
-    legalPersonName: '',
-    legalPersonPhone: '',
-    contactPerson: '',
-    contactPersonPhone: '',
-    companySize: '',
-    registeredCapital: '',
-    employeeCount: '',
-    businessStatus: '',
-    industryCategory: '',
-    industryCode: '',
-  },
-});
-
 const industryCodeList = [
   '0161',
   '0162',
@@ -1426,6 +1409,9 @@ export const companySchema = z.object({
   industryCategory: z.enum(['第一产业', '第二产业', '第三产业'], { message: '必选项' }),
   industryCode: z.enum(industryCodeList, { message: '请选择行业分类' }),
 });
+
+export type inputCompany = z.input<typeof companySchema>;
+export type outputCompany = z.output<typeof companySchema>;
 
 export function generateRandomComp(): InsertEnterprises {
   return {

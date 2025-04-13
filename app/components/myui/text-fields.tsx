@@ -1,7 +1,7 @@
 import { useStore } from '@tanstack/react-form';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context.tsx';
+import { useFieldContext } from '~/hooks/form-context';
 import { cn } from '~/lib/utils';
 
 interface TextFieldProps extends React.ComponentProps<typeof Input> {
@@ -25,7 +25,7 @@ export default function TextField({
       <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
         <Input
-          value={field.state.value}
+          value={field.state.value ?? ''}
           onChange={(e) => field.handleChange(e.target.value)}
           className={cn('flex-grow rounded border px-2 py-1', inputCls)}
           {...props}

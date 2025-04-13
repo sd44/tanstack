@@ -1,14 +1,6 @@
 import { ColumnDef, RowData } from '@tanstack/react-table';
 import { User } from '~/lib/table/user';
 
-declare module '@tanstack/react-table' {
-   
-  interface ColumnMeta<TData extends RowData, TValue> {
-    filterKey?: keyof TData;
-    filterVariant?: 'text' | 'number';
-  }
-}
-
 export const USER_COLUMNS: ColumnDef<User>[] = [
   {
     accessorKey: 'id',

@@ -3,14 +3,12 @@ import { toast } from 'sonner';
 import { Separator } from '~/components/ui/separator';
 import { useAppForm } from '~/hooks/form';
 import hangye2017 from '~/lib/data/hangye2017.json';
-import { companyOpts, companySchema } from '~/utils/company-isomophic';
+import { type inputCompany, companySchema } from '~/utils/company-isomophic';
 import { handleForm } from '~/utils/company-server';
 
 export const CompanyForm = () => {
   const form = useAppForm({
-    /*  理论上以下zod infer类型可以替代 ...companyOpts。但事实上前者导致 "A component is changing a controlled input to be uncontrolled" 错误；后者导致eslint类型推断错误   */
-    /* defaultValues: {} as z.infer<typeof companySchema>, */
-    ...companyOpts,
+    defaultValues: {} as inputCompany,
     validators: {
       onChange: companySchema,
     },

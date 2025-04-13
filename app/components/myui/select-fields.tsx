@@ -34,7 +34,9 @@ export default function SelectField({
     <div className="flex">
       <Label className="flex w-full items-center gap-2">
         <div className={labelCls}>{label}</div>
-        <Select value={field.state.value} onValueChange={(value) => field.handleChange(value)}>
+        <Select
+          value={field.state.value ?? ''}
+          onValueChange={(value) => field.handleChange(value)}>
           <SelectTrigger className={selectCls}>
             <SelectValue {...props} />
           </SelectTrigger>
