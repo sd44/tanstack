@@ -1,9 +1,9 @@
 import { createFormHook } from '@tanstack/react-form';
 import { lazy } from 'react';
-import CascaderField from '~/components/myui/cascader-field';
 import { Button } from '~/components/ui/button';
 import { fieldContext, formContext, useFormContext } from './form-context';
 
+const CascaderField = lazy(() => import('~/components/myui/cascader-field'));
 const TextField = lazy(() => import('~/components/myui/text-fields'));
 const PasswordField = lazy(() => import('~/components/myui/password-fields'));
 const SelectField = lazy(() => import('~/components/myui/select-fields'));

@@ -8,6 +8,8 @@ import { handleForm } from '~/utils/company-server';
 
 export const CompanyForm = () => {
   const form = useAppForm({
+    /*  理论上以下zod infer类型可以替代 ...companyOpts。但事实上前者导致 "A component is changing a controlled input to be uncontrolled" 错误；后者导致eslint类型推断错误   */
+    /* defaultValues: {} as z.infer<typeof companySchema>, */
     ...companyOpts,
     validators: {
       onChange: companySchema,
