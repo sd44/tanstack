@@ -19,7 +19,7 @@ import { Route as TestImport } from './routes/test'
 import { Route as Table2Import } from './routes/table2'
 import { Route as TableImport } from './routes/table'
 import { Route as DashboardRouteImport } from './routes/dashboard/route'
-import { Route as AuthRouteImport } from './routes/auth.route'
+import { Route as AuthRouteImport } from './routes/auth/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as DashboardAddCompanyImport } from './routes/dashboard/addCompany'
@@ -423,7 +423,7 @@ export const routeTree = rootRoute
       "filePath": "index.tsx"
     },
     "/auth": {
-      "filePath": "auth.route.tsx",
+      "filePath": "auth/route.tsx",
       "children": [
         "/auth/login",
         "/auth/signup"

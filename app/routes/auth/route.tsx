@@ -7,7 +7,7 @@ const REDIRECT_URL = '/dashboard';
 
 export const Route = createFileRoute('/auth')({
   component: AuthLayout,
-  beforeLoad: async ({ context }) => {
+  beforeLoad: async ({ context, location }) => {
     if (context.user) {
       throw redirect({
         to: REDIRECT_URL,
