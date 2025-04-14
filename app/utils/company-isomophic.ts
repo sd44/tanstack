@@ -1,8 +1,6 @@
-import { formOptions } from '@tanstack/react-form';
 import { z } from 'zod';
 
 import { fakerZH_CN as faker } from '@faker-js/faker';
-import { InsertEnterprises } from '~/lib/server/schema';
 
 import {
   mobileSchema,
@@ -1408,12 +1406,16 @@ export const companySchema = z.object({
   registeredCapital: z.coerce.number().gte(0, '注册资金必须大于等于0'),
   industryCategory: z.enum(['第一产业', '第二产业', '第三产业'], { message: '必选项' }),
   industryCode: z.enum(industryCodeList, { message: '请选择行业分类' }),
+  // TODO: 以下三项暂未做限制
+  serviceCommissioner: z.string(),
+  recorder: z.string(),
+  recordingUnitName: z.string(),
 });
 
 export type inputCompany = z.input<typeof companySchema>;
 export type outputCompany = z.output<typeof companySchema>;
 
-export function generateRandomComp(): InsertEnterprises {
+export function generateRandomComp(): inputCompany {
   return {
     companyName: faker.company.name(),
     address: faker.location.city() + faker.location.streetAddress(),

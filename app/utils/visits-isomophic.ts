@@ -1,27 +1,28 @@
-import { formOptions } from '@tanstack/react-form';
+// import { formOptions } from '@tanstack/react-form';
 import { z } from 'zod';
 import { InsertVisits, visitTypeEnum } from '~/lib/server/schema/visits.schema';
+import { fakerZH_CN as faker } from '@faker-js/faker';
 
-export const visitsOpts = formOptions({
-  defaultValues: {
-    companyName: '',
-    commissioner: '',
-    visitTime: '',
-    visitType: null,
-    visitedPerson: '',
-    visitedPersonPosition: '',
-    visitedPersonPhone: '',
-    visitSituation: '',
-    hasCompanyDemand: null,
-    companyDemand: '',
-    isCompleted: null,
-    problemDescription: '',
-    remarkInformation: '',
-    completionTime: '',
-    completionPersonName: '',
-    completionRemark: '',
-  },
-});
+// export const visitsOpts = formOptions({
+//   defaultValues: {
+//     companyName: '',
+//     commissioner: '',
+//     visitTime: '',
+//     visitType: null,
+//     visitedPerson: '',
+//     visitedPersonPosition: '',
+//     visitedPersonPhone: '',
+//     visitSituation: '',
+//     hasCompanyDemand: null,
+//     companyDemand: '',
+//     isCompleted: null,
+//     problemDescription: '',
+//     remarkInformation: '',
+//     completionTime: '',
+//     completionPersonName: '',
+//     completionRemark: '',
+//   },
+// });
 
 // 从 Drizzle pgEnum 获取枚举值数组
 const visitTypeValues = visitTypeEnum.enumValues; // ['实地走访', '微信交流', '电话联系']
