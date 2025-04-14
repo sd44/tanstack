@@ -1,12 +1,11 @@
 // import { formOptions } from '@tanstack/react-form';
 import { z } from 'zod';
-import { InsertVisits, visitTypeEnum } from '~/lib/server/schema/visits.schema';
+import { visitTypeEnum } from '~/lib/server/schema/visits.schema';
 import { fakerZH_CN as faker } from '@faker-js/faker';
 
 // export const visitsOpts = formOptions({
 //   defaultValues: {
 //     companyName: '',
-//     commissioner: '',
 //     visitTime: '',
 //     visitType: null,
 //     visitedPerson: '',
@@ -56,7 +55,7 @@ const baseVisitSchema = z.object({
   }),
   companyDemand: z.string().nullish(), // Drizzle text() 默认 nullable
   isCompleted: z.boolean().nullish(), // Drizzle boolean() 默认 nullable
-  problemDescription: z.string().nullish(),
+  completedDescription: z.string().nullish(),
   remarkInformation: z.string().nullish(),
   completionTime: z.coerce.date().nullish(), // Drizzle timestamp() 默认 nullable
   completionPersonName: z.string().nullish(),
@@ -75,7 +74,7 @@ export const visitValidationSchema = baseVisitSchema.superRefine((data, ctx) => 
     ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom, // 使用自定义错误代码
-        message: '当“有企业诉求”时，企业诉求内容不能为空',
+        message: '企业诉求内容不能为空',
         path: ['companyDemand'], // 指明错误关联的字段
       });
     }
@@ -112,21 +111,29 @@ export const visitValidationSchema = baseVisitSchema.superRefine((data, ctx) => 
 // export const updateVisitSchema = visitValidationSchema.partial(); // 使所有字段变为可选
 // 或者更精细地控制哪些字段可以更新
 
-export function generateRandomComp(): InsertVisits {
+export type inputVisits = z.input<typeof visitValidationSchema>;
+export type outputVisits = z.output<typeof visitValidationSchema>;
+
+export function generateRandomComp(): inputVisits {
+  const timestamp = faker.date.between({ from: '2025-01-01', to: Date.now() });
+  let date = new Date(timestamp.getTime() + 1000 * 60 * 60 * 20);
+
   return {
-    // companyName: faker.company.name(),
-    // address: faker.location.city() + faker.location.streetAddress(),
-    // legalPersonName: faker.person.fullName(),
-    // legalPersonPhone: faker.helpers.fromRegExp('1[0-9]{10}'),
-    // contactPerson: faker.person.fullName(),
-    // contactPersonPhone: faker.helpers.fromRegExp('1[0-9]{10}'),
-    // companySize: faker.helpers.arrayElement(['特大型', '大型', '中型', '小型', '微型']),
-    // registeredCapital: faker.number.float({ min: 0, max: 3000 }).toString(),
-    // employeeCount: faker.number.int({ min: 1, max: 1000 }),
-    // businessStatus: faker.helpers.arrayElement(['正常', '异常']),
-    // industryCategory: faker.helpers.arrayElement(['第一产业', '第二产业', '第三产业']),
-    // industryCode: faker.helpers.arrayElement(industryCodeList),
-    // // 生成user1到25@1.com， 硬解码
-    // serviceCommissioner: `user{ceil(Math.random()* 25)}@1.com`,
+    companyName: faker.company.name(),
+    visitTime: timestamp,
+    visitType: faker.helpers.arrayElement(visitTypeValues),
+    visitedPerson: faker.person.fullName(),
+    visitedPersonPosition: faker.person.jobType(),
+    visitedPersonPhone: faker.helpers.fromRegExp('1[0-9]{10}'),
+    visitSituation: '正常走访',
+    hasCompanyDemand: faker.datatype.boolean(),
+    companyDemand: 'bla bla bla bla bla',
+    isCompleted: faker.datatype.boolean(),
+    completedDescription: '',
+    remarkInformation: '',
+    completionTime: date,
+    // TODO: 办结人应在提交办结时自动设定为用户名
+    completionPersonName: '',
+    completionRemark: '',
   };
 }

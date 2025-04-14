@@ -20,9 +20,9 @@ export const visits = pgTable('visits', {
   visitedPersonPhone: text('visited_person_phone').notNull(), // 被走访人电话[必填]
   visitSituation: text('visit_situation'), // 走访内容
   hasCompanyDemand: boolean('has_company_demand').notNull(), // 是否有企业诉求[是/否][必填]
-  companyDemand: text('company_demand'), // 企业诉求[必填]
+  companyDemand: text('company_demand'), // 如有企业诉求，则此项必填
   isCompleted: boolean('is_completed'), // 是否办结[是/否/ 依赖于前面的有诉求][必填]
-  problemDescription: text('problem_description'), // 诉求描述
+  completedDescriptin: text('problem_description'), // 诉求描述
   remarkInformation: text('remark_information'), // 备注信息
   completionTime: timestamp('completion_time'), // 办结时间
   completionPersonName: text('completion_person_name'), // 办结人姓名

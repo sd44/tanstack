@@ -37,10 +37,11 @@ test('faker zh_CN', () => {
   console.log(faker.phone.number({ style: 'human' }));
   console.log(faker.helpers.fromRegExp('1[0-9]{10}'));
   console.log(faker.helpers.fromRegExp('1[0-9]{10}'));
-  console.log(faker.helpers.fromRegExp('1[0-9]{10}'));
-  console.log(faker.helpers.fromRegExp('1[0-9]{10}'));
-  console.log(faker.helpers.fromRegExp('1[0-9]{10}'));
   console.log(faker.location.city() + faker.location.streetAddress());
+
+  console.log(faker.person.jobTitle());
+  console.log(faker.person.jobTitle());
+  console.log(faker.person.jobTitle());
 });
 
 interface CompSeed {
