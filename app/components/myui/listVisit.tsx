@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import { ColumnDef } from '@tanstack/react-table';
 import { db } from '~/lib/server/db';
-import { InsertVisits, SelectVisits, visits, enterprises } from '~/lib/server/schema';
+import { SelectVisits, visits, enterprises } from '~/lib/server/schema';
 import { fetchDatas } from '~/lib/table/fetchdatas';
 import { Filters, PaginatedData } from '~/lib/table/types';
 import { eq, inArray } from 'drizzle-orm';
@@ -72,7 +72,7 @@ const compColumns: columnDefMeta[] = [
   { key: 'visitedPersonPosition', head: '走访人职务', filterVariant: 'text' },
   { key: 'hasCompanyDemand', head: '企业诉求', filterVariant: 'text' },
   { key: 'isCompleted', head: '是否办结', filterVariant: 'text' },
-  { key: 'problemDescription', head: '诉求描述', filterVariant: 'text' },
+  { key: 'completedDescription', head: '办结描述', filterVariant: 'text' },
   { key: 'remarkInformation', head: '备注信息', filterVariant: 'text' },
   { key: 'completionTime', head: '办结时间', filterVariant: 'text' },
   { key: 'completionPersonName', head: '办结人姓名', filterVariant: 'text' },
