@@ -14,7 +14,7 @@ export const Route = createFileRoute('/dashboard')({
 
   // TODO: 应该根据context就需要获取用户。如此，则可以删掉loader.
   loader: ({ context }) => {
-    return { user: context.user };
+    return { user: context.user, crumb: '管理面板' };
   },
 });
 

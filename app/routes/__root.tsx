@@ -30,7 +30,9 @@ export const Route = createRootRouteWithContext<{
     }); // we're using react-query for caching, see router.tsx
     return { user };
   },
-
+  loader: () => ({
+    crumb: '主页',
+  }),
   head: () => ({
     meta: [
       {

@@ -3,6 +3,9 @@ import { CompanyForm } from '~/components/myui/company-form';
 
 export const Route = createFileRoute('/dashboard/addCompany')({
   component: AddCompany,
+  loader: () => ({
+    crumb: '新增企业信息',
+  }),
 });
 
 function AddCompany() {

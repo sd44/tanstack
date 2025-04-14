@@ -8,6 +8,9 @@ import { useFilters } from '~/lib/table/useFilters';
 
 export const Route = createFileRoute('/dashboard/ListCop')({
   component: ListComps,
+  loader: () => ({
+    crumb: '企业信息列表',
+  }),
 });
 
 function ListComps() {

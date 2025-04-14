@@ -17,10 +17,10 @@ function DashMain() {
     <SidebarInset>
       <div className="flex flex-1 flex-col gap-4 p-4">
         <SectionCards />
-        <div className="w-full grid lg:grid-cols-3 gap-4 p-4">
-          <BarChartNeg className="" />
-          <BarChart02 className="" />
-          <PieChartSelector className="" />
+        <div className="grid w-full gap-4 p-4 lg:grid-cols-3">
+          <BarChartNeg />
+          <BarChart02 />
+          <PieChartSelector />
         </div>
         <ChartAreaInteractive />
       </div>
