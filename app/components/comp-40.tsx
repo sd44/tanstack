@@ -1,5 +1,8 @@
 import { useState, useCallback } from 'react';
-import { Label } from 'react-aria-components';
+import { useStore } from '@tanstack/react-form';
+import { useFieldContext } from '~/hooks/form-context';
+
+import { Label } from '~/components/ui/label';
 import { CalendarIcon } from 'lucide-react';
 import { DateField, DateInput } from '~/components/ui/datefield-rac';
 import { Button } from '~/components/ui/button';
@@ -11,8 +14,6 @@ import {
   getLocalTimeZone,
   toCalendarDateTime,
   fromDate,
-  now,
-  ZonedDateTime,
 } from '@internationalized/date';
 
 import { zhCN } from 'date-fns/locale';
@@ -21,11 +22,11 @@ import { cn } from '~/lib/utils';
 // Set the locale for the component
 const LOCALE = 'zh-CN';
 
-interface MyDatePickerProps extends React.ComponentProps<typeof DateField> {
+interface MyDatePickerProps {
   label: string;
   labelCls?: string; //labelCls 变为可选
   dateCls?: string; //inputCls 变为可选
-  value?: Date;
+  value: Date;
 }
 
 export default function MyDatePicker({
@@ -34,6 +35,10 @@ export default function MyDatePicker({
   dateCls = '',
   value,
 }: MyDatePickerProps) {
+  const field = useFieldContext<Date>();
+
+  const meta = useStore(field.store, (state) => state.meta);
+
   /* useCallback的意思要弄明白 */
 
   /* const zoneTime = fromDate(value, getLocalTimeZone());
@@ -99,7 +104,7 @@ export default function MyDatePicker({
           className="w-full *:not-first:mt-2"
           granularity="minute"
           hourCycle={24}
-          value={date}
+          value={handleDateSelect(value) ?? null}
           onChange={handleDateFieldChange}>
           <DateInput className={cn('w-full', dateCls)} />
         </DateField>
