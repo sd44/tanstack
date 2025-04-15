@@ -12,6 +12,9 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestclientImport } from './routes/testclient'
+import { Route as Test7Import } from './routes/test7'
+import { Route as Test6Import } from './routes/test6'
+import { Route as Test5Import } from './routes/test5'
 import { Route as Test4Import } from './routes/test4'
 import { Route as Test3Import } from './routes/test3'
 import { Route as Test2Import } from './routes/test2'
@@ -32,6 +35,24 @@ import { Route as AuthLoginImport } from './routes/auth/login'
 const TestclientRoute = TestclientImport.update({
   id: '/testclient',
   path: '/testclient',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Test7Route = Test7Import.update({
+  id: '/test7',
+  path: '/test7',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Test6Route = Test6Import.update({
+  id: '/test6',
+  path: '/test6',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Test5Route = Test5Import.update({
+  id: '/test5',
+  path: '/test5',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -186,6 +207,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Test4Import
       parentRoute: typeof rootRoute
     }
+    '/test5': {
+      id: '/test5'
+      path: '/test5'
+      fullPath: '/test5'
+      preLoaderRoute: typeof Test5Import
+      parentRoute: typeof rootRoute
+    }
+    '/test6': {
+      id: '/test6'
+      path: '/test6'
+      fullPath: '/test6'
+      preLoaderRoute: typeof Test6Import
+      parentRoute: typeof rootRoute
+    }
+    '/test7': {
+      id: '/test7'
+      path: '/test7'
+      fullPath: '/test7'
+      preLoaderRoute: typeof Test7Import
+      parentRoute: typeof rootRoute
+    }
     '/testclient': {
       id: '/testclient'
       path: '/testclient'
@@ -273,6 +315,9 @@ export interface FileRoutesByFullPath {
   '/test2': typeof Test2Route
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
+  '/test5': typeof Test5Route
+  '/test6': typeof Test6Route
+  '/test7': typeof Test7Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -290,6 +335,9 @@ export interface FileRoutesByTo {
   '/test2': typeof Test2Route
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
+  '/test5': typeof Test5Route
+  '/test6': typeof Test6Route
+  '/test7': typeof Test7Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -309,6 +357,9 @@ export interface FileRoutesById {
   '/test2': typeof Test2Route
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
+  '/test5': typeof Test5Route
+  '/test6': typeof Test6Route
+  '/test7': typeof Test7Route
   '/testclient': typeof TestclientRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -329,6 +380,9 @@ export interface FileRouteTypes {
     | '/test2'
     | '/test3'
     | '/test4'
+    | '/test5'
+    | '/test6'
+    | '/test7'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -345,6 +399,9 @@ export interface FileRouteTypes {
     | '/test2'
     | '/test3'
     | '/test4'
+    | '/test5'
+    | '/test6'
+    | '/test7'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -362,6 +419,9 @@ export interface FileRouteTypes {
     | '/test2'
     | '/test3'
     | '/test4'
+    | '/test5'
+    | '/test6'
+    | '/test7'
     | '/testclient'
     | '/auth/login'
     | '/auth/signup'
@@ -381,6 +441,9 @@ export interface RootRouteChildren {
   Test2Route: typeof Test2Route
   Test3Route: typeof Test3Route
   Test4Route: typeof Test4Route
+  Test5Route: typeof Test5Route
+  Test6Route: typeof Test6Route
+  Test7Route: typeof Test7Route
   TestclientRoute: typeof TestclientRoute
 }
 
@@ -394,6 +457,9 @@ const rootRouteChildren: RootRouteChildren = {
   Test2Route: Test2Route,
   Test3Route: Test3Route,
   Test4Route: Test4Route,
+  Test5Route: Test5Route,
+  Test6Route: Test6Route,
+  Test7Route: Test7Route,
   TestclientRoute: TestclientRoute,
 }
 
@@ -416,6 +482,9 @@ export const routeTree = rootRoute
         "/test2",
         "/test3",
         "/test4",
+        "/test5",
+        "/test6",
+        "/test7",
         "/testclient"
       ]
     },
@@ -454,6 +523,15 @@ export const routeTree = rootRoute
     },
     "/test4": {
       "filePath": "test4.tsx"
+    },
+    "/test5": {
+      "filePath": "test5.tsx"
+    },
+    "/test6": {
+      "filePath": "test6.tsx"
+    },
+    "/test7": {
+      "filePath": "test7.tsx"
     },
     "/testclient": {
       "filePath": "testclient.tsx"
