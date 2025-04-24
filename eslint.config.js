@@ -25,9 +25,9 @@ export default [
     extends: [
       pluginJs.configs.recommended,
       ...tseslint.configs.recommended,
-      eslintConfigPrettier,
       ...pluginQuery.configs['flat/recommended'],
       ...pluginRouter.configs['flat/recommended'],
+      eslintConfigPrettier,
     ],
   },
   reactHooks.configs.recommended,

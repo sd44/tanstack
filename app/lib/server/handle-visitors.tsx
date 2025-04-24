@@ -1,14 +1,14 @@
 import { createServerFn } from '@tanstack/react-start';
 import { insert } from '~/lib/drizzle/utils';
-import { enterprises } from '~/lib/server/schema/company.schema';
-import { companySchema } from '~/lib/zod/comps-validators';
+import { visits } from '~/lib/server/schema/visits.schema';
+import { visitValidationSchema } from '../zod/visits-validator';
 
 export const handleVisitsForm = createServerFn({
   method: 'POST',
 })
-  .validator(companySchema)
+  .validator(visitValidationSchema)
   .handler(async (ctx) => {
     console.log('进入serverFn handle: ', JSON.stringify(ctx.data, null, 2));
-    const msg = await insert(enterprises, ctx.data);
+    const msg = await insert(visits, ctx.data);
     return msg;
   });
