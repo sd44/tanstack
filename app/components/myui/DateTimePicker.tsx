@@ -30,7 +30,7 @@ export interface MyDatePickerProps
 
 export function MyDatePicker({
   label,
-  labelCls = 'w-24',
+  labelCls = '',
   dateCls = '',
   value,
   onChange, // <--- 把 onChange 添加到这里解构出来
@@ -105,7 +105,7 @@ export function MyDatePicker({
   return (
     <div className="flex flex-wrap">
       {/* 使用 React Aria 的 Label 组件，它会自动与内部的 DateField 关联 */}
-      <Label className="flex w-full items-center gap-2" aria-label="日期时间选择">
+      <Label className="flex items-center gap-2" aria-label="日期时间选择">
         <div className={labelCls}>{label}</div>
 
         {/* DateField 用于显示和通过键盘输入日期时间 */}
@@ -128,7 +128,7 @@ export function MyDatePicker({
             </Button>
           </PopoverTrigger>
           <PopoverContent className="items-center" align="center">
-            <div>
+            <div className="w-full">
               {/* 日历组件 */}
               <Calendar
                 mode="single"
@@ -147,7 +147,7 @@ export function MyDatePicker({
                   }
                   // 选择日期后通常不立即关闭 Popover，以便继续选择时间
                 }}
-                autoFocus
+                initialFocus
                 locale={zhCN} // 为日历指定中文 locale
               />
               {/* 时间选择器 */}

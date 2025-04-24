@@ -11,7 +11,7 @@ import { useStore } from '@tanstack/react-store';
 import { handleVisitsForm } from '~/lib/server/handle-visitors';
 
 // TODO: 参考 visits-data的fetchVisitsDatas获取当前用户的企业列表。
-export const VisitForm = () => {
+export const VisitForm = ({ comps }: { comps: string[] }) => {
   const form = useAppForm({
     defaultValues: {} as inputVisits,
     validators: {
@@ -59,12 +59,7 @@ export const VisitForm = () => {
       <form.AppField
         name="companyName"
         children={(field) => (
-          <field.TextField
-            label="企业名称"
-            labelCls="w-36 "
-            required
-            placeholder="与营业执照一致"
-          />
+          <field.SelectField label="企业名称" labelCls="w-36 required" items={comps} />
         )}
       />
 
@@ -103,7 +98,7 @@ export const VisitForm = () => {
 
       <form.AppField
         name="visitSituation"
-        children={(field) => <field.TextareaField label="走访内容" labelCls="w-36 required" />}
+        children={(field) => <field.TextareaField label="走访内容" labelCls="w-36 " />}
       />
 
       <Separator className="col-span-full my-2 border-gray-200" />

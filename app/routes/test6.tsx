@@ -4,10 +4,9 @@ import { fetchMyComps } from '~/lib/server/handle-visitors';
 
 export const Route = createFileRoute('/test6')({
   component: xx,
-  loader: async () => ({ comps: await fetchMyComps(), crum: '增加走访记录' }),
+  loader: async () => ({ comps: await fetchMyComps(), crumb: '增加走访记录' }),
 });
 
 function xx() {
-  /* return <VisitForm />; */
-  return <div>{JSON.stringify(Route.useLoaderData().comps)}</div>;
+  return <VisitForm comps={Route.useLoaderData().comps} />;
 }

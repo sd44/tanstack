@@ -9,7 +9,6 @@ export const visits = pgTable('visits', {
   id: serial('id').primaryKey(),
   companyName: text('company_name')
     .notNull()
-    .unique()
     .references(() => enterprises.companyName, { onDelete: 'cascade' }), // 企业名称[必填]
   visitTime: timestamp('visit_time', { withTimezone: true, mode: 'date' }).notNull(), // 走访时间[必填]
   visitType: visitTypeEnum('visit_type').notNull(), // 走访形式[必填]

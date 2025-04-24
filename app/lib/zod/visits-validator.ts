@@ -11,7 +11,7 @@ export const visitTypeValues = ['实地走访', '微信交流', '电话联系'];
 
 // 创建基本的 Zod Schema，映射 Drizzle 字段类型
 const baseVisitSchema = z.object({
-  companyName: z.string({ required_error: '企业名称不能为空' }).min(1, '企业名称不能为空'),
+  companyName: z.string(),
   commissioner: z.string().nullish(), // Drizzle text() 默认 nullable
   visitTime: z.coerce.date({
     // 使用 coerce.date 接受日期对象或可转换为日期的字符串/数字

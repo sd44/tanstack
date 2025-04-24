@@ -10,8 +10,8 @@ export const Route = createFileRoute('/dashboard/addCompany')({
 
 function AddCompany() {
   return (
-    <div>
-      <h3 className="m-8">新增企业信息</h3>
+    <div className="mx-4 flex flex-col gap-2 overflow-auto p-2">
+      <h3>新增企业信息</h3>
       <CompanyForm />
     </div>
   );

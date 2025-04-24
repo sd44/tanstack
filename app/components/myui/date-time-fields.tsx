@@ -5,7 +5,7 @@ import { MyDatePicker, type MyDatePickerProps } from './DateTimePicker';
 
 export default function DateTimeField({
   label,
-  labelCls = 'w-24',
+  labelCls = 'w-32',
   dateCls = '',
   value,
   onChange, // <--- 把 onChange 添加到这里解构出来

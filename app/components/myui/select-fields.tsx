@@ -53,7 +53,9 @@ export default function SelectField({
         </Select>
       </Label>
       {meta.isTouched && meta.errors.length ? (
-        <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+        <p className="w-full text-sm text-red-600">
+          {meta.errors.map((err) => err.message).join(',')}
+        </p>
       ) : null}
     </div>
   );

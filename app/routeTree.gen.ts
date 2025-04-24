@@ -23,6 +23,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard/route'
 import { Route as AuthRouteImport } from './routes/auth/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as DashboardNewVisitImport } from './routes/dashboard/newVisit'
 import { Route as DashboardHistoryVisitImport } from './routes/dashboard/historyVisit'
 import { Route as DashboardAddCompanyImport } from './routes/dashboard/addCompany'
 import { Route as DashboardListCopImport } from './routes/dashboard/ListCop'
@@ -100,6 +101,12 @@ const IndexRoute = IndexImport.update({
 const DashboardIndexRoute = DashboardIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+
+const DashboardNewVisitRoute = DashboardNewVisitImport.update({
+  id: '/newVisit',
+  path: '/newVisit',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 
@@ -249,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardHistoryVisitImport
       parentRoute: typeof DashboardRouteImport
     }
+    '/dashboard/newVisit': {
+      id: '/dashboard/newVisit'
+      path: '/newVisit'
+      fullPath: '/dashboard/newVisit'
+      preLoaderRoute: typeof DashboardNewVisitImport
+      parentRoute: typeof DashboardRouteImport
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
@@ -279,6 +293,7 @@ interface DashboardRouteRouteChildren {
   DashboardListCopRoute: typeof DashboardListCopRoute
   DashboardAddCompanyRoute: typeof DashboardAddCompanyRoute
   DashboardHistoryVisitRoute: typeof DashboardHistoryVisitRoute
+  DashboardNewVisitRoute: typeof DashboardNewVisitRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -286,6 +301,7 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardListCopRoute: DashboardListCopRoute,
   DashboardAddCompanyRoute: DashboardAddCompanyRoute,
   DashboardHistoryVisitRoute: DashboardHistoryVisitRoute,
+  DashboardNewVisitRoute: DashboardNewVisitRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -310,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/ListCop': typeof DashboardListCopRoute
   '/dashboard/addCompany': typeof DashboardAddCompanyRoute
   '/dashboard/historyVisit': typeof DashboardHistoryVisitRoute
+  '/dashboard/newVisit': typeof DashboardNewVisitRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 
@@ -329,6 +346,7 @@ export interface FileRoutesByTo {
   '/dashboard/ListCop': typeof DashboardListCopRoute
   '/dashboard/addCompany': typeof DashboardAddCompanyRoute
   '/dashboard/historyVisit': typeof DashboardHistoryVisitRoute
+  '/dashboard/newVisit': typeof DashboardNewVisitRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 
@@ -350,6 +368,7 @@ export interface FileRoutesById {
   '/dashboard/ListCop': typeof DashboardListCopRoute
   '/dashboard/addCompany': typeof DashboardAddCompanyRoute
   '/dashboard/historyVisit': typeof DashboardHistoryVisitRoute
+  '/dashboard/newVisit': typeof DashboardNewVisitRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 
@@ -372,6 +391,7 @@ export interface FileRouteTypes {
     | '/dashboard/ListCop'
     | '/dashboard/addCompany'
     | '/dashboard/historyVisit'
+    | '/dashboard/newVisit'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -390,6 +410,7 @@ export interface FileRouteTypes {
     | '/dashboard/ListCop'
     | '/dashboard/addCompany'
     | '/dashboard/historyVisit'
+    | '/dashboard/newVisit'
     | '/dashboard'
   id:
     | '__root__'
@@ -409,6 +430,7 @@ export interface FileRouteTypes {
     | '/dashboard/ListCop'
     | '/dashboard/addCompany'
     | '/dashboard/historyVisit'
+    | '/dashboard/newVisit'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -480,6 +502,7 @@ export const routeTree = rootRoute
         "/dashboard/ListCop",
         "/dashboard/addCompany",
         "/dashboard/historyVisit",
+        "/dashboard/newVisit",
         "/dashboard/"
       ]
     },
@@ -525,6 +548,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/historyVisit": {
       "filePath": "dashboard/historyVisit.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/newVisit": {
+      "filePath": "dashboard/newVisit.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/": {
