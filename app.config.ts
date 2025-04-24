@@ -1,0 +1,25 @@
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from '@tanstack/react-start/config';
+import tsConfigPaths from 'vite-tsconfig-paths';
+import { fileURLToPath } from 'node:url';
+export default defineConfig({
+  tsr: {
+    appDirectory: 'app',
+  },
+  server: {
+    preset: 'bun',
+  },
+  vite: {
+    plugins: [
+      tsConfigPaths({
+        projects: ['./tsconfig.json'],
+      }),
+      tailwindcss(),
+    ],
+    // build: {
+    //   rollupOptions: {
+    //     external: ['cloudflare:sockets'],
+    //   },
+    // },
+  },
+});
