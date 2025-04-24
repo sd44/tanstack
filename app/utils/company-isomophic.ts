@@ -1,9 +1,9 @@
-import { z } from 'zod';
 import { db } from '~/lib/server/db';
 import { eq } from 'drizzle-orm';
 import { enterprises, InsertEnterprises, user } from '~/lib/server/schema';
 
 import { fakerZH_CN as faker } from '@faker-js/faker';
+import { industryCodeList } from '~/lib/zod/comps-validators';
 
 export async function generateRandomComp() {
   try {

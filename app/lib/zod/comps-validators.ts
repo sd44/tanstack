@@ -6,7 +6,7 @@ import {
   strFieldSchema,
 } from '~/utils/zod_helper_func';
 
-const industryCodeList = [
+export const industryCodeList = [
   '0161',
   '0162',
   '0163',

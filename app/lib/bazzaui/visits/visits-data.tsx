@@ -4,7 +4,7 @@ import { db } from '~/lib/server/db';
 import { enterprises, visits } from '~/lib/server/schema';
 import { eq, inArray, desc } from 'drizzle-orm';
 import { getUser } from '~/lib/server/getuser';
-import { outputVisits } from '~/utils/visits-isomophic';
+import { outputVisits } from '~/lib/zod/visits-validator';
 import { filterFn } from '~/lib/filters';
 import {
   BatteryChargingIcon,
