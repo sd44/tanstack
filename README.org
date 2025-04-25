@@ -4,16 +4,14 @@
 :END:
 
 #+begin_quote
-[!WARNING] fork 自
-[[https://github.com/dotnize/tanstarter][dotnize/tanstarter]]
-开发阶段，尚未完成，仅供参考！特别是本库体积臃肿，主要是为开发方便：
+[!WARNING] ]
 
+开发阶段，尚未完成，仅供交流参考！特别是本库体积臃肿，主要是为开发方便：
 #+end_quote
 
-- 全部 shadcn UI 组件
+- 囊括了几乎全部 shadcn UI 组件
 - 大量 eslint, prettier plugin
-- 尚未配置完成的 Jest
-- 大量尚未完成，持续开发的代码
+- 大量 *尚未完成* ，持续开发的代码，详情见 [[file:TODOs]['TODOs.org']] 欢迎小伙伴们一起参与！
 
 * 参考并感谢
 :PROPERTIES:
@@ -24,8 +22,7 @@
 
   以下文档修改自 dotnize/react-tanstarter
 
-- [[https://better-auth.vercel.app/docs/examples/next-js][Better Auth
-  with Next Example]]
+- [[https://better-auth.vercel.app/docs/examples/next-js][Better Auth with Next Example]]
 
 * TanStarter
 :PROPERTIES:
@@ -33,8 +30,7 @@
 :END:
 A minimal starter template for 🏝️ TanStack Start.
 
-- [[https://react.dev][React 19]] +
-  [[https://react.dev/learn/react-compiler][React Compiler]]
+- [[https://react.dev][React 19]]
 
 - TanStack Full Stack
   - [[https://tanstack.com/start/latest][Start]]
@@ -54,7 +50,7 @@ A minimal starter template for 🏝️ TanStack Start.
 :PROPERTIES:
 :CUSTOM_ID: getting-started
 :END:
-本库改用 bun 作为默认包管理工具，可自行修改 =package.json=使用其他包管理。
+本库改用 bun 作为默认包管理工具，可自行修改 ~package.json~ 使用其他包管理，如 pnpm, yarn 等。
 
 1. Install dependencies:
 
@@ -62,12 +58,13 @@ A minimal starter template for 🏝️ TanStack Start.
    bun install
    #+end_src
 
-2. Create a =.env= file based on [[./.env.example][=.env.example=]].
+2. Create a =.env= file based on [[./.env.example][.env.example]].据你系统环境配置。
 
 3. Push the schema to your database with drizzle-kit:
 
    #+begin_src sh
-   bun db push
+     bun auth:generate
+     bun db push
    #+end_src
 
    https://orm.drizzle.team/docs/migrations
@@ -94,17 +91,6 @@ A minimal starter template for 🏝️ TanStack Start.
    bun start
    #+end_src
 
-* Issue watchlist
-:PROPERTIES:
-:CUSTOM_ID: issue-watchlist
-:END:
-- [[https://react.dev/learn/react-compiler][React Compiler docs]],
-  [[https://github.com/reactwg/react-compiler/discussions][Working
-  Group]] - React Compiler is still in beta. You can disable it in
-  [[./app.config.ts#L15][app.config.ts]] if you prefer.
-- https://github.com/TanStack/router/discussions/2863 - TanStack Start
-  is currently in beta and may still undergo major changes.
-
 * Auth
 :PROPERTIES:
 :CUSTOM_ID: auth
@@ -120,7 +106,7 @@ Discord, but can be easily modified to use other providers.
 :PROPERTIES:
 :CUSTOM_ID: scripts
 :END:
-These scripts in [[./package.json#L5][package.json]] use *pnpm* by
+These scripts in [[./package.json#L5][package.json]] use *bun* by
 default, but you can modify them to use your preferred package manager.
 
 - *auth:generate* - Regenerate the
@@ -139,16 +125,7 @@ default, but you can modify them to use your preferred package manager.
 :PROPERTIES:
 :CUSTOM_ID: utilities
 :END:
-- [[./src/lib/middleware/auth-guard.ts][=auth-guard.ts=]] - Sample
+- [[./src/lib/middleware/auth-guard.ts][auth-guard.ts]] - Sample
   middleware for forcing authentication on server functions.
   ([[https://github.com/dotnize/tanstarter/issues/5][see #5]])
-- [[./src/lib/components/ThemeToggle.tsx][=ThemeToggle.tsx=]] - A simple
-  component to toggle between light and dark mode.
-  ([[https://github.com/dotnize/tanstarter/issues/7][#7]])
-
-* TODOS
-:PROPERTIES:
-:CUSTOM_ID: todos
-:END:
-
-[[file:TODOs]['TODOs.org']] 包含代完成任务，欢迎小伙伴们一起参与！
+- [[./src/lib/components/ThemeToggle.tsx][ThemeToggle.tsx]] - A simple component to toggle between light and dark mode. ([[https://github.com/dotnize/tanstarter/issues/7][#7]])
