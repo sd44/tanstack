@@ -1,0 +1,81 @@
+*  网上比较好的 drizzle 简明笔记，涉及到 ~drizzle-zod~ 实践。
+
+[[https://heibaimeng.com/post/265][黑白梦 drizzle-orm使用笔记]]
+
+个人不喜欢 ~drizzle-zod~ ，因需要扩展 ~refine~ 等或重新自定义 ~schema~ ，以实现用户友好的 message 等，见 [[https://orm.drizzle.team/docs/zod#refinements]]
+
+* tanstack form zod validator 简明使用
+
+tanstack form 可以很方便的在 server 和 client 复用 zod 等 validator， ，并且可以直接在 form field 显示 zod 错误信息，不需额外配置：
+
+1. tanstack form 推荐的实践 AppFrom
+   + [[https://tanstack.com/form/latest/docs/framework/react/guides/form-composition#pre-bound-form-components][tanstack form 预绑定、可复用]]
+   + [[file:app/hooks/form.tsx][我的实践]]
+   + 特别注意实践各 ~foo-field.tsx~ 代码中的以下内容，在 field ~touched~ 或错误时自动显示错误信息
+
+     #+begin_src typescript
+       {meta.isTouched && meta.errors.length ? (
+         <p className="text-sm text-red-600">{meta.errors.map((err) => err.message).join(',')}</p>
+       ) : null}
+     #+end_src
+
+2. 我的 zod schema 以及一些 zod 辅助函数
+
+   [[file:app/utils/company-isomophic.ts::1429][my zod schema]]
+
+3. server 和 client 只需要指定 validator，各 field 的错误显示，zod 的类型转换等可自动搞定，无须再做其他工作。
+
+   #+begin_src typescript
+     validators: {
+           onChange: companySchema,
+         },
+   #+end_src
+   [[file:app/components/myui/company-form.tsx][client]]
+
+   [[file:app/utils/company-server.ts][server]]
+
+4. tanstack form ~onServerValidator~ 只接受 formdata type，搭配 form action 使用。我没搞清楚，另外似乎有 bug，略。
+
+* drizzle 应用
+ 1. SQL WHERE IN 语句的 drizzle 实现
+
+  #+begin_src typescript
+    import { inArray, isNull } from 'drizzle-orm';
+    import { db } from '~/lib/server/db';
+    import { enterprises } from '../server/schema';
+
+    for (let i = 1; i <= 25; i++) {
+      const serviceCommissioner = `user${i}@1.com`;
+
+      console.log(serviceCommissioner);
+
+      const ids = await db
+        .select({ id: enterprises.id })
+        .from(enterprises)
+        .where(isNull(enterprises.serviceCommissioner))
+        .limit(70);
+
+      const idValues = ids.map((item) => item.id);
+
+      const result = await db
+        .update(enterprises)
+        .set({ serviceCommissioner })
+        .where(inArray(enterprises.id, idValues));
+    }
+  #+end_src
+
+* timestamp 最佳实践
+
+1.  *数据库:* 使用 `TIMESTAMPTZ` (在 Drizzle 中用 `timestamp('...', { withTimezone: true })`)。
+2.  *存储:* 所有时间戳以 UTC 形式存储在数据库中。
+3.  *后端:*
+    *   将 Node.js 环境时区设为 UTC (推荐)。
+    *   视 Drizzle 返回的 `Date` 对象为 UTC。
+    *   在存储前，将任何非 UTC 的用户输入时间转换为 UTC。
+    *   使用可靠的日期库 (`date-fns-tz`, `Luxon`) 处理时区转换和后端格式化（如果需要）。
+4.  *API:* 使用 ISO 8601 字符串 (`YYYY-MM-DDTHH:mm:ss.sssZ`) 在后端和前端之间传输日期。
+5.  *前端:*
+    *   接收 ISO 8601 UTC 字符串。
+    *   使用浏览器 `Intl` API 或库，将 UTC 时间格式化为用户本地时区进行显示。
+
+遵循这些实践可以最大程度地减少因时区、夏令时 (DST) 等问题引起的错误和混淆。
