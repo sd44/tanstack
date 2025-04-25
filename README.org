@@ -11,7 +11,7 @@
 
 * TODOS
 
-*尚未完成* 的任务详情见 [[file:TODOs]['TODOs.org']] 欢迎小伙伴们一起参与！
+*尚未完成* 的任务详情见 [[file:TODOs][TODOs.org]] 欢迎小伙伴们一起参与！
 
 * 参考并感谢
 :PROPERTIES:
