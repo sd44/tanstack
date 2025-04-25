@@ -6,12 +6,12 @@
 #+begin_quote
 [!WARNING] ]
 
-开发阶段，尚未完成，仅供交流参考！特别是本库体积臃肿，主要是为开发方便：
+开发阶段，尚未完成，仅供交流参考！
 #+end_quote
 
-- 囊括了几乎全部 shadcn UI 组件
-- 大量 eslint, prettier plugin
-- 大量 *尚未完成* ，持续开发的代码，详情见 [[file:TODOs]['TODOs.org']] 欢迎小伙伴们一起参与！
+* TODOS
+
+*尚未完成* 的任务详情见 [[file:TODOs]['TODOs.org']] 欢迎小伙伴们一起参与！
 
 * 参考并感谢
 :PROPERTIES:
