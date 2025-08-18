@@ -1,0 +1,9 @@
+[test]
+# `preload` 字段告诉 bun test 在运行测试文件之前要加载的脚本
+# Bun 会自动执行这个文件，从而设置好全局 DOM 环境
+preload = ["./tests/setup.tsx"]
+
+# 如果你的 React 组件使用了 JSX，确保 `jsx` 配置正确
+[jsx]
+# "react-jsx" 是现代 React 的标准
+transform = "react-jsx"
