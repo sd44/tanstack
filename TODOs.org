@@ -1,0 +1,59 @@
+#+TITLE: Project TODOs
+#+CATEGORY: tanstack
+
+* General
+
+** TODO applyTheme
+
+[[file:src/components/ThemeToggle.tsx]]  应在 layout 或 root 建立 applyTheme()，否则无法保存主题设定，每次刷新网页都要手动设定。
+
+注意：读取主题需要在客户端 localStorage，所以可能导致服务水合出错，需要设定不提示水合失败。
+
+** TODO addCompany 提交时加入服务专员、派出单位等信息，注意 zod schema 也应加入校验
+
+[[file:src/lib/db/schema/company.schema.ts]]
+
+[[file:src/utils/company-server.tsx]]
+等文件
+
+* 泛型
+
+** TODO 完善 drizzle 通用泛型函数，类型定义有问题
+
+[[file:src/lib/drizzle/utils.ts]]
+
+* TODO 无特殊情况，index 不能做 map id 键位
+
+* Features
+
+** TODO 结合 better-auth admin plugin role，建立多级权限角色。
+
+better-auth 新版将会发布更全权限控制的插件，待定。
+
+** TODO Bazza/ui 尚不支持 boolean
+
+* Bugs
+
+** TODO Bazza/ui Checkbox is changing from uncontrolled to controlled.
+https://github.com/kianbazza/ui/issues/121
+
+* Refactoring
+
+* Documentation
+
+* Completed
+
+** DONE 为 user 增加 unit 等成员，或者建另建一个数据库表
+CLOSED: [2025-04-25 五 19:03]
+
+
+** DONE 完善 table 通用泛型函数，类型定义有问题
+CLOSED: [2025-04-25 五 19:03]
+
+[[file:src/lib/table/table.tsx::28]]
+
+
+** DONE 实现 date, range, select(options) 的 table filterVariant，目前只有 text 和 number
+CLOSED: [2025-04-25 五 19:04]
+
+已借助 bazza/UI 实现

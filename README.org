@@ -1,0 +1,130 @@
+* Tanstack Family + tailwindcss v4 + Origin UI + better-auth
+:PROPERTIES:
+:CUSTOM_ID: tanstack-family-tailwindcss-v4-origin-ui-better-auth
+:END:
+
+#+begin_quote
+[!WARNING] ]
+
+开发阶段，尚未完成，仅供交流参考！
+#+end_quote
+
+* TODOS
+
+*尚未完成* 的任务详情见 [[file:TODOs.org][TODOs.org]] 欢迎小伙伴们一起参与！
+
+* 参考并感谢
+:PROPERTIES:
+:CUSTOM_ID: 参考并感谢
+:END:
+- [[https://github.com/dotnize/react-tanstarter][dotnize/react-tanstarter(Tanstarter
+  with Better Auth)]]
+
+  以下文档修改自 dotnize/react-tanstarter
+
+- [[https://better-auth.vercel.app/docs/examples/next-js][Better Auth with Next Example]]
+
+* TanStarter
+:PROPERTIES:
+:CUSTOM_ID: tanstarter
+:END:
+A minimal starter template for 🏝️ TanStack Start.
+
+- [[https://react.dev][React 19]]
+
+- TanStack Full Stack
+  - [[https://tanstack.com/start/latest][Start]]
+  - [[https://tanstack.com/router/latest][Router]]
+  - [[https://tanstack.com/query/latest][Query]]
+  - [[https://tanstack.com/form/latest][Form]]
+  - [[https://tanstack.com/table/latest][Table]]
+  - [[https://tanstack.com/store/latest][store]]
+
+- [[https://tailwindcss.com/][Tailwind CSS v4]] + [[https://originui.com/][Oringin UI]]
+
+- [[https://orm.drizzle.team/][Drizzle ORM]] + PostgreSQL
+
+- [[https://www.better-auth.com/][Better Auth]]
+
+* Getting Started
+:PROPERTIES:
+:CUSTOM_ID: getting-started
+:END:
+本库改用 bun 作为默认包管理工具，可自行修改 ~package.json~ 使用其他包管理，如 pnpm, yarn 等。
+
+1. Install dependencies:
+
+   #+begin_src sh
+   bun install
+   #+end_src
+
+2. Create a =.env= file based on [[./.env.example][.env.example]].据你系统环境配置。
+
+3. Push the schema to your database with drizzle-kit:
+
+   #+begin_src sh
+     bun auth:generate
+     bun db push
+   #+end_src
+
+   https://orm.drizzle.team/docs/migrations
+
+4. 生成 seed 数据
+
+   #+begin_src sh
+   bun seed
+   #+end_src
+
+5. Run the development server:
+
+   #+begin_src sh
+   bun dev
+   #+end_src
+
+   The development server should be now running at
+   [[http://localhost:3000]].
+
+6. Build && Start:
+
+   #+begin_src sh
+   bun run build
+   bun start
+   #+end_src
+
+* Auth
+:PROPERTIES:
+:CUSTOM_ID: auth
+:END:
+Better Auth is currently configured for OAuth with GitHub, Google, and
+Discord, but can be easily modified to use other providers.
+
+* Goodies
+:PROPERTIES:
+:CUSTOM_ID: goodies
+:END:
+** Scripts
+:PROPERTIES:
+:CUSTOM_ID: scripts
+:END:
+These scripts in [[./package.json#L5][package.json]] use *bun* by
+default, but you can modify them to use your preferred package manager.
+
+- *auth:generate* - Regenerate the
+  [[./src/lib/db/schema/auth.schema.ts][auth db schema]] if you've
+  made changes to your Better Auth [[./src/lib/db/auth.ts][config]].
+- *db* - Run drizzle-kit commands. (e.g. ~bun db push~ to generate a
+  migration)
+- *ui* - The shadcn/ui CLI. (e.g. ~bun ui add button~ to add
+  shadcn@canary button component)
+- *format* and *lint* - Run Prettier and ESLint.
+- *drizzle 数据库辅助* - [[file:app/lib/drizzle/utils.ts][utils.ts]]
+- *开发过程中的一些 tips* - [[file:tips.org]]
+
+** Utilities
+:PROPERTIES:
+:CUSTOM_ID: utilities
+:END:
+- [[./src/lib/middleware/auth-guard.ts][auth-guard.ts]] - Sample
+  middleware for forcing authentication on server functions.
+  ([[https://github.com/dotnize/tanstarter/issues/5][see #5]])
+- [[./src/lib/components/ThemeToggle.tsx][ThemeToggle.tsx]] - A simple component to toggle between light and dark mode. ([[https://github.com/dotnize/tanstarter/issues/7][#7]])
