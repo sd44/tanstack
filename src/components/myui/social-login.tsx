@@ -1,4 +1,6 @@
+import { useMutation } from '@tanstack/react-query';
 import type { ComponentProps } from 'react';
+import { toast } from 'sonner';
 import { Button } from '~/components/ui/button';
 import authClient from '~/lib/auth/auth-client';
 import { cn } from '~/lib/utils';
@@ -11,15 +13,25 @@ interface SignInButtonProps extends ComponentProps<typeof Button> {
 }
 
 function _SignInButton({ provider, label, className, ...props }: SignInButtonProps) {
+  const mutation = useMutation({
+    mutationFn: async () =>
+      await authClient.signIn.social(
+        {
+          provider,
+          callbackURL: REDIRECT_URL,
+        },
+        {
+          onError: ({ error }) => {
+            toast.error(error.message || `An error occurred during ${label} sign-in.`);
+          },
+        },
+      ),
+  });
+
   return (
     <Button
       className={cn('text-white hover:text-white', className)}
-      onClick={() =>
-        authClient.signIn.social({
-          provider,
-          callbackURL: REDIRECT_URL,
-        })
-      }
+      onClick={() => mutation.mutate()}
       size="lg"
       type="button"
       variant="outline"

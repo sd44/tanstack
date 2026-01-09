@@ -22,7 +22,6 @@ export default defineConfig({
   plugins: [
     devtools(),
     tanstackStart(),
-    viteReact(),
     viteReact({
       // https://react.dev/learn/react-compiler
       babel: {
