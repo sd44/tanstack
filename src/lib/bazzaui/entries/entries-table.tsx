@@ -1,7 +1,7 @@
 'use client';
 
-import { type FiltersState, useDataTableFilters } from '@bazzaui/filters';
-import { createTSTColumns, createTSTFilters } from '@bazzaui/filters/tanstack-table';
+import { type FiltersState, useDataTableFilters } from '@bazza-ui/filters';
+import { createTSTColumns, createTSTFilters } from '@bazza-ui/filters/tanstack-table';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import {
   getCoreRowModel,
@@ -12,7 +12,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useMemo, useState } from 'react';
-import { DataTableFilter } from '~/components/data-table-filter';
+import { Filter } from '~/components/ui/filter';
 import { getEntriesOpt } from '~/lib/db/CRUD/entry-datas';
 import type { enterprisesSelectT } from '~/lib/db/schema';
 import { DataTable } from '../data-table';
@@ -78,13 +78,28 @@ function EntriesTable({
   return (
     <div className="col-span-2 w-full">
       <div className="flex items-center gap-2 pb-4">
-        <DataTableFilter
+        <Filter.Provider
           actions={actions}
           columns={columns}
           filters={filters}
           locale="zh_CN"
           strategy={strategy}
-        />
+        >
+          <Filter.Root>
+            <Filter.Menu />
+            <Filter.List>
+              {({ filter, column }) => (
+                <Filter.Item column={column} filter={filter}>
+                  <Filter.Subject />
+                  <Filter.Operator />
+                  <Filter.Value />
+                  <Filter.Remove />
+                </Filter.Item>
+              )}
+            </Filter.List>
+            <Filter.Actions />
+          </Filter.Root>
+        </Filter.Provider>
       </div>
       <DataTable table={table} />
     </div>

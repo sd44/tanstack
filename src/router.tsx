@@ -1,9 +1,9 @@
 import { QueryClient } from '@tanstack/react-query';
-import { createRouter as createTanStackRouter } from '@tanstack/react-router';
+import { createRouter } from '@tanstack/react-router';
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query';
 
 import { DefaultCatchBoundary } from './components/default-catch-boundary';
-import { NotFound } from './components/not-found';
+import { DefaultNotFound } from './components/default-not-found';
 import { routeTree } from './routeTree.gen';
 
 export function getRouter() {
@@ -16,7 +16,7 @@ export function getRouter() {
     },
   });
 
-  const router = createTanStackRouter({
+  const router = createRouter({
     routeTree,
     scrollRestoration: true,
     context: { queryClient, user: null },
@@ -25,7 +25,7 @@ export function getRouter() {
     // https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#passing-all-loader-events-to-an-external-cache
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultCatchBoundary,
-    defaultNotFoundComponent: () => <NotFound />,
+    defaultNotFoundComponent: DefaultNotFound,
     defaultStructuralSharing: true,
   });
 

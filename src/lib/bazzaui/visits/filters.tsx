@@ -1,5 +1,5 @@
 'use client';
-import { createColumnConfigHelper } from '@bazzaui/filters';
+import { createColumnConfigHelper } from '@bazza-ui/filters';
 import {
   Building2Icon,
   CalendarArrowUpIcon,

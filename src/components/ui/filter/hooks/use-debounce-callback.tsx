@@ -1,7 +1,3 @@
-/*
- * Source: https://usehooks-ts.com/react-hook/use-debounce-callback
- */
-
 import { useEffect, useMemo, useRef } from 'react'
 import { debounce } from '../lib/debounce'
 import { useUnmount } from './use-unmount'
