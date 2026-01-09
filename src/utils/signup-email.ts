@@ -22,5 +22,6 @@ export async function SignUpEmail({
     const err = `注册信息错误：${err_msg}`;
     return { success: false, error: err };
   }
-  return { success: true, name: data.name };
+
+  return { success: true, name: data.user?.name };
 }

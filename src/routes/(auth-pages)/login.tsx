@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import type { ComponentProps } from 'react';
 import { toast } from 'sonner';
@@ -10,7 +11,7 @@ import { loginOpts, loginSchema } from '~/utils/login-isomophic';
 
 const REDIRECT_URL = '/dashboard';
 
-export const Route = createFileRoute('/auth/login')({
+export const Route = createFileRoute('/(auth-pages)/login')({
   component: LoginForm,
 });
 
@@ -40,38 +41,40 @@ function SocialButton({ provider, imgsrc, className, ...props }: SocialButtonPro
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { redirectUrl } = Route.useRouteContext();
+
+  const { mutate: emailLoginMutate, isPending } = useMutation({
+    mutationFn: async (data: { email: string; password: string }) =>
+      await authClient.signIn.email(
+        {
+          ...data,
+          callbackURL: redirectUrl,
+        },
+        {
+          onError: ({ error }) => {
+            const err_code = error.code ?? '';
+            const err_msg = getErrorMessage(err_code, 'zh-hans');
+            toast.error(`登录错误：${err_msg}，请修订信息重新登录`);
+          },
+          // better-auth seems to trigger a hard navigation on login,
+          // so we don't have to revalidate & navigate ourselves
+          onSuccess: () => {
+            toast.success('亲爱的朋友，你已成功登录！');
+            navigate({ to: '/dashboard', replace: true });
+          },
+        },
+      ),
+  });
+
   const form = useAppForm({
     ...loginOpts,
     validators: {
       onChange: loginSchema,
     },
-    onSubmit: async ({ value }) => {
-      try {
-        /* await SignUpEmail({ ...value }); */
-
-        const { error } = await authClient.signIn.email({
-          email: value.email,
-          password: value.password,
-          callbackURL: REDIRECT_URL,
-          rememberMe: true,
-        });
-
-        if (error) {
-          const err_code = error.code ?? '';
-          const err_msg = getErrorMessage(err_code, 'zh-hans');
-          toast.error(`登录错误：${err_msg}，请修订信息重新登录`);
-        } else {
-          //redirect to the dashboard or sign in page
-          toast.success('亲爱的朋友，你已成功登录！');
-          navigate({ to: '/dashboard', replace: true });
-        }
-      } catch (_error) {
-        const errorMessage = _error instanceof Error ? _error.message : String(_error);
-        toast.error(`登录时发生错误：${errorMessage}`);
-      }
+    onSubmit: ({ value }) => {
+      emailLoginMutate(value);
     },
   });
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col items-center gap-2 text-center">
@@ -106,7 +109,7 @@ function LoginForm() {
       <SocialButton imgsrc="/ico/github_black.svg" provider="github" />
       <div className="text-center text-base">
         还没有账户？{' '}
-        <Link className="underline underline-offset-4" to="/auth/signup">
+        <Link className="underline underline-offset-4" to="/signup">
           注册账户
         </Link>
       </div>

@@ -1,25 +1,29 @@
-/* import { cn } from "~/lib/utils"; */
-
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
+import { authQueryOptions } from '~/lib/auth/queries';
 
 const REDIRECT_URL = '/dashboard';
 
-export const Route = createFileRoute('/auth')({
-  component: AuthLayout,
-  beforeLoad: ({ context }) => {
-    if (context.user) {
+export const Route = createFileRoute('/(auth-pages)')({
+  component: RouteComponent,
+  beforeLoad: async ({ context }) => {
+    const user = await context.queryClient.ensureQueryData({
+      ...authQueryOptions(),
+      revalidateIfStale: true,
+    });
+    if (user) {
       throw redirect({
         to: REDIRECT_URL,
       });
     }
+
     return {
       redirectUrl: REDIRECT_URL,
     };
   },
 });
 
-function AuthLayout() {
+function RouteComponent() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">

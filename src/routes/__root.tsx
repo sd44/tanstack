@@ -5,28 +5,25 @@ import type { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-
-import { DefaultCatchBoundary } from '~/components/default-catch-boundary';
-import { NotFound } from '~/components/not-found';
+import type * as React from 'react';
 import { ThemeProvider } from '~/components/theme-provider';
 import { Toaster } from '~/components/ui/sonner';
-import { getUser } from '~/lib/auth/functions/getuser';
+import { type AuthQueryResult, authQueryOptions } from '~/lib/auth/queries';
 import appCss from '~/styles/app.css?url';
 import { seo } from '~/utils/seo';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
-  user: Awaited<ReturnType<typeof getUser>>;
+  user: AuthQueryResult;
 }>()({
-  beforeLoad: async ({ context }) => {
+  beforeLoad: ({ context }) => {
     // we're using react-query for client-side caching to reduce client-to-server calls, see /src/router.tsx
     // better-auth's cookieCache is also enabled server-side to reduce server-to-db calls, see /src/lib/auth/auth.ts
-    const user = await context.queryClient.ensureQueryData({
-      queryKey: ['user'],
-      queryFn: ({ signal }) => getUser({ signal }),
-      revalidateIfStale: true,
-    }); // we're using react-query for caching, see router.tsx
-    return { user };
+    context.queryClient.prefetchQuery(authQueryOptions());
+
+    // typically we don't need the user immediately in landing pages,
+    // so we're only prefetching here and not awaiting.
+    // for protected routes with loader data, see /(authenticated)/route.tsx
   },
   loader: () => ({
     crumb: '主页',
@@ -69,14 +66,6 @@ export const Route = createRootRouteWithContext<{
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  errorComponent: (props) => {
-    return (
-      <RootDocument>
-        <DefaultCatchBoundary {...props} />
-      </RootDocument>
-    );
-  },
-  notFoundComponent: () => <NotFound />,
   component: RootComponent,
 });
 

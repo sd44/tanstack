@@ -20,6 +20,7 @@ import {
   useSidebar,
 } from '~/components/ui/sidebar';
 import authClient from '~/lib/auth/auth-client';
+import { authQueryOptions } from '~/lib/auth/queries';
 
 export function NavUser({
   user,
@@ -100,18 +101,15 @@ export function NavUser({
               onSelect={async (event: Event) => {
                 // 接收 event 参数并添加类型
                 event.preventDefault(); // <--- 添加这一行！
-                try {
-                  await authClient.signOut({
-                    fetchOptions: {
-                      onResponse: async () => {
-                        queryClient.setQueryData(['user'], null);
-                        await router.invalidate();
-                      },
+                await authClient.signOut({
+                  fetchOptions: {
+                    onResponse: async () => {
+                      // manually set to null to avoid unnecessary refetching
+                      queryClient.setQueryData(authQueryOptions().queryKey, null);
+                      await router.invalidate();
                     },
-                  });
-                } catch (_error) {
-                  // 这里可以添加用户反馈，例如 toast 通知
-                }
+                  },
+                });
               }}
             >
               <LogOut />

@@ -3,6 +3,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { multiSession, oAuthProxy, oidcProvider, openAPI } from 'better-auth/plugins';
 import { tanstackStartCookies } from 'better-auth/tanstack-start';
+
 import { env } from '~/env/server';
 import { db } from '~/lib/db';
 
@@ -16,7 +17,7 @@ const getAuthConfig = createServerOnlyFn(() =>
   betterAuth({
     appName: '墨韩的梦园',
     baseURL: env.VITE_BASE_URL,
-    trustedOrigins: ['http://localhost:3000', 'http://47.129.57.189:3000/'],
+    trustedOrigins: [env.VITE_BASE_URL, 'http://47.129.57.189:3000/'],
     database: drizzleAdapter(db, {
       provider: 'pg',
     }),
@@ -48,10 +49,10 @@ const getAuthConfig = createServerOnlyFn(() =>
     },
     // https://www.better-auth.com/docs/concepts/session-management#session-caching
     session: {
-      // cookieCache: {
-      //   enabled: true,
-      //   maxAge: 5 * 60, // 5 minutes
-      // },
+      cookieCache: {
+        enabled: true,
+        maxAge: 5 * 60, // 5 minutes
+      },
     },
     // https://www.better-auth.com/docs/authentication/email-password
     emailAndPassword: {
@@ -86,6 +87,7 @@ const getAuthConfig = createServerOnlyFn(() =>
     },
 
     plugins: [
+      tanstackStartCookies(),
       // admin({
       //   // adminRoles: ['admin', 'superadmin'],
       //   // adminUserIds: ['fVVf4ABR0IuWZ6lLvBmSWSLgvSYjWBfJ'],
@@ -96,7 +98,6 @@ const getAuthConfig = createServerOnlyFn(() =>
       oidcProvider({
         loginPage: '/auth',
       }),
-      tanstackStartCookies(),
     ],
   }),
 );

@@ -1,16 +1,12 @@
-import {
-  adminClient,
-  genericOAuthClient,
-  multiSessionClient,
-  oidcClient,
-} from 'better-auth/client/plugins';
+import { genericOAuthClient, multiSessionClient, oidcClient } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 import { toast } from 'sonner';
 import { env } from '~/env/client';
 
 const authClient = createAuthClient({
   baseURL: env.VITE_BASE_URL,
-  plugins: [adminClient(), multiSessionClient(), oidcClient(), genericOAuthClient()],
+  // plugins: [adminClient(), multiSessionClient(), oidcClient(), genericOAuthClient()],
+  plugins: [multiSessionClient(), oidcClient(), genericOAuthClient()],
   fetchOptions: {
     onError(e) {
       if (e.error.status === 429) {

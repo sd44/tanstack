@@ -13,7 +13,6 @@ import { Route as TestclientRouteImport } from './routes/testclient'
 import { Route as Test9HeaderpicRouteImport } from './routes/test9-headerpic'
 import { Route as Test8HeaderRouteImport } from './routes/test8-header'
 import { Route as Test7RouteImport } from './routes/test7'
-import { Route as Test6RouteImport } from './routes/test6'
 import { Route as Test5RouteImport } from './routes/test5'
 import { Route as Test4RouteImport } from './routes/test4'
 import { Route as Test3RouteImport } from './routes/test3'
@@ -25,14 +24,16 @@ import { Route as Test13CustomersRouteImport } from './routes/test13-customers'
 import { Route as Test11CardsRouteImport } from './routes/test11-cards'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
+import { Route as authPagesRouteRouteImport } from './routes/(auth-pages)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardNewVisitRouteImport } from './routes/dashboard/new-visit'
 import { Route as DashboardListCopRouteImport } from './routes/dashboard/list-cop'
 import { Route as DashboardHistoryVisitRouteImport } from './routes/dashboard/history-visit'
 import { Route as DashboardAddCompanyRouteImport } from './routes/dashboard/add-company'
-import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as authPagesSignupRouteImport } from './routes/(auth-pages)/signup'
+import { Route as authPagesLoginRouteImport } from './routes/(auth-pages)/login'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const TestclientRoute = TestclientRouteImport.update({
@@ -53,11 +54,6 @@ const Test8HeaderRoute = Test8HeaderRouteImport.update({
 const Test7Route = Test7RouteImport.update({
   id: '/test7',
   path: '/test7',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Test6Route = Test6RouteImport.update({
-  id: '/test6',
-  path: '/test6',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Test5Route = Test5RouteImport.update({
@@ -115,6 +111,10 @@ const AuthRouteRoute = AuthRouteRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const authPagesRouteRoute = authPagesRouteRouteImport.update({
+  id: '/(auth-pages)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -145,15 +145,20 @@ const DashboardAddCompanyRoute = DashboardAddCompanyRouteImport.update({
   path: '/add-company',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const AuthSignupRoute = AuthSignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
+} as any)
+const authPagesSignupRoute = authPagesSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => authPagesRouteRoute,
+} as any)
+const authPagesLoginRoute = authPagesLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => authPagesRouteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -174,13 +179,13 @@ export interface FileRoutesByFullPath {
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
-  '/test6': typeof Test6Route
   '/test7': typeof Test7Route
   '/test8-header': typeof Test8HeaderRoute
   '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
+  '/login': typeof authPagesLoginRoute
+  '/signup': typeof authPagesSignupRoute
   '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
   '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
   '/dashboard/list-cop': typeof DashboardListCopRoute
@@ -200,13 +205,13 @@ export interface FileRoutesByTo {
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
-  '/test6': typeof Test6Route
   '/test7': typeof Test7Route
   '/test8-header': typeof Test8HeaderRoute
   '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
+  '/login': typeof authPagesLoginRoute
+  '/signup': typeof authPagesSignupRoute
   '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
   '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
   '/dashboard/list-cop': typeof DashboardListCopRoute
@@ -217,6 +222,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(auth-pages)': typeof authPagesRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/test11-cards': typeof Test11CardsRoute
@@ -228,13 +234,13 @@ export interface FileRoutesById {
   '/test3': typeof Test3Route
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
-  '/test6': typeof Test6Route
   '/test7': typeof Test7Route
   '/test8-header': typeof Test8HeaderRoute
   '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
+  '/(auth-pages)/login': typeof authPagesLoginRoute
+  '/(auth-pages)/signup': typeof authPagesSignupRoute
   '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
   '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
   '/dashboard/list-cop': typeof DashboardListCopRoute
@@ -257,13 +263,13 @@ export interface FileRouteTypes {
     | '/test3'
     | '/test4'
     | '/test5'
-    | '/test6'
     | '/test7'
     | '/test8-header'
     | '/test9-headerpic'
     | '/testclient'
+    | '/login'
+    | '/signup'
     | '/auth/login'
-    | '/auth/signup'
     | '/dashboard/add-company'
     | '/dashboard/history-visit'
     | '/dashboard/list-cop'
@@ -283,13 +289,13 @@ export interface FileRouteTypes {
     | '/test3'
     | '/test4'
     | '/test5'
-    | '/test6'
     | '/test7'
     | '/test8-header'
     | '/test9-headerpic'
     | '/testclient'
+    | '/login'
+    | '/signup'
     | '/auth/login'
-    | '/auth/signup'
     | '/dashboard/add-company'
     | '/dashboard/history-visit'
     | '/dashboard/list-cop'
@@ -299,6 +305,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/(auth-pages)'
     | '/auth'
     | '/dashboard'
     | '/test11-cards'
@@ -310,13 +317,13 @@ export interface FileRouteTypes {
     | '/test3'
     | '/test4'
     | '/test5'
-    | '/test6'
     | '/test7'
     | '/test8-header'
     | '/test9-headerpic'
     | '/testclient'
+    | '/(auth-pages)/login'
+    | '/(auth-pages)/signup'
     | '/auth/login'
-    | '/auth/signup'
     | '/dashboard/add-company'
     | '/dashboard/history-visit'
     | '/dashboard/list-cop'
@@ -327,6 +334,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  authPagesRouteRoute: typeof authPagesRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   Test11CardsRoute: typeof Test11CardsRoute
@@ -338,7 +346,6 @@ export interface RootRouteChildren {
   Test3Route: typeof Test3Route
   Test4Route: typeof Test4Route
   Test5Route: typeof Test5Route
-  Test6Route: typeof Test6Route
   Test7Route: typeof Test7Route
   Test8HeaderRoute: typeof Test8HeaderRoute
   Test9HeaderpicRoute: typeof Test9HeaderpicRoute
@@ -374,13 +381,6 @@ declare module '@tanstack/react-router' {
       path: '/test7'
       fullPath: '/test7'
       preLoaderRoute: typeof Test7RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test6': {
-      id: '/test6'
-      path: '/test6'
-      fullPath: '/test6'
-      preLoaderRoute: typeof Test6RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/test5': {
@@ -460,6 +460,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(auth-pages)': {
+      id: '/(auth-pages)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof authPagesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -502,19 +509,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAddCompanyRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/auth/signup': {
-      id: '/auth/signup'
-      path: '/signup'
-      fullPath: '/auth/signup'
-      preLoaderRoute: typeof AuthSignupRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
     '/auth/login': {
       id: '/auth/login'
       path: '/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteRoute
+    }
+    '/(auth-pages)/signup': {
+      id: '/(auth-pages)/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof authPagesSignupRouteImport
+      parentRoute: typeof authPagesRouteRoute
+    }
+    '/(auth-pages)/login': {
+      id: '/(auth-pages)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authPagesLoginRouteImport
+      parentRoute: typeof authPagesRouteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -526,14 +540,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface authPagesRouteRouteChildren {
+  authPagesLoginRoute: typeof authPagesLoginRoute
+  authPagesSignupRoute: typeof authPagesSignupRoute
+}
+
+const authPagesRouteRouteChildren: authPagesRouteRouteChildren = {
+  authPagesLoginRoute: authPagesLoginRoute,
+  authPagesSignupRoute: authPagesSignupRoute,
+}
+
+const authPagesRouteRouteWithChildren = authPagesRouteRoute._addFileChildren(
+  authPagesRouteRouteChildren,
+)
+
 interface AuthRouteRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
-  AuthSignupRoute: typeof AuthSignupRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
-  AuthSignupRoute: AuthSignupRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
@@ -562,6 +588,7 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  authPagesRouteRoute: authPagesRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   Test11CardsRoute: Test11CardsRoute,
@@ -573,7 +600,6 @@ const rootRouteChildren: RootRouteChildren = {
   Test3Route: Test3Route,
   Test4Route: Test4Route,
   Test5Route: Test5Route,
-  Test6Route: Test6Route,
   Test7Route: Test7Route,
   Test8HeaderRoute: Test8HeaderRoute,
   Test9HeaderpicRoute: Test9HeaderpicRoute,
@@ -585,10 +611,11 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }
