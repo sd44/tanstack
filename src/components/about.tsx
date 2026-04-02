@@ -43,7 +43,10 @@ export function About() {
       </div>
 
       <div className="m-8 flex place-content-center justify-center gap-x-8">
-        <Button className="w-48" render={<Link to="/dashboard">管理面板</Link>} />
+        <Link to="/dashboard">
+          {' '}
+          <Button className="w-48">管理面板</Button>
+        </Link>
 
         {/* <ThemeToggle /> */}
       </div>

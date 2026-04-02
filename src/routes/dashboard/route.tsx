@@ -1,18 +1,20 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { authQueryOptions } from '@/lib/auth/queries';
 import { AppSidebar } from '@/components/modif_shadcn/app-sidebar';
 import { SiteHeader } from '@/components/modif_shadcn/site-header';
-import { SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardLayout,
 
-  beforeLoad: ({ context }) => {
-    if (!context.user) {
+  beforeLoad: async ({ context }) => {
+    const user = await context.queryClient.ensureQueryData(authQueryOptions());
+    if (!user) {
       throw redirect({ to: '/login' });
     }
+    return { user, crumb: '管理面板' };
   },
 
-  // TODO: 应该根据context就需要获取用户。如此，则可以删掉loader.
   loader: ({ context }) => {
     return { user: context.user, crumb: '管理面板' };
   },
@@ -25,8 +27,9 @@ function DashboardLayout() {
         <SiteHeader />
         <div className="flex flex-1">
           <AppSidebar />
-
-          <Outlet />
+          <SidebarInset>
+            <Outlet />
+          </SidebarInset>
         </div>
       </SidebarProvider>
     </div>

@@ -21,6 +21,11 @@ function _SignInButton({ provider, label, className, ...props }: SignInButtonPro
           callbackURL: REDIRECT_URL,
         },
         {
+          // CSRF protection for social sign-in
+          csrfProtection: true,
+          onSuccess: () => {
+            toast.success(`Successfully signed in with ${label}`);
+          },
           onError: ({ error }) => {
             toast.error(error.message || `An error occurred during ${label} sign-in.`);
           },
@@ -31,13 +36,14 @@ function _SignInButton({ provider, label, className, ...props }: SignInButtonPro
   return (
     <Button
       className={cn('text-white hover:text-white', className)}
+      disabled={mutation.isPending}
       onClick={() => mutation.mutate()}
       size="lg"
       type="button"
       variant="outline"
       {...props}
     >
-      Sign in with {label}
+      {mutation.isPending ? `Signing in with ${label}...` : `Sign in with ${label}`}
     </Button>
   );
 }

@@ -14,10 +14,9 @@ import { seo } from '@/utils/seo';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
-  user: AuthQueryResult;
+  user: AuthQueryResult | null;
 }>()({
-  // Typically we don't need the user immediately in landing pages.
-  // For protected routes with loader data, see /_auth/route.tsx
+  // Prefetch auth query so it's available for all routes
   beforeLoad: ({ context }) => {
     context.queryClient.prefetchQuery(authQueryOptions());
   },
