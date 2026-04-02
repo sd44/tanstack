@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import type { ComponentProps } from 'react';
 import { toast } from 'sonner';
-import { Button } from '~/components/ui/button';
-import authClient from '~/lib/auth/auth-client';
-import { cn } from '~/lib/utils';
+import { Button } from '@/components/ui/button';
+import authClient from '@/lib/auth/auth-client';
+import { cn } from '@/lib/utils';
 
 const REDIRECT_URL = '/dashboard';
 

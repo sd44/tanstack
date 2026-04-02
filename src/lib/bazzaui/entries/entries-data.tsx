@@ -9,9 +9,9 @@
 //   User2Icon,
 //   UserPenIcon,
 // } from 'lucide-react';
-// import { Checkbox } from '~/components/ui/checkbox';
-// import type { enterprisesSelectT } from '~/lib/db/schema/enterprises.schema';
-// import { filterFn } from '~/lib/filters';
+// import { Checkbox } from '@/components/ui/checkbox';
+// import type { enterprisesSelectT } from '@/lib/db/schema/enterprises.schema';
+// import { filterFn } from '@/lib/filters';
 
 // import { DataTableColumnHeader } from '../column-header';
 

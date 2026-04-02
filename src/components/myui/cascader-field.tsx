@@ -1,8 +1,8 @@
 import { useStore } from '@tanstack/react-form';
 import { useState } from 'react';
-import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context';
-import { FieldMetaErr } from '~/utils/field-error';
+import { Label } from '@/components/ui/label';
+import { useFieldContext } from '@/hooks/form-context';
+import { FieldMetaErr } from '@/utils/field-error';
 import type { OptionsType } from './nested-dropdown';
 import { NestedDropMenu } from './nested-dropdown';
 

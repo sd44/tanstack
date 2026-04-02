@@ -1,5 +1,5 @@
 import { useStore } from '@tanstack/react-form';
-import { Label } from '~/components/ui/label';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -8,9 +8,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
-import { useFieldContext } from '~/hooks/form-context';
-import { FieldMetaErr } from '~/utils/field-error';
+} from '@/components/ui/select';
+import { useFieldContext } from '@/hooks/form-context';
+import { FieldMetaErr } from '@/utils/field-error';
 
 interface SelectFieldProps extends React.ComponentProps<typeof SelectValue> {
   label: string;

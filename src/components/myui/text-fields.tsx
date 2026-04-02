@@ -1,10 +1,10 @@
 import { useStore } from '@tanstack/react-form';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context';
-import { cn } from '~/lib/utils';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useFieldContext } from '@/hooks/form-context';
+import { cn } from '@/lib/utils';
 
-import { FieldMetaErr } from '~/utils/field-error';
+import { FieldMetaErr } from '@/utils/field-error';
 
 interface TextFieldProps extends React.ComponentProps<typeof Input> {
   label: string;

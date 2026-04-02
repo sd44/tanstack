@@ -1,7 +1,7 @@
 // import { expect, test } from 'bun:test';
 // import { createServerFn } from '@tanstack/react-start';
 // import * as z from 'zod';
-// import { getRouter } from '~/router';
+// import { getRouter } from '@/router';
 
 // test('basic { queryClient } context', async () => {
 //   const myRouter = getRouter();

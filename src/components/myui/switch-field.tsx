@@ -1,7 +1,7 @@
 import { useStore } from '@tanstack/react-form';
-import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context';
-import { FieldMetaErr } from '~/utils/field-error';
+import { Label } from '@/components/ui/label';
+import { useFieldContext } from '@/hooks/form-context';
+import { FieldMetaErr } from '@/utils/field-error';
 import { Switch } from '../ui/switch';
 
 interface SwitchFieldProps {

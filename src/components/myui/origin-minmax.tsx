@@ -1,7 +1,7 @@
 import debounce from 'lodash/debounce';
 import { useEffect, useId, useMemo, useState } from 'react';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export function MinMaxInput() {
   const id = useId();

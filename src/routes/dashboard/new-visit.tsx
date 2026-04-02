@@ -1,8 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Suspense } from 'react';
-import { VisitForm } from '~/components/myui/visit-form';
-import { Button } from '~/components/ui/button';
+import { VisitForm } from '@/components/myui/visit-form';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,9 +10,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/dialog';
-import { getCompsOpt, visitCreate } from '~/lib/db/CRUD/visit-datas';
-import type { visitInsertT } from '~/lib/db/schema';
+} from '@/components/ui/dialog';
+import { getCompsOpt, visitCreate } from '@/lib/db/CRUD/visit-datas';
+import type { visitInsertT } from '@/lib/db/schema';
 
 export const Route = createFileRoute('/dashboard/new-visit')({
   component: RouteComponent,

@@ -12,7 +12,7 @@ import {
   UserPenIcon,
   VideoIcon,
 } from 'lucide-react';
-import type { visitSelectT } from '~/lib/db/schema';
+import type { visitSelectT } from '@/lib/db/schema';
 
 const dtf = createColumnConfigHelper<visitSelectT>();
 

@@ -13,7 +13,7 @@ function RouteComponent() {
   );
 }
 
-import { WenjuanxingEmbed } from '~/components/myui/wenjuanxing';
+import { WenjuanxingEmbed } from '@/components/myui/wenjuanxing';
 
 function MyPage() {
   return (

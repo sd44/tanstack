@@ -4,8 +4,8 @@ import { SQL } from 'bun';
 // import { drizzle } from 'drizzle-orm/postgres-js';
 import { drizzle } from 'drizzle-orm/bun-sql';
 import type { Logger } from 'drizzle-orm/logger';
-import { env } from '~/env/server';
-import { logger } from '~/lib/pino-logger';
+import { env } from '@/env/server';
+import { logger } from '@/lib/pino-logger';
 import * as schema from './schema';
 
 class MyLogger implements Logger {

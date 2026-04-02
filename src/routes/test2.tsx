@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Button } from '~/components/ui/button'; // 假设你使用了 shadcn/ui
-import { useDeleteVisit, useGetVisitById } from '~/lib/db/CRUD/visits-crud';
+import { Button } from '@/components/ui/button'; // 假设你使用了 shadcn/ui
+import { useDeleteVisit, useGetVisitById } from '@/lib/db/CRUD/visits-crud';
 
 export const Route = createFileRoute('/test2')({
   component: MyComponent,

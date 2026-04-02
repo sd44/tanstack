@@ -1,17 +1,17 @@
 // import { expect, mock, test } from 'bun:test';
 // import { eq } from 'drizzle-orm';
-// import { db } from '~/lib/db';
+// import { db } from '@/lib/db';
 // import {
 //   visitCreate,
 //   visitDelById,
 //   visitReadById,
 //   visitUpdateById,
-// } from '~/lib/db/CRUD/visit-datas';
-// import { visits } from '~/lib/db/schema';
+// } from '@/lib/db/CRUD/visit-datas';
+// import { visits } from '@/lib/db/schema';
 
 // // Mock hasPermission to always return true
-// mock.module('~/lib/db/CRUD/visitDatas', () => {
-//   const original = import.meta.require('~/lib/db/CRUD/visitDatas');
+// mock.module('@/lib/db/CRUD/visitDatas', () => {
+//   const original = import.meta.require('@/lib/db/CRUD/visitDatas');
 //   return {
 //     ...original,
 //     hasPermission: () => Promise.resolve(true),

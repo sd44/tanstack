@@ -12,9 +12,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useMemo, useState } from 'react';
-import { Filter } from '~/components/ui/filter';
-import { getVisitsOpt } from '~/lib/db/CRUD/visit-datas';
-import type { visitSelectT } from '~/lib/db/schema';
+import { Filter } from '@/components/ui/filter';
+import { getVisitsOpt } from '@/lib/db/CRUD/visit-datas';
+import type { visitSelectT } from '@/lib/db/schema';
 import { DataTable } from '../data-table';
 import { tstColumnDefs } from './columns';
 import { columnsConfig } from './filters';

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Quote } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '~/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export const Route = createFileRoute('/test13-customers')({
   component: Feedbacks,

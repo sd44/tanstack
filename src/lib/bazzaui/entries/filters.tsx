@@ -14,8 +14,8 @@ import {
   Users2Icon,
   UsersRoundIcon,
 } from 'lucide-react';
-import type { enterprisesSelectT } from '~/lib/db/schema';
-import { businessStatusList, companySizeList, industryCategoryList } from '~/lib/db/schema';
+import type { enterprisesSelectT } from '@/lib/db/schema';
+import { businessStatusList, companySizeList, industryCategoryList } from '@/lib/db/schema';
 
 // 类型安全的图标映射
 const sizeIconMap: Record<(typeof companySizeList)[number], LucideIcon> = {

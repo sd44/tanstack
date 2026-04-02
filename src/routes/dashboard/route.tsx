@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
-import { AppSidebar } from '~/components/modif_shadcn/app-sidebar';
-import { SiteHeader } from '~/components/modif_shadcn/site-header';
-import { SidebarProvider } from '~/components/ui/sidebar';
+import { AppSidebar } from '@/components/modif_shadcn/app-sidebar';
+import { SiteHeader } from '@/components/modif_shadcn/site-header';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardLayout,

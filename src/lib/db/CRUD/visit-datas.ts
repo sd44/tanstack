@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import { createServerFn } from '@tanstack/react-start';
 import { desc, eq, inArray } from 'drizzle-orm';
-import { getUser } from '~/lib/auth/functions/getuser';
-import { db } from '~/lib/db';
+import { getUser } from '@/lib/auth/functions/getuser';
+import { db } from '@/lib/db';
 import {
   enterprises,
   visitInsertPlusSchema,
@@ -10,7 +10,7 @@ import {
   type visitSelectT,
   visits,
   visitUpdateSchema,
-} from '~/lib/db/schema';
+} from '@/lib/db/schema';
 
 export const hasPermission = createServerFn({ method: 'GET' })
   .inputValidator((visitId: number) => visitId)

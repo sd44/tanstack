@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
-import { authQueryOptions } from '~/lib/auth/queries';
+import { authQueryOptions } from '@/lib/auth/queries';
 
 const REDIRECT_URL = '/dashboard';
 

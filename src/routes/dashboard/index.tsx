@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { BarChart02 } from '~/components/modif_shadcn/bar-chart';
-import { BarChartNeg } from '~/components/modif_shadcn/bar-chart-negative';
-import { ChartAreaInteractive } from '~/components/modif_shadcn/chartarea-interactive';
-import { PieChartSelector } from '~/components/modif_shadcn/pie-chart';
-import { SectionCards } from '~/components/modif_shadcn/section-cards';
-import { SidebarInset } from '~/components/ui/sidebar';
+import { BarChart02 } from '@/components/modif_shadcn/bar-chart';
+import { BarChartNeg } from '@/components/modif_shadcn/bar-chart-negative';
+import { ChartAreaInteractive } from '@/components/modif_shadcn/chartarea-interactive';
+import { PieChartSelector } from '@/components/modif_shadcn/pie-chart';
+import { SectionCards } from '@/components/modif_shadcn/section-cards';
+import { SidebarInset } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/dashboard/')({
   component: DashMain,

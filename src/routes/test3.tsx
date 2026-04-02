@@ -6,8 +6,8 @@
  */
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
-import { Button } from '~/components/ui/button';
-import { downloadFileWithAxios, postData } from '~/lib/utils/axios-download';
+import { Button } from '@/components/ui/button';
+import { downloadFileWithAxios, postData } from '@/lib/utils/axios-download';
 
 export const Route = createFileRoute('/test3')({
   component: RouteComponent,

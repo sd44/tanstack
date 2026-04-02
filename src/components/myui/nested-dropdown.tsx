@@ -1,7 +1,7 @@
 import { ChevronDownIcon, XIcon } from 'lucide-react';
 import * as React from 'react';
 
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { cn } from '~/lib/utils';
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import { Input } from '../ui/input';
 import type { OptionNode } from './OptionNode';
 

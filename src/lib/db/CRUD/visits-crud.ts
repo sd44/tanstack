@@ -1,11 +1,11 @@
-import { createCrudHooks } from '~/hooks/create-crud-hooks';
+import { createCrudHooks } from '@/hooks/create-crud-hooks';
 import {
   visitDelById,
   visitReadById,
   visitReadMyDatas,
   visitUpdateById,
-} from '~/lib/db/CRUD/visit-datas';
-import type { visitInsertT, visitSelectT, visitUpdateT } from '~/lib/db/schema/visits.schema';
+} from '@/lib/db/CRUD/visit-datas';
+import type { visitInsertT, visitSelectT, visitUpdateT } from '@/lib/db/schema/visits.schema';
 import { visitCreate } from './visit-datas';
 
 // ✨ 调用工厂函数，创建一套专门用于 visit 资源的 Hooks

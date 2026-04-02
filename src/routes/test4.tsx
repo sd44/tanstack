@@ -7,7 +7,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/test4')({
   component: RouteComponent,

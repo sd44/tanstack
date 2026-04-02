@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { CompanyForm } from '~/components/myui/company-form';
+import { CompanyForm } from '@/components/myui/company-form';
 
 export const Route = createFileRoute('/dashboard/add-company')({
   component: AddCompany,

@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { CheckCircleIcon } from 'lucide-react';
-// import { ThemeToggle } from '~/components/theme-toggle';
-import { Button } from '~/components/ui/button';
+// import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
 
 const tiers = [
   {

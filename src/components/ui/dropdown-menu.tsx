@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 
-import { cn } from "~/lib/utils/index"
+import { cn } from "@/lib/utils/index"
 import { RiArrowRightSLine, RiCheckLine } from "@remixicon/react"
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {

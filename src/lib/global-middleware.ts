@@ -1,5 +1,5 @@
 import { createMiddleware } from '@tanstack/react-start';
-import { logger } from '~/lib/pino-logger';
+import { logger } from '@/lib/pino-logger';
 
 export const pinoLogMiddleware = createMiddleware({ type: 'function' }).server(
   async ({ next, data, context }) => {

@@ -4,11 +4,11 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { multiSession, oAuthProxy, oidcProvider, openAPI } from 'better-auth/plugins';
 import { tanstackStartCookies } from 'better-auth/tanstack-start';
 
-import { env } from '~/env/server';
-import { db } from '~/lib/db';
+import { env } from '@/env/server';
+import { db } from '@/lib/db';
 
-import { resend } from '~/lib/db/email/resend';
-import { reactResetPasswordEmail } from '~/lib/db/email/reset-password';
+import { resend } from '@/lib/db/email/resend';
+import { reactResetPasswordEmail } from '@/lib/db/email/reset-password';
 
 // const from = env.BETTER_AUTH_EMAIL;
 // const to = env.TEST_EMAIL;

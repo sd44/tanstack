@@ -1,11 +1,11 @@
 'use client';
 import { toast } from 'sonner';
-import { Separator } from '~/components/ui/separator';
-import { useAppForm } from '~/hooks/form';
-import hangye2017 from '~/lib/data/hangye2017.json' with { type: 'json' };
-import { handleCompsForm } from '~/lib/db/handle-company';
-import { type enterprisesInserT, enterprisesInsertSchema } from '~/lib/db/schema';
-import { logger } from '~/lib/pino-logger';
+import { Separator } from '@/components/ui/separator';
+import { useAppForm } from '@/hooks/form';
+import hangye2017 from '@/lib/data/hangye2017.json' with { type: 'json' };
+import { handleCompsForm } from '@/lib/db/handle-company';
+import { type enterprisesInserT, enterprisesInsertSchema } from '@/lib/db/schema';
+import { logger } from '@/lib/pino-logger';
 
 export const CompanyForm = () => {
   const form = useAppForm({

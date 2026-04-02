@@ -1,5 +1,5 @@
 import type { Column } from 'exceljs'; // 可能需要导入 Column 类型来定义列
-import { exportJsonToExcel } from '~/utils/json-to-xlsx'; // 导入通用函数
+import { exportJsonToExcel } from '@/utils/json-to-xlsx'; // 导入通用函数
 
 // 假设这是你要导出的用户数据结构
 interface User {

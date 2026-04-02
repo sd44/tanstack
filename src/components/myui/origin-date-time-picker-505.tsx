@@ -2,9 +2,9 @@ import { format } from 'date-fns';
 // Import the locale object
 import { zhCN } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
-import { Button } from '~/components/ui/button';
-import { Calendar } from '~/components/ui/calendar';
-import { ScrollArea } from '~/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface DateTimePickerProps {
   selectedDate?: Date;

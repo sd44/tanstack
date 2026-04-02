@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import authClient from '~/lib/auth/auth-client';
+import authClient from '@/lib/auth/auth-client';
 
 export const Route = createFileRoute('/test7')({
   component: Component,

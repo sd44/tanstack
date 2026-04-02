@@ -3,21 +3,21 @@
 import { useMemo, useState } from 'react';
 import { Label, Pie, PieChart, Sector } from 'recharts';
 import type { PieSectorDataItem } from 'recharts/types/polar/Pie';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   type ChartConfig,
   ChartContainer,
   ChartStyle,
   ChartTooltip,
   ChartTooltipContent,
-} from '~/components/ui/chart';
+} from '@/components/ui/chart';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
+} from '@/components/ui/select';
 
 const desktopData = [
   { month: 'january', desktop: 186, fill: 'var(--color-january)' },

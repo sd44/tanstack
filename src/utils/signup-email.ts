@@ -1,4 +1,4 @@
-import authClient, { getErrorMessage } from '~/lib/auth/auth-client';
+import authClient, { getErrorMessage } from '@/lib/auth/auth-client';
 
 export async function SignUpEmail({
   name,

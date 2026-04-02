@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test';
 import * as z from 'zod';
 
-import { flatten_zod, flattenRecord } from '~/utils/zod-flattern-msg';
+import { flatten_zod, flattenRecord } from '@/utils/zod-flattern-msg';
 
 test('flatten zod safeparse', () => {
   const FormData = z.object({

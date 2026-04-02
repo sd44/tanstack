@@ -3,14 +3,14 @@
 import type { Table as TanStackTable } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
-import { Button } from '~/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '~/components/ui/select';
+} from '@/components/ui/select';
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '~/components/ui/table';
+} from '@/components/ui/table';
 
 export function DataTable<TData>({ table }: { table: TanStackTable<TData> }) {
   return (

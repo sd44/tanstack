@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 
-import { Button } from '~/components/ui/button';
-import { Calendar } from '~/components/ui/calendar';
-import { ScrollArea } from '~/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function Component() {
   const today = new Date();

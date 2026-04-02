@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Popover, PopoverAnchor, PopoverContent } from '~/components/ui/popover';
+import { Popover, PopoverAnchor, PopoverContent } from '@/components/ui/popover';
 
 export function AutoOpenPopover({
   shouldOpen = true,

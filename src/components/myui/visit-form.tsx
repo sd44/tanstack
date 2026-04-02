@@ -1,9 +1,9 @@
 import { useStore } from '@tanstack/react-store';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { Separator } from '~/components/ui/separator';
-import { useAppForm } from '~/hooks/form';
-import { visitInsertPlusSchema, type visitInsertT, visitTypeEnum } from '~/lib/db/schema';
+import { Separator } from '@/components/ui/separator';
+import { useAppForm } from '@/hooks/form';
+import { visitInsertPlusSchema, type visitInsertT, visitTypeEnum } from '@/lib/db/schema';
 
 export const VisitForm = ({
   comps,

@@ -2,15 +2,15 @@ import { fakerZH_CN as faker } from '@faker-js/faker';
 import { APIError } from 'better-auth/api';
 import { eq } from 'drizzle-orm';
 import type { PgTable, TableConfig } from 'drizzle-orm/pg-core';
-import { db } from '~/lib/db';
-import { norm_industry, user, visits } from '~/lib/db/schema';
+import { db } from '@/lib/db';
+import { norm_industry, user, visits } from '@/lib/db/schema';
 import {
   enterprises,
   type enterprisesInserT,
   enterprisesInsertSchema,
-} from '~/lib/db/schema/enterprises.schema';
-import industryCodeList from '~/lib/db/schema/industry.json' with { type: 'json' };
-import industry from '~/lib/db/schema/industry.json' with { type: 'json' };
+} from '@/lib/db/schema/enterprises.schema';
+import industryCodeList from '@/lib/db/schema/industry.json' with { type: 'json' };
+import industry from '@/lib/db/schema/industry.json' with { type: 'json' };
 import { auth } from '../auth/auth';
 
 async function signUpUsers() {

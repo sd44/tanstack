@@ -1,15 +1,15 @@
 import { isMatch, Link, useMatches } from '@tanstack/react-router';
 import { SidebarIcon } from 'lucide-react';
-import { ThemeToggle } from '~/components/theme-toggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from '~/components/ui/breadcrumb';
-import { Button } from '~/components/ui/button';
-import { Separator } from '~/components/ui/separator';
-import { useSidebar } from '~/components/ui/sidebar';
+} from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { useSidebar } from '@/components/ui/sidebar';
 
 export function SiteHeader() {
   const { toggleSidebar } = useSidebar();

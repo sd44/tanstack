@@ -3,11 +3,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { useAppForm } from '~/hooks/form';
-import authClient from '~/lib/auth/auth-client';
-import { authQueryOptions } from '~/lib/auth/queries';
-import { signUpOpts, signUpSchema } from '~/utils/signup-isomophic';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAppForm } from '@/hooks/form';
+import authClient from '@/lib/auth/auth-client';
+import { authQueryOptions } from '@/lib/auth/queries';
+import { signUpOpts, signUpSchema } from '@/utils/signup-isomophic';
 
 const SignupForm = () => {
   const { redirectUrl = '/' } = Route.useRouteContext();

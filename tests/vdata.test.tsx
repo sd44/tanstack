@@ -1,7 +1,7 @@
 // import { expect, mock, test } from 'bun:test';
 
-// mock.module('~/lib/db/CRUD/visitDatas.ts', async () => {
-//   const origin = await import('~/lib/db/CRUD/visit-datas');
+// mock.module('@/lib/db/CRUD/visitDatas.ts', async () => {
+//   const origin = await import('@/lib/db/CRUD/visit-datas');
 //   return {
 //     ...origin,
 //     hasPermission: (_id: number) => {
@@ -11,7 +11,7 @@
 // });
 
 // test('basic permission test', async () => {
-//   const esm = await import('~/lib/db/CRUD/visit-datas');
+//   const esm = await import('@/lib/db/CRUD/visit-datas');
 //   expect(await esm.hasPermission(3222)).toBe(true);
 // });
 

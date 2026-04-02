@@ -10,7 +10,7 @@ import {
   type CarouselApi,
   CarouselContent,
   CarouselItem,
-} from '~/components/ui/carousel';
+} from '@/components/ui/carousel';
 
 interface SlideItem {
   content: React.ReactNode;

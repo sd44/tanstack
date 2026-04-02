@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip'; // 确保路径正确
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'; // 确保路径正确
 
 // TooltipProvider is NOT imported here - it should be higher up in the app tree
 

@@ -12,10 +12,10 @@ import {
   SquareTerminal,
 } from 'lucide-react';
 import type * as React from 'react';
-import { NavMain } from '~/components/modif_shadcn/nav-main';
-/* import { NavProjects } from '~/components/modif_shadcn/nav-projects'; */
-import { NavSecondary } from '~/components/modif_shadcn/nav-secondary';
-import { NavUser } from '~/components/modif_shadcn/nav-user';
+import { NavMain } from '@/components/modif_shadcn/nav-main';
+/* import { NavProjects } from '@/components/modif_shadcn/nav-projects'; */
+import { NavSecondary } from '@/components/modif_shadcn/nav-secondary';
+import { NavUser } from '@/components/modif_shadcn/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -24,7 +24,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '~/components/ui/sidebar';
+} from '@/components/ui/sidebar';
 
 const data = {
   navMain: [

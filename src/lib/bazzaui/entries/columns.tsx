@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import { chineseSort } from '~/components/data-table-filter/lib/zh-cn-sorting';
-import { Checkbox } from '~/components/ui/checkbox';
-import type { enterprisesSelectT } from '~/lib/db/schema';
+import { chineseSort } from '@/components/data-table-filter/lib/zh-cn-sorting';
+import { Checkbox } from '@/components/ui/checkbox';
+import type { enterprisesSelectT } from '@/lib/db/schema';
 
 const columnHelper = createColumnHelper<enterprisesSelectT>();
 

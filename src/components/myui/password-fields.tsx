@@ -1,10 +1,10 @@
 import { useStore } from '@tanstack/react-form';
-import { PasswordInput } from '~/components/myui/origin-password';
-import { Label } from '~/components/ui/label';
-import { useFieldContext } from '~/hooks/form-context';
+import { PasswordInput } from '@/components/myui/origin-password';
+import { Label } from '@/components/ui/label';
+import { useFieldContext } from '@/hooks/form-context';
 
-import { cn } from '~/lib/utils';
-import { FieldMetaErr } from '~/utils/field-error';
+import { cn } from '@/lib/utils';
+import { FieldMetaErr } from '@/utils/field-error';
 
 interface PasswordFieldProps extends React.ComponentProps<typeof PasswordInput> {
   label: string;

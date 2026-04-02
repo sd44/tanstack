@@ -5,8 +5,8 @@ import {
   type DayButton,
 } from "react-day-picker"
 
-import { cn } from "~/lib/utils/index"
-import { Button, buttonVariants } from "~/components/ui/button"
+import { cn } from "@/lib/utils/index"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { RiArrowLeftSLine, RiArrowRightSLine, RiArrowDownSLine } from "@remixicon/react"
 
 function Calendar({

@@ -5,24 +5,24 @@ import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "~/lib/utils/index"
-import { Button } from "~/components/ui/button"
-import { Input } from "~/components/ui/input"
-import { Separator } from "~/components/ui/separator"
+import { cn } from "@/lib/utils/index"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "~/components/ui/sheet"
-import { Skeleton } from "~/components/ui/skeleton"
+} from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "~/components/ui/tooltip"
-import { useIsMobile } from "~/hooks/use-mobile"
+} from "@/components/ui/tooltip"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { RiSideBarLine } from "@remixicon/react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"

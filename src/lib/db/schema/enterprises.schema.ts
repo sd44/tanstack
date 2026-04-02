@@ -5,7 +5,7 @@ import {
   optionalMobileSchema,
   optionalStrFieldSchema,
   strFieldSchema,
-} from '~/utils/zod-helper-func';
+} from '@/utils/zod-helper-func';
 import { user } from './auth.schema';
 import { businessStatusEnum, companySizeEnum, industryCategoryEnum } from './enums';
 import { norm_industry } from './industry.schema';

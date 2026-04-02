@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { EntriesTableWrapper } from '~/lib/bazzaui/entries/entries-table';
-import { getEntriesOpt } from '~/lib/db/CRUD/entry-datas';
+import { EntriesTableWrapper } from '@/lib/bazzaui/entries/entries-table';
+import { getEntriesOpt } from '@/lib/db/CRUD/entry-datas';
 
 export const Route = createFileRoute('/dashboard/list-cop')({
   loader: async ({ context: { queryClient } }) => {

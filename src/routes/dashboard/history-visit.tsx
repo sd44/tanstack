@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { VisitsTableWrapper } from '~/lib/bazzaui/visits/visits-table';
-import { getVisitsOpt } from '~/lib/db/CRUD/visit-datas';
+import { VisitsTableWrapper } from '@/lib/bazzaui/visits/visits-table';
+import { getVisitsOpt } from '@/lib/db/CRUD/visit-datas';
 
 export const Route = createFileRoute('/dashboard/history-visit')({
   loader: async ({ context: { queryClient } }) => {

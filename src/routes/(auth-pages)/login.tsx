@@ -2,12 +2,12 @@ import { useMutation } from '@tanstack/react-query';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import type { ComponentProps } from 'react';
 import { toast } from 'sonner';
-import { Button } from '~/components/ui/button';
-import { useAppForm } from '~/hooks/form';
-import authClient, { getErrorMessage } from '~/lib/auth/auth-client';
-import { cn } from '~/lib/utils';
-import { capitalize } from '~/lib/utils/strtools';
-import { loginOpts, loginSchema } from '~/utils/login-isomophic';
+import { Button } from '@/components/ui/button';
+import { useAppForm } from '@/hooks/form';
+import authClient, { getErrorMessage } from '@/lib/auth/auth-client';
+import { cn } from '@/lib/utils';
+import { capitalize } from '@/lib/utils/strtools';
+import { loginOpts, loginSchema } from '@/utils/login-isomophic';
 
 const REDIRECT_URL = '/dashboard';
 
