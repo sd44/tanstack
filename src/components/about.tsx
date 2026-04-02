@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router';
 import { CheckCircleIcon } from 'lucide-react';
-// import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 
 const tiers = [
@@ -44,9 +43,7 @@ export function About() {
       </div>
 
       <div className="m-8 flex place-content-center justify-center gap-x-8">
-        <Button asChild className="w-48">
-          <Link to="/dashboard">管理面板</Link>
-        </Button>
+        <Button className="w-48" render={<Link to="/dashboard">管理面板</Link>} />
 
         {/* <ThemeToggle /> */}
       </div>

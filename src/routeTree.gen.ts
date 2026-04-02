@@ -10,8 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestclientRouteImport } from './routes/testclient'
-import { Route as Test9HeaderpicRouteImport } from './routes/test9-headerpic'
-import { Route as Test8HeaderRouteImport } from './routes/test8-header'
 import { Route as Test7RouteImport } from './routes/test7'
 import { Route as Test5RouteImport } from './routes/test5'
 import { Route as Test4RouteImport } from './routes/test4'
@@ -37,16 +35,6 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 const TestclientRoute = TestclientRouteImport.update({
   id: '/testclient',
   path: '/testclient',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Test9HeaderpicRoute = Test9HeaderpicRouteImport.update({
-  id: '/test9-headerpic',
-  path: '/test9-headerpic',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Test8HeaderRoute = Test8HeaderRouteImport.update({
-  id: '/test8-header',
-  path: '/test8-header',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Test7Route = Test7RouteImport.update({
@@ -167,8 +155,6 @@ export interface FileRoutesByFullPath {
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
   '/test7': typeof Test7Route
-  '/test8-header': typeof Test8HeaderRoute
-  '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
   '/login': typeof authPagesLoginRoute
   '/signup': typeof authPagesSignupRoute
@@ -191,8 +177,6 @@ export interface FileRoutesByTo {
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
   '/test7': typeof Test7Route
-  '/test8-header': typeof Test8HeaderRoute
-  '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
   '/login': typeof authPagesLoginRoute
   '/signup': typeof authPagesSignupRoute
@@ -218,8 +202,6 @@ export interface FileRoutesById {
   '/test4': typeof Test4Route
   '/test5': typeof Test5Route
   '/test7': typeof Test7Route
-  '/test8-header': typeof Test8HeaderRoute
-  '/test9-headerpic': typeof Test9HeaderpicRoute
   '/testclient': typeof TestclientRoute
   '/(auth-pages)/login': typeof authPagesLoginRoute
   '/(auth-pages)/signup': typeof authPagesSignupRoute
@@ -245,8 +227,6 @@ export interface FileRouteTypes {
     | '/test4'
     | '/test5'
     | '/test7'
-    | '/test8-header'
-    | '/test9-headerpic'
     | '/testclient'
     | '/login'
     | '/signup'
@@ -269,8 +249,6 @@ export interface FileRouteTypes {
     | '/test4'
     | '/test5'
     | '/test7'
-    | '/test8-header'
-    | '/test9-headerpic'
     | '/testclient'
     | '/login'
     | '/signup'
@@ -295,8 +273,6 @@ export interface FileRouteTypes {
     | '/test4'
     | '/test5'
     | '/test7'
-    | '/test8-header'
-    | '/test9-headerpic'
     | '/testclient'
     | '/(auth-pages)/login'
     | '/(auth-pages)/signup'
@@ -322,8 +298,6 @@ export interface RootRouteChildren {
   Test4Route: typeof Test4Route
   Test5Route: typeof Test5Route
   Test7Route: typeof Test7Route
-  Test8HeaderRoute: typeof Test8HeaderRoute
-  Test9HeaderpicRoute: typeof Test9HeaderpicRoute
   TestclientRoute: typeof TestclientRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
@@ -335,20 +309,6 @@ declare module '@tanstack/react-router' {
       path: '/testclient'
       fullPath: '/testclient'
       preLoaderRoute: typeof TestclientRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test9-headerpic': {
-      id: '/test9-headerpic'
-      path: '/test9-headerpic'
-      fullPath: '/test9-headerpic'
-      preLoaderRoute: typeof Test9HeaderpicRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test8-header': {
-      id: '/test8-header'
-      path: '/test8-header'
-      fullPath: '/test8-header'
-      preLoaderRoute: typeof Test8HeaderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/test7': {
@@ -549,8 +509,6 @@ const rootRouteChildren: RootRouteChildren = {
   Test4Route: Test4Route,
   Test5Route: Test5Route,
   Test7Route: Test7Route,
-  Test8HeaderRoute: Test8HeaderRoute,
-  Test9HeaderpicRoute: Test9HeaderpicRoute,
   TestclientRoute: TestclientRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }

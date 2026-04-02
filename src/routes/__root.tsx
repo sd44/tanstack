@@ -8,7 +8,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import type * as React from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
-import type { AuthQueryResult } from '@/lib/auth/queries';
+import { type AuthQueryResult, authQueryOptions } from '@/lib/auth/queries';
 import appCss from '@/styles/app.css?url';
 import { seo } from '@/utils/seo';
 
@@ -18,9 +18,9 @@ export const Route = createRootRouteWithContext<{
 }>()({
   // Typically we don't need the user immediately in landing pages.
   // For protected routes with loader data, see /_auth/route.tsx
-  // beforeLoad: ({ context }) => {
-  //   context.queryClient.prefetchQuery(authQueryOptions());
-  // },
+  beforeLoad: ({ context }) => {
+    context.queryClient.prefetchQuery(authQueryOptions());
+  },
 
   loader: () => ({
     crumb: '主页',
