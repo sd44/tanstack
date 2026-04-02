@@ -7,9 +7,9 @@ logs/
 
 .DS_Store
 .cache
-.env
-.env.development
-.env.production
+# .env
+# .env.development
+# .env.production
 
 .data
 .vercel
