@@ -8,8 +8,8 @@ import { Label } from '@/components/ui/label';
 
 interface TimePickerDemoProps {
   date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
   locale?: string;
+  setDate: (date: Date | undefined) => void;
 }
 
 export function TimePickerDemo({ date, setDate, locale = 'en-US' }: TimePickerDemoProps) {

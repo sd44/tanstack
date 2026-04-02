@@ -2,9 +2,9 @@ import type { TooltipProps } from 'recharts';
 
 interface CustomTooltipContentProps extends TooltipProps<number, string> {
   colorMap?: Record<string, string>;
-  labelMap?: Record<string, string>;
   // Optional array to define display order
   dataKeys?: string[];
+  labelMap?: Record<string, string>;
   // Optional formatter for values
   valueFormatter?: (value: number) => string;
 }

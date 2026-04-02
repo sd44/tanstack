@@ -25,8 +25,6 @@ import { Route as authPagesRouteRouteImport } from './routes/(auth-pages)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardNewVisitRouteImport } from './routes/dashboard/new-visit'
-import { Route as DashboardListCopRouteImport } from './routes/dashboard/list-cop'
-import { Route as DashboardHistoryVisitRouteImport } from './routes/dashboard/history-visit'
 import { Route as DashboardAddCompanyRouteImport } from './routes/dashboard/add-company'
 import { Route as authPagesSignupRouteImport } from './routes/(auth-pages)/signup'
 import { Route as authPagesLoginRouteImport } from './routes/(auth-pages)/login'
@@ -111,16 +109,6 @@ const DashboardNewVisitRoute = DashboardNewVisitRouteImport.update({
   path: '/new-visit',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const DashboardListCopRoute = DashboardListCopRouteImport.update({
-  id: '/list-cop',
-  path: '/list-cop',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
-const DashboardHistoryVisitRoute = DashboardHistoryVisitRouteImport.update({
-  id: '/history-visit',
-  path: '/history-visit',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 const DashboardAddCompanyRoute = DashboardAddCompanyRouteImport.update({
   id: '/add-company',
   path: '/add-company',
@@ -159,8 +147,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof authPagesLoginRoute
   '/signup': typeof authPagesSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
-  '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
-  '/dashboard/list-cop': typeof DashboardListCopRoute
   '/dashboard/new-visit': typeof DashboardNewVisitRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -181,8 +167,6 @@ export interface FileRoutesByTo {
   '/login': typeof authPagesLoginRoute
   '/signup': typeof authPagesSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
-  '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
-  '/dashboard/list-cop': typeof DashboardListCopRoute
   '/dashboard/new-visit': typeof DashboardNewVisitRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -206,8 +190,6 @@ export interface FileRoutesById {
   '/(auth-pages)/login': typeof authPagesLoginRoute
   '/(auth-pages)/signup': typeof authPagesSignupRoute
   '/dashboard/add-company': typeof DashboardAddCompanyRoute
-  '/dashboard/history-visit': typeof DashboardHistoryVisitRoute
-  '/dashboard/list-cop': typeof DashboardListCopRoute
   '/dashboard/new-visit': typeof DashboardNewVisitRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -231,8 +213,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard/add-company'
-    | '/dashboard/history-visit'
-    | '/dashboard/list-cop'
     | '/dashboard/new-visit'
     | '/dashboard/'
     | '/api/auth/$'
@@ -253,8 +233,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard/add-company'
-    | '/dashboard/history-visit'
-    | '/dashboard/list-cop'
     | '/dashboard/new-visit'
     | '/dashboard'
     | '/api/auth/$'
@@ -277,8 +255,6 @@ export interface FileRouteTypes {
     | '/(auth-pages)/login'
     | '/(auth-pages)/signup'
     | '/dashboard/add-company'
-    | '/dashboard/history-visit'
-    | '/dashboard/list-cop'
     | '/dashboard/new-visit'
     | '/dashboard/'
     | '/api/auth/$'
@@ -416,20 +392,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardNewVisitRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/dashboard/list-cop': {
-      id: '/dashboard/list-cop'
-      path: '/list-cop'
-      fullPath: '/dashboard/list-cop'
-      preLoaderRoute: typeof DashboardListCopRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
-    '/dashboard/history-visit': {
-      id: '/dashboard/history-visit'
-      path: '/history-visit'
-      fullPath: '/dashboard/history-visit'
-      preLoaderRoute: typeof DashboardHistoryVisitRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
     '/dashboard/add-company': {
       id: '/dashboard/add-company'
       path: '/add-company'
@@ -477,16 +439,12 @@ const authPagesRouteRouteWithChildren = authPagesRouteRoute._addFileChildren(
 
 interface DashboardRouteRouteChildren {
   DashboardAddCompanyRoute: typeof DashboardAddCompanyRoute
-  DashboardHistoryVisitRoute: typeof DashboardHistoryVisitRoute
-  DashboardListCopRoute: typeof DashboardListCopRoute
   DashboardNewVisitRoute: typeof DashboardNewVisitRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardAddCompanyRoute: DashboardAddCompanyRoute,
-  DashboardHistoryVisitRoute: DashboardHistoryVisitRoute,
-  DashboardListCopRoute: DashboardListCopRoute,
   DashboardNewVisitRoute: DashboardNewVisitRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }

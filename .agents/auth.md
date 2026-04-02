@@ -1,5 +1,14 @@
 # Auth Conventions
 
+## UI Components
+
+- This project uses **shadcn + basecn UI**, NOT plain Radix UI.
+- When building auth UI components (modals, dropdowns, forms), follow basecn patterns:
+  - Use `render` prop instead of `asChild`
+  - Use `Positioner` for dropdown menus and popovers
+  - Wrap `Label` inside `Group` in form popovers
+- See [.agents/ui-components.md](./ui-components.md) for detailed patterns.
+
 ## Auth Architecture
 
 - Better Auth config lives in `src/lib/auth/auth.ts`.

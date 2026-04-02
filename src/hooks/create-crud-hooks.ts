@@ -54,19 +54,19 @@ export interface IResourceItem {
 
 // CRUD 操作函数接口
 export interface CrudOperations<TSelect extends IResourceItem, TInsert, TUpdate> {
-  getList: (filters?: object) => Promise<TSelect[]>;
-  getById: (id: string | number) => Promise<TSelect>;
   create: (payload: TInsert) => Promise<TSelect>;
-  update: (payload: TUpdate) => Promise<TSelect>;
+  getById: (id: string | number) => Promise<TSelect>;
+  getList: (filters?: object) => Promise<TSelect[]>;
   remove: (id: string | number) => Promise<void>;
+  update: (payload: TUpdate) => Promise<TSelect>;
 }
 
 // 工厂函数的配置项
 export interface CrudHookFactoryConfig<TSelect extends IResourceItem, TInsert, TUpdate> {
-  /** 用于 queryKey 的唯一标识 (e.g., 'todos') */
-  resourceKey: string;
   /** CRUD 操作函数 */
   crudOperations: CrudOperations<TSelect, TInsert, TUpdate>;
+  /** 用于 queryKey 的唯一标识 (e.g., 'todos') */
+  resourceKey: string;
 }
 
 /**

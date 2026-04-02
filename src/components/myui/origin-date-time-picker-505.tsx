@@ -7,8 +7,8 @@ import { Calendar } from '@/components/ui/calendar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface DateTimePickerProps {
-  selectedDate?: Date;
   onDateTimeChange?: (date: Date) => void;
+  selectedDate?: Date;
 }
 
 export function DateTimePicker({ selectedDate, onDateTimeChange }: DateTimePickerProps) {

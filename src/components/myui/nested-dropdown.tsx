@@ -76,12 +76,12 @@ const RenderMenuItem = ({ node, onFinalSelect }: RenderMenuItemProps) => {
 
 // --- 使用递归渲染器的父组件 ---
 interface NestedDropdownMenuProps {
-  labelName: string;
-  options: OptionsType; // 接收顶层节点数组
-  onValueChange?: (value: string | null, label: string | null) => void;
-  initialValue?: string | null; // Optional: Set an initial value
   initialLabel?: string | null; // Optional: Set an initial label matching initialValue
+  initialValue?: string | null; // Optional: Set an initial value
   inputClassName?: string; // Allow custom styling for the input wrapper
+  labelName: string;
+  onValueChange?: (value: string | null, label: string | null) => void;
+  options: OptionsType; // 接收顶层节点数组
 }
 
 export function NestedDropMenu({

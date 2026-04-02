@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import { createServerFn } from '@tanstack/react-start';
 import { desc, eq, inArray } from 'drizzle-orm';
-import { getUser } from '@/lib/auth/functions/getuser';
+import { useAuthSuspense } from '@/lib/auth/hooks';
 import { db } from '@/lib/db';
 import {
   enterprises,
@@ -16,7 +16,7 @@ export const hasPermission = createServerFn({ method: 'GET' })
   .inputValidator((visitId: number) => visitId)
   .handler(async (ctx) => {
     const visitId = ctx.data;
-    const user = await getUser();
+    const user = useAuthSuspense().user;
     const userId = user?.id;
     if (!userId) {
       throw new Error('userId不存在');
@@ -35,7 +35,7 @@ export const hasPermission = createServerFn({ method: 'GET' })
 export const visitReadMyDatas = createServerFn({ method: 'GET' }).handler(
   async (): Promise<visitSelectT[]> => {
     try {
-      const user = await getUser();
+      const user = useAuthSuspense().user;
       const userId = user?.id;
       if (!userId) {
         console.error('userId不存在');
@@ -130,7 +130,7 @@ export const visitCreate = createServerFn({
   });
 
 export const fetchMyComps = createServerFn({ method: 'GET' }).handler(async () => {
-  const user = await getUser();
+  const user = useAuthSuspense().user;
   const userId = user?.id;
   if (!userId) {
     console.error('userId不存在');

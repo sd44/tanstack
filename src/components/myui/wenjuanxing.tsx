@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 
 interface WenjuanxingEmbedProps {
   activityId: string;
-  width?: number | string; // 允许数字或字符串，如 '100%'
   containerStyle?: React.CSSProperties; // 允许传递自定义样式
+  width?: number | string; // 允许数字或字符串，如 '100%'
 }
 
 export const WenjuanxingEmbed: React.FC<WenjuanxingEmbedProps> = ({

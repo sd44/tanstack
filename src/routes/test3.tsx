@@ -65,11 +65,11 @@ function RouteComponent() {
 }
 
 interface User {
-  id: number;
-  name: string;
   email: string;
-  registeredAt: Date;
+  id: number;
   isActive: boolean;
+  name: string;
+  registeredAt: Date;
 }
 
 // 定义针对 User 数据的 Excel 列配置 (!!!)

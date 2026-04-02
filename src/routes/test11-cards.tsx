@@ -5,10 +5,10 @@ export const Route = createFileRoute('/test11-cards')({
 });
 
 interface CardCon {
-  title: string;
-  subtitle: string;
   desc: string;
   image: string;
+  subtitle: string;
+  title: string;
 }
 
 function CardElem({ title, subtitle, desc, image }: CardCon) {

@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils';
 const REDIRECT_URL = '/dashboard';
 
 interface SignInButtonProps extends ComponentProps<typeof Button> {
-  provider: 'microsoft' | 'github';
   label: string;
+  provider: 'microsoft' | 'github';
 }
 
 function _SignInButton({ provider, label, className, ...props }: SignInButtonProps) {

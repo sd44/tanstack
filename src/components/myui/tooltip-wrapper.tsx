@@ -5,13 +5,25 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 interface TooltipWrapperProps {
   /**
+   * Optional: The preferred alignment of the tooltip relative to the trigger element.
+   * Passed directly to the TooltipContent component.
+   * Default: 'center'
+   */
+  align?: 'start' | 'center' | 'end';
+  /**
+   * Optional: An offset in pixels from the edge of the tooltip alignment.
+   * Passed directly to the TooltipContent component.
+   * Default: 0
+   */
+  alignOffset?: number;
+  /**
    * The element that triggers the tooltip on hover/focus.
    */
   children: React.ReactNode;
   /**
-   * The content to display inside the tooltip. Can be a string or any React node.
+   * Optional: Additional CSS classes to apply to the TooltipContent element.
    */
-  tooltipMsg: React.ReactNode;
+  contentClassName?: string;
   /**
    * Optional: Delay in milliseconds before the tooltip appears.
    * Passed directly to the Tooltip component.
@@ -24,27 +36,15 @@ interface TooltipWrapperProps {
    */
   side?: 'top' | 'right' | 'bottom' | 'left';
   /**
-   * Optional: The preferred alignment of the tooltip relative to the trigger element.
-   * Passed directly to the TooltipContent component.
-   * Default: 'center'
-   */
-  align?: 'start' | 'center' | 'end';
-  /**
    * Optional: The distance in pixels from the trigger element.
    * Passed directly to the TooltipContent component.
    * Default: 0
    */
   sideOffset?: number;
   /**
-   * Optional: An offset in pixels from the edge of the tooltip alignment.
-   * Passed directly to the TooltipContent component.
-   * Default: 0
+   * The content to display inside the tooltip. Can be a string or any React node.
    */
-  alignOffset?: number;
-  /**
-   * Optional: Additional CSS classes to apply to the TooltipContent element.
-   */
-  contentClassName?: string;
+  tooltipMsg: React.ReactNode;
 }
 
 export function TooltipWrapper({

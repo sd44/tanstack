@@ -11,8 +11,8 @@ interface ThemeProviderProps {
 }
 
 interface ThemeProviderState {
-  theme: Theme;
   setTheme: (theme: Theme) => void;
+  theme: Theme;
 }
 
 const initialState: ThemeProviderState = {
@@ -33,7 +33,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () =>
-      (typeof window !== 'undefined' ? (localStorage.getItem(storageKey) as Theme) : null) ||
+      (typeof window === 'undefined' ? null : (localStorage.getItem(storageKey) as Theme)) ||
       defaultTheme,
   );
 

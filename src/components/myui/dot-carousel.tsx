@@ -19,23 +19,23 @@ interface SlideItem {
 
 interface CarouselPluginProps {
   /**
-   * Array of React elements to display as slides
-   */
-  slides: SlideItem[];
-  /**
    * Autoplay delay in milliseconds
    * @default 2000
    */
   autoplayDelay?: number;
+  /**
+   * Additional class names for the carousel container
+   */
+  className?: string;
   /**
    * Whether to loop the carousel
    * @default true
    */
   loop?: boolean;
   /**
-   * Additional class names for the carousel container
+   * Array of React elements to display as slides
    */
-  className?: string;
+  slides: SlideItem[];
 }
 
 export function CarouselPlugin({

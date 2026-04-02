@@ -10,6 +10,10 @@ import { cn } from '@/lib/utils';
 
 interface DateTimePickerProps {
   /**
+   * Optional: className to apply to the root container.
+   */
+  className?: string;
+  /**
    * The selected date. This is a controlled component, so you must manage this state yourself.
    * IMPORTANT: This component operates on JavaScript `Date` objects, which are based on the user's local timezone.
    * For robust applications, it is highly recommended to convert this date to a timezone-aware format (like ISO 8601 UTC string)
@@ -20,10 +24,6 @@ interface DateTimePickerProps {
    * Callback function to update the date state.
    */
   setDate: (date: Date | undefined) => void;
-  /**
-   * Optional: className to apply to the root container.
-   */
-  className?: string;
 }
 
 /**

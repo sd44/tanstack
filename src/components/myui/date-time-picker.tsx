@@ -16,11 +16,11 @@ import { cn } from '@/lib/utils';
 
 export interface MyDatePickerProps
   extends Omit<React.ComponentProps<typeof DateField>, 'value' | 'onChange'> {
+  dateCls?: string;
   label: string;
   labelCls?: string;
-  dateCls?: string;
-  value?: Date | null; // 外部传入的 JS Date
   onChange?: (date: Date | undefined) => void; // 外部的回调函数，接收 JS Date 或 undefined
+  value?: Date | null; // 外部传入的 JS Date
 }
 
 export function MyDatePicker({

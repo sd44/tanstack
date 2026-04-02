@@ -7,9 +7,9 @@ import { integer, pgTable, timestamp } from 'drizzle-orm/pg-core';
 import { db } from '../db';
 
 interface Result {
-  success: boolean;
-  error?: string;
   data?: any;
+  error?: string;
+  success: boolean;
 }
 
 export function takeFirstOrNull<TData>(data: TData[]) {

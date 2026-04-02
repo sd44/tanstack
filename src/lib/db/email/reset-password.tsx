@@ -14,8 +14,8 @@ import {
 } from '@react-email/components';
 
 interface BetterAuthResetPasswordEmailProps {
-  username?: string;
   resetLink?: string;
+  username?: string;
 }
 
 export const ResetPasswordEmail = ({ username, resetLink }: BetterAuthResetPasswordEmailProps) => {

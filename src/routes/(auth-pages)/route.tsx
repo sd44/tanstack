@@ -18,7 +18,7 @@ export const Route = createFileRoute('/(auth-pages)')({
     }
 
     return {
-      redirectUrl: REDIRECT_URL,
+      redirectUrl: '/login',
     };
   },
 });

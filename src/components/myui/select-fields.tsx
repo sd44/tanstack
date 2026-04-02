@@ -13,10 +13,10 @@ import { useFieldContext } from '@/hooks/form-context';
 import { FieldMetaErr } from '@/utils/field-error';
 
 interface SelectFieldProps extends React.ComponentProps<typeof SelectValue> {
+  items: string[];
   label: string;
   labelCls?: string; //labelCls 变为可选
   selectCls?: string; //inputCls 变为可选
-  items: string[];
 }
 
 export default function SelectField({

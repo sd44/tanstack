@@ -7,10 +7,10 @@ import type { OptionsType } from './nested-dropdown';
 import { NestedDropMenu } from './nested-dropdown';
 
 interface CascaderFieldProps {
-  options: OptionsType; //传递给ant design cascader的JSON对象
-  labelStr: string;
-  labelCls?: string; //labelCls 变为可选
   cascaderStyle?: object; //labelCls 变为可选
+  labelCls?: string; //labelCls 变为可选
+  labelStr: string;
+  options: OptionsType; //传递给ant design cascader的JSON对象
   placeholder?: string;
 }
 

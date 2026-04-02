@@ -6,9 +6,9 @@ import { Label } from '../ui/label';
 import { DateTimePicker } from './shadcn-datetime-picker';
 
 export interface DateTimeFieldT {
+  dateCls?: string;
   label: string;
   labelCls?: string;
-  dateCls?: string;
 }
 
 export default function DateTimeField({ label, labelCls = 'w-48', dateCls = '' }: DateTimeFieldT) {

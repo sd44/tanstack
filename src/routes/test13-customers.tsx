@@ -22,9 +22,9 @@ function Feedbacks() {
 }
 
 interface feedBack {
-  name: string;
   avatar?: string;
   msg: string;
+  name: string;
 }
 
 function TestimonialCard({ name, msg }: feedBack) {

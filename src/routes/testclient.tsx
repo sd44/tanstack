@@ -1,5 +1,3 @@
-/** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: easy test */
-/** biome-ignore-all lint/style/noNestedTernary: easy test */
 'use client';
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -23,7 +21,7 @@ export const Route = createFileRoute('/testclient')({
   component: ClientTest,
 });
 
-export default function ClientTest() {
+function ClientTest() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -90,7 +88,7 @@ export default function ClientTest() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" disabled={loading} onClick={handleLogin}>
+            <Button className="w-full" disabled={loading} onClick={handleLogin} type="submit">
               {loading ? (
                 <>
                   <Loader2 className="mr-2 animate-spin" size={16} />

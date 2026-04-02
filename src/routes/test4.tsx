@@ -75,11 +75,11 @@ function RouteComponent() {
 }
 
 interface User {
-  id: number;
-  name: string;
   email: string;
-  registeredAt: Date;
+  id: number;
   isActive: boolean;
+  name: string;
+  registeredAt: Date;
 }
 
 // 模拟获取特定数据

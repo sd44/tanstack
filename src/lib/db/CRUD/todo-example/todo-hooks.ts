@@ -3,9 +3,9 @@ import { baseApi } from './base-api';
 
 // 定义 Todo 类型，确保它符合 IResourceItem 接口
 export interface Todo extends IResourceItem {
+  completed: boolean;
   id: number;
   title: string;
-  completed: boolean;
   userId: number;
 }
 

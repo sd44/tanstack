@@ -5,9 +5,9 @@ import type { User } from 'better-auth';
 interface FakerUser extends User {
   avatar?: string;
   birthday?: Date;
-  sex?: 'male' | 'female';
   firstName?: string;
   lastName?: string;
+  sex?: 'male' | 'female';
   subscriptionTier?: string;
 }
 
@@ -52,17 +52,17 @@ test('faker zh_CN', () => {
 });
 
 interface CompSeed {
-  companyName: string;
   address: string;
-  legalPersonName: string;
-  legalPersonPhone: string;
+  businessStatus: string;
+  companyName: string;
+  companySize: string;
   contactPerson: string;
   contactPersonPhone: string;
-  companySize: string;
-  registeredCapital: number;
   employeeCount: number;
-  businessStatus: string;
   industryCategory: string;
+  legalPersonName: string;
+  legalPersonPhone: string;
+  registeredCapital: number;
 }
 
 function generateRandomTask(): CompSeed {

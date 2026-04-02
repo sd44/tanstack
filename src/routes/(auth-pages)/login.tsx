@@ -16,8 +16,8 @@ export const Route = createFileRoute('/(auth-pages)/login')({
 });
 
 interface SocialButtonProps extends ComponentProps<typeof Button> {
-  provider: 'microsoft' | 'github';
   imgsrc: string;
+  provider: 'microsoft' | 'github';
 }
 
 function SocialButton({ provider, imgsrc, className, ...props }: SocialButtonProps) {

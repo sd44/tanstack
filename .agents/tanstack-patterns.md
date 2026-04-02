@@ -2,6 +2,15 @@
 
 # TanStack Patterns
 
+## UI Components
+
+- This project uses **shadcn + basecn UI**, NOT plain Radix UI.
+- Key differences from Radix UI:
+  - Use `render` prop instead of `asChild`
+  - Use `Positioner` component for popover/dropdown positioning (not `side`/`align` props on `Content`)
+  - `Label` must be inside `Group` in popovers
+- See [.agents/ui-components.md](./ui-components.md) for detailed patterns.
+
 ## Route Group Conventions
 
 - Protected routes live under `src/routes/_auth/**`, enforced by `beforeLoad` in the `_auth` layout (`src/routes/_auth/route.tsx`).

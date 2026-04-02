@@ -7,9 +7,9 @@ import { cn } from '@/lib/utils';
 import { FieldMetaErr } from '@/utils/field-error';
 
 interface TextFieldProps extends React.ComponentProps<typeof Input> {
+  inputCls?: string; //inputCls 变为可选
   label: string;
   labelCls?: string; //labelCls 变为可选
-  inputCls?: string; //inputCls 变为可选
 }
 
 export default function TextField({
