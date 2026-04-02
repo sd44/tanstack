@@ -40,10 +40,14 @@ export function NavUser({
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<SidebarMenuButton
-            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            size="lg"
-          />}>
+          <DropdownMenuTrigger
+            render={
+              <SidebarMenuButton
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                size="lg"
+              />
+            }
+          >
             <Avatar className="h-8 w-8 rounded-lg">
               <AvatarImage alt={user.name} src={user.avatar} />
               <AvatarFallback className="rounded-lg">CN</AvatarFallback>

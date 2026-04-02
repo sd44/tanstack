@@ -1,8 +1,8 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
-import { authQueryOptions } from '@/lib/auth/queries';
 import { AppSidebar } from '@/components/modif_shadcn/app-sidebar';
 import { SiteHeader } from '@/components/modif_shadcn/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { authQueryOptions } from '@/lib/auth/queries';
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardLayout,

@@ -34,14 +34,14 @@ export function NavMain({
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
-            render={<div className="group/collapsible" />}
             defaultOpen={item.isActive}
             key={item.title}
+            render={<div className="group/collapsible" />}
           >
             <SidebarMenuItem>
               <CollapsibleTrigger render={<SidebarMenuButton tooltip={item.title} />}>
                 {item.icon && <item.icon />}
-                <span className="font-bold whitespace-nowrap">{item.title}</span>
+                <span className="whitespace-nowrap font-bold">{item.title}</span>
                 <ChevronRight className="ml-auto shrink-0 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </CollapsibleTrigger>
               <CollapsibleContent>

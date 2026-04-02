@@ -25,7 +25,7 @@ export function NavSecondary({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton render={<a href={item.url} className="flex items-center gap-2" />}>
+              <SidebarMenuButton render={<a className="flex items-center gap-2" href={item.url} />}>
                 <item.icon className="shrink-0" />
                 <span className="whitespace-nowrap">{item.title}</span>
               </SidebarMenuButton>
