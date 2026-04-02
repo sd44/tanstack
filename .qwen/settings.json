@@ -1,8 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "WebFetch(basecn.dev)"
-    ]
+    "allow": ["WebFetch(basecn.dev)"]
   },
   "$version": 3
 }
